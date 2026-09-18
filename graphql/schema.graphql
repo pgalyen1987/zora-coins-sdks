@@ -1720,7 +1720,7 @@ type Mutation {
   Create a short-lived token for uploading coin media and metadata to Zora's uploader. Requires an
   API key.
   """
-  createUploadJWT(
+  createUploadJwt(
     """The request."""
     input: CreateUploadJwtRequest!
   ): String

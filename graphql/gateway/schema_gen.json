@@ -4008,7 +4008,7 @@
  "mutation": [
   {
    "op": "SetCreateUploadJWT",
-   "name": "createUploadJWT",
+   "name": "createUploadJwt",
    "args": [
     {
      "name": "input",

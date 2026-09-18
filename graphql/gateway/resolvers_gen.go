@@ -82,7 +82,7 @@ func callSDK(ctx context.Context, c *zora.Client, field string, args map[string]
 			return nil, err
 		}
 		return c.CreateContentCoin(ctx, &body)
-	case "createUploadJWT":
+	case "createUploadJwt":
 		var body zora.CreateUploadJWTRequest
 		if err := remarshal(args["input"], &body); err != nil {
 			return nil, err
