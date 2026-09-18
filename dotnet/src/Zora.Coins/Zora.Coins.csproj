@@ -1,0 +1,27 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFrameworks>netstandard2.1;net8.0</TargetFrameworks>
+    <LangVersion>latest</LangVersion>
+    <Nullable>enable</Nullable>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <RootNamespace>Zora.Coins</RootNamespace>
+    <PackageId>Zora.Coins</PackageId>
+    <Version>0.1.0</Version>
+    <Authors>Rebel Studios Software</Authors>
+    <Description>Typed async client for the Zora Coins API (all 30 endpoints), a GraphQL client, and an onchain indexer for Zora creator and referral rewards on Base. .NET Standard 2.1 (Unity) and .NET 8+.</Description>
+    <PackageTags>zora;base;creator-coins;web3;sdk;graphql;unity</PackageTags>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <RepositoryUrl>https://github.com/pgalyen1987/zora-coins-sdks</RepositoryUrl>
+    <PackageProjectUrl>https://github.com/pgalyen1987/zora-coins-sdks/tree/main/dotnet</PackageProjectUrl>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+  </PropertyGroup>
+  <ItemGroup Condition="'$(TargetFramework)' == 'netstandard2.1'">
+    <PackageReference Include="System.Text.Json" Version="8.0.5" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="../../README.md" Pack="true" PackagePath="/" Condition="Exists('../../README.md')" />
+  </ItemGroup>
+</Project>
