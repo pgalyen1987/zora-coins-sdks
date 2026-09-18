@@ -55,9 +55,13 @@ publishing {
             }
         }
     }
+    repositories {
+        // A local Maven layout that scripts/release-java.sh zips and uploads to the Central Portal.
+        maven { name = "staging"; url = uri(layout.buildDirectory.dir("staging-deploy")) }
+    }
 }
 
-// Maven Central needs signed artifacts. Pass the key only when releasing:
+// Maven Central needs signed artifacts. Pass the key only when releasing (scripts/release-java.sh does):
 //   ORG_GRADLE_PROJECT_signingKey=… ORG_GRADLE_PROJECT_signingPassword=… ./gradlew publish
 signing {
     val key = findProperty("signingKey") as String?

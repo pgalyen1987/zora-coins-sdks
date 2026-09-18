@@ -9,13 +9,13 @@ Typed clients for the [Zora Coins API](https://docs.zora.co/coins) in **Python, 
 | **Python** | [`zora-coins`](https://pypi.org/project/zora-coins/) | `pip install zora-coins` |
 | **TypeScript / JavaScript** | [`zora-coins`](https://www.npmjs.com/package/zora-coins) | `npm install zora-coins` |
 | **Go** | [`…/zora-coins-sdks/go`](https://pkg.go.dev/github.com/pgalyen1987/zora-coins-sdks/go/zora) | `go get github.com/pgalyen1987/zora-coins-sdks/go` |
-| **Rust** | [`rust/`](rust/) | `cargo add zora-coins --git https://github.com/pgalyen1987/zora-coins-sdks --tag v0.1.0` |
+| **Rust** | [`zora-coins`](https://crates.io/crates/zora-coins) | `cargo add zora-coins` |
 | **C# / .NET / Unity** | [`dotnet/`](dotnet/) | from source: `dotnet pack dotnet/src/Zora.Coins` |
 | **Java / Kotlin / Android** | [`java/`](java/) | from source: `cd java && ./gradlew publishToMavenLocal` |
 | **C++** | [`cpp/`](cpp/) | CMake `FetchContent` |
 | **GraphQL** | [`graphql/`](graphql/) | `go run github.com/pgalyen1987/zora-coins-sdks/graphql/cmd/zora-graphql@latest` |
 
-crates.io, NuGet and Maven Central releases are on the way; until then Rust installs from git and C# and Java build from source.
+NuGet and Maven Central releases are on the way; until then C# and Java build from source.
 
 Zora's official SDK is TypeScript only. These cover the same API in the languages people build games, bots, backends, indexers and mobile apps in, and share one set of types, names and docs, so switching languages doesn't mean relearning the API.
 
@@ -45,7 +45,7 @@ Zora rewards for 0x55c88bb05602da94fce8feadc1cbebf5b72c2453
   Total (current prices)                                      $2.58
 ```
 
-The CLI ships with the Python, TypeScript, Go and Rust packages (`pip install zora-coins`, `npx -p zora-coins zora-rewards`, `go install …/cmd/zora-rewards@latest`, `cargo install zora-coins --git https://github.com/pgalyen1987/zora-coins-sdks --features cli`), and the C++ build has one too.
+The CLI ships with the Python, TypeScript, Go and Rust packages (`pip install zora-coins`, `npx -p zora-coins zora-rewards`, `go install …/cmd/zora-rewards@latest`, `cargo install zora-coins --features cli`), and the C++ build has one too.
 
 ## One request with GraphQL
 
