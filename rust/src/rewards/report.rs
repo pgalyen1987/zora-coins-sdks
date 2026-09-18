@@ -186,8 +186,23 @@ fn fmt_amount(x: f64) -> String {
     if x.abs() >= 1.0 {
         commas(&format!("{x:.4}"))
     } else {
-        sig(x, 6)
+        g6(x)
     }
+}
+
+/// Like C's %.6g, as the Go, Python and Java reports print: 0.000199321, 9.38878e-09.
+fn g6(x: f64) -> String {
+    if x == 0.0 {
+        return "0".into();
+    }
+    let exp = x.abs().log10().floor() as i32;
+    if (-4..6).contains(&exp) {
+        return sig(x, 6);
+    }
+    let m = x / 10f64.powi(exp);
+    let mant = format!("{m:.5}");
+    let mant = mant.trim_end_matches('0').trim_end_matches('.');
+    format!("{mant}e{}{:02}", if exp < 0 { '-' } else { '+' }, exp.abs())
 }
 
 fn commas(s: &str) -> String {

@@ -11,7 +11,7 @@ documentation = "https://docs.rs/zora-coins"
 readme = "README.md"
 keywords = ["zora", "base", "web3", "creator-coins", "sdk"]
 categories = ["api-bindings", "cryptography::cryptocurrencies", "web-programming::http-client"]
-exclude = ["tests/fixtures"]
+exclude = ["tests/"]  # the tests read ../fixtures, which only exists in the repository
 
 [features]
 default = ["rustls", "rewards"]

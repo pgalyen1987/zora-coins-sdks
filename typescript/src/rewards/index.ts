@@ -342,7 +342,10 @@ export function formatUsd(x: number): string {
   return "$" + Number(x.toPrecision(4)).toString();
 }
 
-const fmtAmount = (x: number) => (Math.abs(x) >= 1 ? x.toLocaleString("en-US", { minimumFractionDigits: 4, maximumFractionDigits: 4 }) : String(Number(x.toPrecision(6))));
+// Like C's %.6g, as the other SDKs print: 0.000199321, 9.38878e-09.
+const fmtAmount = (x: number) => (Math.abs(x) >= 1
+  ? x.toLocaleString("en-US", { minimumFractionDigits: 4, maximumFractionDigits: 4 })
+  : String(Number(x.toPrecision(6))).replace(/e([+-])(\d)$/, "e$10$2"));
 
 /** What a set of addresses earned. USD uses current prices, not prices at payout time. */
 export class Report {

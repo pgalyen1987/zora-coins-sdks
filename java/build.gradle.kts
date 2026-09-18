@@ -57,8 +57,12 @@ publishing {
     }
 }
 
+// Maven Central needs signed artifacts. Pass the key only when releasing:
+//   ORG_GRADLE_PROJECT_signingKey=… ORG_GRADLE_PROJECT_signingPassword=… ./gradlew publish
 signing {
-    isRequired = gradle.taskGraph.hasTask("publish")
-    useGpgCmd()
-    sign(publishing.publications["maven"])
+    val key = findProperty("signingKey") as String?
+    if (key != null) {
+        useInMemoryPgpKeys(key, findProperty("signingPassword") as String?)
+        sign(publishing.publications["maven"])
+    }
 }

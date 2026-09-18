@@ -242,7 +242,7 @@ def resolvers(model: irmod.IR, data: dict) -> str:
                 elif ft == "[]string":
                     fields.append(f'{fname}: strs(args["{an}"])')
                 elif ft == "float64":
-                    fields.append(f'{fname}: float(args["{an}"])')
+                    fields.append(f'{fname}: func() float64 {{ f, _ := args["{an}"].(float64); return f }}()')
                 else:
                     raise ValueError(f"{op.id}.{p.name}: {ft}")
             call.append(f"&zora.{m}Params{{{', '.join(fields)}}}")

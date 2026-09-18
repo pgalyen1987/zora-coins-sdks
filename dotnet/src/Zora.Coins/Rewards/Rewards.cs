@@ -115,7 +115,7 @@ public static class RewardsDecoder
     }
 }
 
-/// <summary>Keeps indexed events and the block ranges scanned per address, in memory. Save/Load persist it as JSON.</summary>
+/// <summary>Keeps indexed events and the block ranges scanned per address, in memory. Thread-safe.</summary>
 public sealed class MemoryStore
 {
     private readonly Dictionary<string, RewardEvent> _events = new();
@@ -349,7 +349,8 @@ public sealed record RewardsReport(IReadOnlyList<string> Addresses, int Events, 
         sb.AppendLine();
         foreach (var l in Lines)
         {
-            var amount = Math.Abs(l.Amount) >= 1 ? l.Amount.ToString("N4", CultureInfo.InvariantCulture) : l.Amount.ToString("G6", CultureInfo.InvariantCulture);
+            var amount = Math.Abs(l.Amount) >= 1 ? l.Amount.ToString("N4", CultureInfo.InvariantCulture)
+                : l.Amount.ToString("G6", CultureInfo.InvariantCulture).Replace("E", "e"); // 9.38878e-09, as the other SDKs print
             sb.AppendLine($"  {Labels[l.Role],-18} {amount,16} {l.Symbol,-12} {(l.Usd is { } u ? FormatUsd(u) : "—"),12}  ({l.Payouts} payouts)");
         }
         sb.AppendLine($"  {"Total (current prices)",-18} {"",16} {"",-12} {FormatUsd(TotalUsd),12}");

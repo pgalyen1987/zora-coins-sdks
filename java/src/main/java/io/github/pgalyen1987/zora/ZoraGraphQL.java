@@ -47,7 +47,7 @@ public final class ZoraGraphQL {
     }
 
     /** Run a query; returns its data as a JSON tree. Throws {@link GraphQLException} if the gateway reports errors. */
-    public JsonNode query(String query, Map<String, Object> variables) {
+    public JsonNode query(String query, Map<String, ?> variables) {
         Map<String, Object> body = new LinkedHashMap<>();
         body.put("query", query);
         body.put("variables", variables == null ? new LinkedHashMap<>() : variables);

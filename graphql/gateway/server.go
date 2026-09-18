@@ -280,16 +280,6 @@ func integer(v any) int {
 	return 0
 }
 
-func float(v any) float64 {
-	switch x := v.(type) {
-	case float64:
-		return x
-	case int:
-		return float64(x)
-	}
-	return 0
-}
-
 func boolPtr(v any) *bool {
 	if b, ok := v.(bool); ok {
 		return &b

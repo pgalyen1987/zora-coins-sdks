@@ -35,7 +35,7 @@ const (
 // ZeroAddress marks "nobody" in a recipient field, and native ETH as a currency.
 const ZeroAddress = "0x0000000000000000000000000000000000000000"
 
-// BaseGenesisTimestamp: Base makes a block exactly every 2 seconds from here, so a block's time is
+// BaseGenesisTimestamp is when Base produced block 0. Base makes a block exactly every 2 seconds, so a block's time is
 // genesis + 2 × number with no RPC call.
 const BaseGenesisTimestamp = 1686789347
 
