@@ -1,2 +1,4 @@
 github.com/graphql-go/graphql v0.8.1 h1:p7/Ou/WpmulocJeEx7wjQy611rtXGQaAcXGqanuMMgc=
 github.com/graphql-go/graphql v0.8.1/go.mod h1:nKiHzRM0qopJEwCITUuIsxk9PlVlwIiiI8pnJEhordQ=
+github.com/pgalyen1987/zora-coins-sdks/go v0.1.0 h1:a4RG4zr7gk3JJwZkFIvpWULE+SzlaXzx/Roxhg0KHRk=
+github.com/pgalyen1987/zora-coins-sdks/go v0.1.0/go.mod h1:I9A1lKbXK9JZy5SKBvqYyXfSjiYfx6g2JWwJA3DsJZU=
