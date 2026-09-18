@@ -1,0 +1,4025 @@
+{
+ "enums": [
+  {
+   "name": "CoinType",
+   "values": [
+    "CREATOR",
+    "CONTENT",
+    "TREND"
+   ],
+   "doc": "What a coin represents: a creator, a piece of content, or a trend."
+  },
+  {
+   "name": "ContentCoinCurrency",
+   "values": [
+    "CREATOR_COIN",
+    "ZORA",
+    "ETH",
+    "CREATOR_COIN_OR_ZORA"
+   ],
+   "doc": "What a new content coin trades against."
+  },
+  {
+   "name": "CurrencyType",
+   "values": [
+    "ETH",
+    "ZORA",
+    "CREATOR_COIN",
+    "CREATOR_COIN_OR_ZORA",
+    "CUSTOM_COIN"
+   ],
+   "doc": "What a new coin's pool trades against."
+  },
+  {
+   "name": "EntityType",
+   "values": [
+    "USER_PROFILE",
+    "CONTENT",
+    "TREND",
+    "COIN"
+   ],
+   "doc": "What kind of thing a search result is."
+  },
+  {
+   "name": "EventType",
+   "values": [
+    "LINK",
+    "UNLINK"
+   ],
+   "doc": "Whether a social account was linked or unlinked."
+  },
+  {
+   "name": "ListType",
+   "values": [
+    "TOP_GAINERS",
+    "TOP_VOLUME_24H",
+    "MOST_VALUABLE",
+    "MOST_VALUABLE_TRENDS",
+    "NEW",
+    "NEW_TRENDS",
+    "OLD",
+    "LAST_TRADED",
+    "LAST_TRADED_UNIQUE",
+    "FEATURED",
+    "FEATURED_VIDEOS",
+    "NEW_CREATORS",
+    "MOST_VALUABLE_CREATORS",
+    "FEATURED_CREATORS",
+    "TOP_VOLUME_CREATORS_24H",
+    "TOP_VOLUME_ALL_24H",
+    "NEW_ALL",
+    "TRENDING_POSTS",
+    "TRENDING_TRENDS",
+    "TRENDING_CREATORS",
+    "TRENDING_ALL",
+    "TOP_VOLUME_TRENDS_24H",
+    "MOST_VALUABLE_ALL",
+    "TRENDING_AGENTS",
+    "MOST_VALUABLE_AGENTS"
+   ],
+   "doc": "Which Zora Explore list to fetch."
+  },
+  {
+   "name": "MetadataType",
+   "values": [
+    "RAW_URI"
+   ],
+   "doc": "How coin metadata is supplied. Only RAW_URI is supported."
+  },
+  {
+   "name": "Platform",
+   "values": [
+    "TWITTER",
+    "TIKTOK",
+    "FARCASTER",
+    "INSTAGRAM"
+   ],
+   "doc": "A social network Zora profiles link to."
+  },
+  {
+   "name": "SortOption",
+   "values": [
+    "BALANCE",
+    "MARKET_CAP",
+    "USD_VALUE",
+    "PRICE_CHANGE",
+    "MARKET_VALUE_USD"
+   ],
+   "doc": "How to order a profile's balances."
+  },
+  {
+   "name": "StartingMarketCap",
+   "values": [
+    "LOW",
+    "HIGH"
+   ],
+   "doc": "The starting market cap tier for a new coin."
+  },
+  {
+   "name": "SwapType",
+   "values": [
+    "BUY",
+    "SELL"
+   ],
+   "doc": "Whether a trade was a buy or a sell."
+  },
+  {
+   "name": "TokenType",
+   "values": [
+    "eth",
+    "erc20"
+   ],
+   "doc": "Native ETH or an ERC-20."
+  },
+  {
+   "name": "WalletType",
+   "values": [
+    "PRIVY",
+    "EXTERNAL",
+    "SMART_WALLET"
+   ],
+   "doc": "How a wallet linked to a profile is held."
+  }
+ ],
+ "objects": [
+  {
+   "name": "Amount",
+   "doc": null,
+   "fields": [
+    {
+     "name": "zoraType",
+     "json": "__typename",
+     "type": "String",
+     "doc": "The type name Zora's GraphQL backend reports for this object, when it includes one."
+    },
+    {
+     "name": "currencyAddress",
+     "json": "currencyAddress",
+     "type": "String",
+     "doc": "The currency (WETH, ZORA, USDC or a creator coin)."
+    },
+    {
+     "name": "amountRaw",
+     "json": "amountRaw",
+     "type": "String",
+     "doc": "Amount in the currency's smallest unit, as an integer string."
+    },
+    {
+     "name": "amountDecimal",
+     "json": "amountDecimal",
+     "type": "Float",
+     "doc": "Amount in whole units of the currency."
+    }
+   ]
+  },
+  {
+   "name": "ApiKey",
+   "doc": "Whether an API key exists and is active.",
+   "fields": [
+    {
+     "name": "zoraType",
+     "json": "__typename",
+     "type": "String",
+     "doc": "The type name Zora's GraphQL backend reports for this object, when it includes one."
+    },
+    {
+     "name": "apiKey",
+     "json": "apiKey",
+     "type": "String",
+     "doc": "The API key."
+    },
+    {
+     "name": "isActive",
+     "json": "isActive",
+     "type": "Boolean",
+     "doc": "Whether the key is active."
+    }
+   ]
+  },
+  {
+   "name": "Avatar",
+   "doc": null,
+   "fields": [
+    {
+     "name": "zoraType",
+     "json": "__typename",
+     "type": "String",
+     "doc": "The type name Zora's GraphQL backend reports for this object, when it includes one."
+    },
+    {
+     "name": "previewImage",
+     "json": "previewImage",
+     "type": "PreviewImage",
+     "doc": "Resized preview of the image."
+    },
+    {
+     "name": "small",
+     "json": "small",
+     "type": "String",
+     "doc": "Small avatar image URL."
+    },
+    {
+     "name": "medium",
+     "json": "medium",
+     "type": "String",
+     "doc": "Medium avatar image URL."
+    },
+    {
+     "name": "blurhash",
+     "json": "blurhash",
+     "type": "String",
+     "doc": "BlurHash placeholder to show while the image loads."
+    }
+   ]
+  },
+  {
+   "name": "Call",
+   "doc": "A transaction to send from the user's wallet: target (to), calldata and ETH value.",
+   "fields": [
+    {
+     "name": "zoraType",
+     "json": "__typename",
+     "type": "String",
+     "doc": "The type name Zora's GraphQL backend reports for this object, when it includes one."
+    },
+    {
+     "name": "data",
+     "json": "data",
+     "type": "String",
+     "doc": "Calldata (0x hex)."
+    },
+    {
+     "name": "value",
+     "json": "value",
+     "type": "String",
+     "doc": "ETH to send with the transaction, in wei, as an integer string."
+    },
+    {
+     "name": "target",
+     "json": "target",
+     "type": "String",
+     "doc": "Contract to send the transaction to."
+    },
+    {
+     "name": "to",
+     "json": "to",
+     "type": "String",
+     "doc": "Same as target."
+    }
+   ]
+  },
+  {
+   "name": "CoinBalance",
+   "doc": "One coin a profile holds, with the balance and the coin itself.",
+   "fields": [
+    {
+     "name": "zoraType",
+     "json": "__typename",
+     "type": "String",
+     "doc": "The type name Zora's GraphQL backend reports for this object, when it includes one."
+    },
+    {
+     "name": "balance",
+     "json": "balance",
+     "type": "String",
+     "doc": "Amount held, in the coin's smallest unit (18 decimals)."
+    },
+    {
+     "name": "walletBalance",
+     "json": "walletBalance",
+     "type": "String",
+     "doc": "Amount held in the profile's own wallets, in the smallest unit (18 decimals)."
+    },
+    {
+     "name": "id",
+     "json": "id",
+     "type": "String",
+     "doc": "Globally unique ID."
+    },
+    {
+     "name": "valuation",
+     "json": "valuation",
+     "type": "Valuation",
+     "doc": "What the holding is worth."
+    },
+    {
+     "name": "coin",
+     "json": "coin",
+     "type": "Zora20Token",
+     "doc": "The coin."
+    }
+   ]
+  },
+  {
+   "name": "CoinBalanceConnection",
+   "doc": "One page of CoinBalance results. Nodes() lists them; PageInfo says how to get the next page.",
+   "fields": [
+    {
+     "name": "count",
+     "json": "count",
+     "type": "Int",
+     "doc": "Total number of items, where the API reports it."
+    },
+    {
+     "name": "edges",
+     "json": "edges",
+     "type": "[CoinBalanceEdge!]",
+     "doc": "The items on this page, each wrapped in an edge."
+    },
+    {
+     "name": "pageInfo",
+     "json": "pageInfo",
+     "type": "PageInfo",
+     "doc": "How to fetch the next page."
+    }
+   ]
+  },
+  {
+   "name": "CoinBalanceEdge",
+   "doc": "Wraps one CoinBalance in a page of results.",
+   "fields": [
+    {
+     "name": "node",
+     "json": "node",
+     "type": "CoinBalance",
+     "doc": "The item."
+    }
+   ]
+  },
+  {
+   "name": "CoinBasicInfo",
+   "doc": "The compact form of a coin returned by the coins list.",
+   "fields": [
+    {
+     "name": "zoraType",
+     "json": "__typename",
+     "type": "String",
+     "doc": "The type name Zora's GraphQL backend reports for this object, when it includes one."
+    },
+    {
+     "name": "coinType",
+     "json": "coinType",
+     "type": "CoinType",
+     "doc": "Creator, content or trend coin."
+    },
+    {
+     "name": "priceUsdc",
+     "json": "priceUsdc",
+     "type": "String",
+     "doc": "Price in USDC (\u2248 USD), as a decimal string."
+    },
+    {
+     "name": "entityName",
+     "json": "entityName",
+     "type": "String",
+     "doc": "Name of the coin."
+    },
+    {
+     "name": "name",
+     "json": "name",
+     "type": "String",
+     "doc": "Display name."
+    },
+    {
+     "name": "symbol",
+     "json": "symbol",
+     "type": "String",
+     "doc": "Ticker symbol."
+    },
+    {
+     "name": "uri",
+     "json": "uri",
+     "type": "String",
+     "doc": "Metadata URI."
+    },
+    {
+     "name": "coinAddress",
+     "json": "coinAddress",
+     "type": "String",
+     "doc": "Contract address of the coin."
+    },
+    {
+     "name": "createdUserAddress",
+     "json": "createdUserAddress",
+     "type": "String",
+     "doc": "Wallet that created the coin."
+    },
+    {
+     "name": "createdTimestamp",
+     "json": "createdTimestamp",
+     "type": "String",
+     "doc": "Date with time (isoformat)"
+    },
+    {
+     "name": "platformBlocked",
+     "json": "platformBlocked",
+     "type": "Boolean",
+     "doc": "True if Zora hides this from its own app."
+    }
+   ]
+  },
+  {
+   "name": "CoinBasicInfoConnection",
+   "doc": "One page of CoinBasicInfo results. Nodes() lists them; PageInfo says how to get the next page.",
+   "fields": [
+    {
+     "name": "pageInfo",
+     "json": "pageInfo",
+     "type": "PageInfo",
+     "doc": "How to fetch the next page."
+    },
+    {
+     "name": "edges",
+     "json": "edges",
+     "type": "[CoinBasicInfoEdge!]",
+     "doc": "The items on this page, each wrapped in an edge."
+    }
+   ]
+  },
+  {
+   "name": "CoinBasicInfoEdge",
+   "doc": "Wraps one CoinBasicInfo in a page of results.",
+   "fields": [
+    {
+     "name": "node",
+     "json": "node",
+     "type": "CoinBasicInfo",
+     "doc": "The item."
+    }
+   ]
+  },
+  {
+   "name": "Comment",
+   "doc": "A comment in a coin's merged feed or on a live stream.",
+   "fields": [
+    {
+     "name": "zoraType",
+     "json": "__typename",
+     "type": "String",
+     "doc": "The type name Zora's GraphQL backend reports for this object, when it includes one."
+    },
+    {
+     "name": "commentId",
+     "json": "commentId",
+     "type": "String",
+     "doc": "ID of the comment."
+    },
+    {
+     "name": "nonce",
+     "json": "nonce",
+     "type": "String",
+     "doc": "Nonce the comment was signed or posted with."
+    },
+    {
+     "name": "userAddress",
+     "json": "userAddress",
+     "type": "String",
+     "doc": "Wallet of the user who posted it."
+    },
+    {
+     "name": "txHash",
+     "json": "txHash",
+     "type": "String",
+     "doc": "Hash of the transaction that posted it onchain, if it was posted onchain."
+    },
+    {
+     "name": "comment",
+     "json": "comment",
+     "type": "String",
+     "doc": "The comment text."
+    },
+    {
+     "name": "timestamp",
+     "json": "timestamp",
+     "type": "Int",
+     "doc": "When it happened (Unix seconds)."
+    },
+    {
+     "name": "userProfile",
+     "json": "userProfile",
+     "type": "UserProfile",
+     "doc": "Profile of the user who posted it."
+    },
+    {
+     "name": "replies",
+     "json": "replies",
+     "type": "Replies",
+     "doc": "Replies to this comment."
+    },
+    {
+     "name": "contractAddress",
+     "json": "contractAddress",
+     "type": "String",
+     "doc": "Contract of the coin the comment is on."
+    },
+    {
+     "name": "text",
+     "json": "text",
+     "type": "String",
+     "doc": "The comment text."
+    },
+    {
+     "name": "commentedAt",
+     "json": "commentedAt",
+     "type": "String",
+     "doc": "Date with time (isoformat)"
+    },
+    {
+     "name": "replyToOnChainId",
+     "json": "replyToOnChainId",
+     "type": "String",
+     "doc": "Onchain ID of the comment this replies to, if any."
+    },
+    {
+     "name": "replyToOffChainId",
+     "json": "replyToOffChainId",
+     "type": "String",
+     "doc": "Offchain ID of the comment this replies to, if any."
+    },
+    {
+     "name": "sparkCount",
+     "json": "sparkCount",
+     "type": "Int",
+     "doc": "Sparks (Zora's likes) the comment received."
+    },
+    {
+     "name": "profile",
+     "json": "profile",
+     "type": "Profile",
+     "doc": "The profile."
+    },
+    {
+     "name": "id",
+     "json": "id",
+     "type": "String",
+     "doc": "Globally unique ID."
+    }
+   ]
+  },
+  {
+   "name": "CommentConnection",
+   "doc": "One page of Comment results. Nodes() lists them; PageInfo says how to get the next page.",
+   "fields": [
+    {
+     "name": "pageInfo",
+     "json": "pageInfo",
+     "type": "PageInfo",
+     "doc": "How to fetch the next page."
+    },
+    {
+     "name": "count",
+     "json": "count",
+     "type": "Int",
+     "doc": "Total number of items, where the API reports it."
+    },
+    {
+     "name": "edges",
+     "json": "edges",
+     "type": "[CommentEdge!]",
+     "doc": "The items on this page, each wrapped in an edge."
+    }
+   ]
+  },
+  {
+   "name": "CommentEdge",
+   "doc": "Wraps one Comment in a page of results.",
+   "fields": [
+    {
+     "name": "node",
+     "json": "node",
+     "type": "Comment",
+     "doc": "The item."
+    },
+    {
+     "name": "cursor",
+     "json": "cursor",
+     "type": "String",
+     "doc": "Cursor pointing at this item."
+    }
+   ]
+  },
+  {
+   "name": "CreateContentCoinResponse",
+   "doc": "The calls that create a content coin, and the address it will have.",
+   "fields": [
+    {
+     "name": "calls",
+     "json": "calls",
+     "type": "[Call!]",
+     "doc": "Transactions to send from the creator's wallet, in order."
+    },
+    {
+     "name": "predictedCoinAddress",
+     "json": "predictedCoinAddress",
+     "type": "String",
+     "doc": "The address the coin will have once created."
+    },
+    {
+     "name": "backingCurrency",
+     "json": "backingCurrency",
+     "type": "String",
+     "doc": "The result. Client methods return this field directly."
+    },
+    {
+     "name": "usedSmartWalletRouting",
+     "json": "usedSmartWalletRouting",
+     "type": "Boolean",
+     "doc": "The result. Client methods return this field directly."
+    }
+   ]
+  },
+  {
+   "name": "CreatorEarning",
+   "doc": "What a coin's creator has earned from trading fees, in one currency.",
+   "fields": [
+    {
+     "name": "zoraType",
+     "json": "__typename",
+     "type": "String",
+     "doc": "The type name Zora's GraphQL backend reports for this object, when it includes one."
+    },
+    {
+     "name": "amount",
+     "json": "amount",
+     "type": "Amount",
+     "doc": "The amount."
+    },
+    {
+     "name": "amountUsd",
+     "json": "amountUsd",
+     "type": "String",
+     "doc": "The amount in USD."
+    }
+   ]
+  },
+  {
+   "name": "CreatorProfile",
+   "doc": "The profile of the creator behind a coin.",
+   "fields": [
+    {
+     "name": "zoraType",
+     "json": "__typename",
+     "type": "String",
+     "doc": "The profile kind, e.g. GraphQLAccountProfile."
+    },
+    {
+     "name": "id",
+     "json": "id",
+     "type": "String",
+     "doc": "Globally unique ID."
+    },
+    {
+     "name": "handle",
+     "json": "handle",
+     "type": "String",
+     "doc": "Zora handle, without @. Wallet-only profiles get a shortened address (0x06d7...b1c6)."
+    },
+    {
+     "name": "platformBlocked",
+     "json": "platformBlocked",
+     "type": "Boolean",
+     "doc": "True if Zora hides this from its own app."
+    },
+    {
+     "name": "avatar",
+     "json": "avatar",
+     "type": "Avatar",
+     "doc": "Profile picture."
+    },
+    {
+     "name": "socialAccounts",
+     "json": "socialAccounts",
+     "type": "SocialAccounts",
+     "doc": "Linked social accounts: X, TikTok, Instagram, Farcaster."
+    },
+    {
+     "name": "creatorCoin",
+     "json": "creatorCoin",
+     "type": "Zora20Token",
+     "doc": "The creator's own creator coin."
+    },
+    {
+     "name": "liveStream",
+     "json": "liveStream",
+     "type": "LiveStream",
+     "doc": "The creator's live stream, if any."
+    }
+   ]
+  },
+  {
+   "name": "Currency",
+   "doc": null,
+   "fields": [
+    {
+     "name": "zoraType",
+     "json": "__typename",
+     "type": "String",
+     "doc": "The type name Zora's GraphQL backend reports for this object, when it includes one."
+    },
+    {
+     "name": "priceUsd",
+     "json": "priceUsd",
+     "type": "String",
+     "doc": "Current USD price of one whole token, as a decimal string."
+    },
+    {
+     "name": "decimals",
+     "json": "decimals",
+     "type": "Int",
+     "doc": "Token decimals (18 for most, 6 for USDC)."
+    },
+    {
+     "name": "name",
+     "json": "name",
+     "type": "String",
+     "doc": "Display name."
+    },
+    {
+     "name": "symbol",
+     "json": "symbol",
+     "type": "String",
+     "doc": "Ticker symbol."
+    },
+    {
+     "name": "icon",
+     "json": "icon",
+     "type": "String",
+     "doc": "Token icon URL."
+    }
+   ]
+  },
+  {
+   "name": "CurrencyAmountWithPrice",
+   "doc": null,
+   "fields": [
+    {
+     "name": "zoraType",
+     "json": "__typename",
+     "type": "String",
+     "doc": "The type name Zora's GraphQL backend reports for this object, when it includes one."
+    },
+    {
+     "name": "priceUsdc",
+     "json": "priceUsdc",
+     "type": "String",
+     "doc": "USD price of one unit of the currency at the time of the swap."
+    },
+    {
+     "name": "currencyAmount",
+     "json": "currencyAmount",
+     "type": "Amount",
+     "doc": "Amount paid or received, in the pool's currency."
+    },
+    {
+     "name": "amountUsd",
+     "json": "amountUsd",
+     "type": "String",
+     "doc": "The amount in USD."
+    },
+    {
+     "name": "priceDelta24h",
+     "json": "priceDelta24h",
+     "type": "String",
+     "doc": "Change in the currency's price over the last 24 hours."
+    }
+   ]
+  },
+  {
+   "name": "Details",
+   "doc": null,
+   "fields": [
+    {
+     "name": "zoraType",
+     "json": "__typename",
+     "type": "String",
+     "doc": "The type name Zora's GraphQL backend reports for this object, when it includes one."
+    },
+    {
+     "name": "token",
+     "json": "token",
+     "type": "String",
+     "doc": "Token address."
+    },
+    {
+     "name": "amount",
+     "json": "amount",
+     "type": "String",
+     "doc": "The amount."
+    },
+    {
+     "name": "expiration",
+     "json": "expiration",
+     "type": "Float",
+     "doc": "When the allowance expires (Unix seconds)."
+    },
+    {
+     "name": "nonce",
+     "json": "nonce",
+     "type": "Float",
+     "doc": "Nonce the comment was signed or posted with."
+    }
+   ]
+  },
+  {
+   "name": "Erc20Token",
+   "doc": "ERC-20 metadata and price for any token.",
+   "fields": [
+    {
+     "name": "zoraType",
+     "json": "__typename",
+     "type": "String",
+     "doc": "The type name Zora's GraphQL backend reports for this object, when it includes one."
+    },
+    {
+     "name": "currency",
+     "json": "currency",
+     "type": "Currency",
+     "doc": "The token's symbol, decimals and USD price."
+    }
+   ]
+  },
+  {
+   "name": "ExternalWallet",
+   "doc": null,
+   "fields": [
+    {
+     "name": "zoraType",
+     "json": "__typename",
+     "type": "String",
+     "doc": "The type name Zora's GraphQL backend reports for this object, when it includes one."
+    },
+    {
+     "name": "ensName",
+     "json": "ensName",
+     "type": "String",
+     "doc": "ENS name of the wallet, if it has one."
+    },
+    {
+     "name": "walletAddress",
+     "json": "walletAddress",
+     "type": "String",
+     "doc": "Wallet address."
+    }
+   ]
+  },
+  {
+   "name": "FeaturedCreator",
+   "doc": "A creator featured on the weekly leaderboard.",
+   "fields": [
+    {
+     "name": "zoraType",
+     "json": "__typename",
+     "type": "String",
+     "doc": "The type name Zora's GraphQL backend reports for this object, when it includes one."
+    },
+    {
+     "name": "id",
+     "json": "id",
+     "type": "String",
+     "doc": "Globally unique ID."
+    },
+    {
+     "name": "handle",
+     "json": "handle",
+     "type": "String",
+     "doc": "Zora handle, without @. Wallet-only profiles get a shortened address (0x06d7...b1c6)."
+    }
+   ]
+  },
+  {
+   "name": "FeaturedCreatorConnection",
+   "doc": "One page of FeaturedCreator results. Nodes() lists them; PageInfo says how to get the next page.",
+   "fields": [
+    {
+     "name": "count",
+     "json": "count",
+     "type": "Int",
+     "doc": "Total number of items, where the API reports it."
+    },
+    {
+     "name": "pageInfo",
+     "json": "pageInfo",
+     "type": "PageInfo",
+     "doc": "How to fetch the next page."
+    },
+    {
+     "name": "edges",
+     "json": "edges",
+     "type": "[FeaturedCreatorEdge!]",
+     "doc": "The items on this page, each wrapped in an edge."
+    }
+   ]
+  },
+  {
+   "name": "FeaturedCreatorEdge",
+   "doc": "Wraps one FeaturedCreator in a page of results.",
+   "fields": [
+    {
+     "name": "node",
+     "json": "node",
+     "type": "FeaturedCreator",
+     "doc": "The item."
+    }
+   ]
+  },
+  {
+   "name": "Followers",
+   "doc": null,
+   "fields": [
+    {
+     "name": "zoraType",
+     "json": "__typename",
+     "type": "String",
+     "doc": "The type name Zora's GraphQL backend reports for this object, when it includes one."
+    },
+    {
+     "name": "count",
+     "json": "count",
+     "type": "Int",
+     "doc": "Total number of items, where the API reports it."
+    }
+   ]
+  },
+  {
+   "name": "Instagram",
+   "doc": null,
+   "fields": [
+    {
+     "name": "zoraType",
+     "json": "__typename",
+     "type": "String",
+     "doc": "The type name Zora's GraphQL backend reports for this object, when it includes one."
+    },
+    {
+     "name": "username",
+     "json": "username",
+     "type": "String",
+     "doc": "Username on that network."
+    },
+    {
+     "name": "displayName",
+     "json": "displayName",
+     "type": "String",
+     "doc": "Display name on that network."
+    },
+    {
+     "name": "followerCount",
+     "json": "followerCount",
+     "type": "Int",
+     "doc": "Followers on that network."
+    },
+    {
+     "name": "id",
+     "json": "id",
+     "type": "String",
+     "doc": "Globally unique ID."
+    }
+   ]
+  },
+  {
+   "name": "LinkedWalletEdge",
+   "doc": "Wraps one LinkedWallet in a page of results.",
+   "fields": [
+    {
+     "name": "node",
+     "json": "node",
+     "type": "PublicWallet",
+     "doc": "The item."
+    }
+   ]
+  },
+  {
+   "name": "LinkedWallets",
+   "doc": null,
+   "fields": [
+    {
+     "name": "zoraType",
+     "json": "__typename",
+     "type": "String",
+     "doc": "The type name Zora's GraphQL backend reports for this object, when it includes one."
+    },
+    {
+     "name": "edges",
+     "json": "edges",
+     "type": "[LinkedWalletEdge!]",
+     "doc": "The items on this page, each wrapped in an edge."
+    }
+   ]
+  },
+  {
+   "name": "LiveStream",
+   "doc": "A creator's live stream.",
+   "fields": [
+    {
+     "name": "zoraType",
+     "json": "__typename",
+     "type": "String",
+     "doc": "The type name Zora's GraphQL backend reports for this object, when it includes one."
+    },
+    {
+     "name": "comments",
+     "json": "comments",
+     "type": "CommentConnection",
+     "doc": "Comments."
+    },
+    {
+     "name": "id",
+     "json": "id",
+     "type": "String",
+     "doc": "Globally unique ID."
+    },
+    {
+     "name": "isOnline",
+     "json": "isOnline",
+     "type": "Boolean",
+     "doc": "Whether the stream is live right now."
+    },
+    {
+     "name": "isActive",
+     "json": "isActive",
+     "type": "Boolean",
+     "doc": "Whether the key is active."
+    },
+    {
+     "name": "concurrentViewers",
+     "json": "concurrentViewers",
+     "type": "Int",
+     "doc": "People watching right now."
+    },
+    {
+     "name": "staticThumbnailUrl",
+     "json": "staticThumbnailUrl",
+     "type": "String",
+     "doc": "Still thumbnail image URL."
+    },
+    {
+     "name": "animatedThumbnailUrl",
+     "json": "animatedThumbnailUrl",
+     "type": "String",
+     "doc": "Animated thumbnail URL."
+    },
+    {
+     "name": "creatorProfile",
+     "json": "creatorProfile",
+     "type": "CreatorProfile",
+     "doc": "Profile of the creator."
+    }
+   ]
+  },
+  {
+   "name": "LiveStreamConnection",
+   "doc": "One page of LiveStream results. Nodes() lists them; PageInfo says how to get the next page.",
+   "fields": [
+    {
+     "name": "pageInfo",
+     "json": "pageInfo",
+     "type": "PageInfo",
+     "doc": "How to fetch the next page."
+    },
+    {
+     "name": "edges",
+     "json": "edges",
+     "type": "[LiveStreamEdge!]",
+     "doc": "The items on this page, each wrapped in an edge."
+    }
+   ]
+  },
+  {
+   "name": "LiveStreamEdge",
+   "doc": "Wraps one LiveStream in a page of results.",
+   "fields": [
+    {
+     "name": "node",
+     "json": "node",
+     "type": "LiveStream",
+     "doc": "The item."
+    }
+   ]
+  },
+  {
+   "name": "MaxSwappable",
+   "doc": null,
+   "fields": [
+    {
+     "name": "zoraType",
+     "json": "__typename",
+     "type": "String",
+     "doc": "The type name Zora's GraphQL backend reports for this object, when it includes one."
+    },
+    {
+     "name": "amountRaw",
+     "json": "amountRaw",
+     "type": "String",
+     "doc": "Raw amount of the currency, in wei. Not formatted with decimals"
+    },
+    {
+     "name": "amountDecimal",
+     "json": "amountDecimal",
+     "type": "Float",
+     "doc": "Amount of the currency, in float format accounting for currency decimals"
+    }
+   ]
+  },
+  {
+   "name": "MediaContent",
+   "doc": "The image, video or other media attached to a coin.",
+   "fields": [
+    {
+     "name": "zoraType",
+     "json": "__typename",
+     "type": "String",
+     "doc": "The type name Zora's GraphQL backend reports for this object, when it includes one."
+    },
+    {
+     "name": "mimeType",
+     "json": "mimeType",
+     "type": "String",
+     "doc": "MIME type of the original media."
+    },
+    {
+     "name": "originalUri",
+     "json": "originalUri",
+     "type": "String",
+     "doc": "The original media file (often ipfs://)."
+    },
+    {
+     "name": "previewImage",
+     "json": "previewImage",
+     "type": "PreviewImage",
+     "doc": "Resized previews served over https."
+    },
+    {
+     "name": "videoPreviewUrl",
+     "json": "videoPreviewUrl",
+     "type": "String",
+     "doc": "Short video preview URL."
+    },
+    {
+     "name": "videoHlsUrl",
+     "json": "videoHlsUrl",
+     "type": "String",
+     "doc": "HLS stream URL of the video."
+    }
+   ]
+  },
+  {
+   "name": "OwnerProfile",
+   "doc": null,
+   "fields": [
+    {
+     "name": "zoraType",
+     "json": "__typename",
+     "type": "String",
+     "doc": "GraphQLAccountProfile for a Zora account, GraphQLWalletProfile for a bare wallet."
+    },
+    {
+     "name": "id",
+     "json": "id",
+     "type": "String",
+     "doc": "Globally unique ID."
+    },
+    {
+     "name": "handle",
+     "json": "handle",
+     "type": "String",
+     "doc": "Zora handle, without @. Wallet-only profiles get a shortened address (0x06d7...b1c6)."
+    },
+    {
+     "name": "platformBlocked",
+     "json": "platformBlocked",
+     "type": "Boolean",
+     "doc": "True if Zora hides this from its own app."
+    },
+    {
+     "name": "avatar",
+     "json": "avatar",
+     "type": "Avatar",
+     "doc": "Profile picture."
+    }
+   ]
+  },
+  {
+   "name": "PageInfo",
+   "doc": "Where a page sits in a paginated list. Pass EndCursor as After to get the next page while HasNextPage is true.",
+   "fields": [
+    {
+     "name": "endCursor",
+     "json": "endCursor",
+     "type": "String",
+     "doc": "Cursor to pass as After for the next page."
+    },
+    {
+     "name": "hasNextPage",
+     "json": "hasNextPage",
+     "type": "Boolean",
+     "doc": "Whether another page follows."
+    },
+    {
+     "name": "startCursor",
+     "json": "startCursor",
+     "type": "String",
+     "doc": "Cursor of the first item on this page."
+    }
+   ]
+  },
+  {
+   "name": "Permit",
+   "doc": null,
+   "fields": [
+    {
+     "name": "zoraType",
+     "json": "__typename",
+     "type": "String",
+     "doc": "The type name Zora's GraphQL backend reports for this object, when it includes one."
+    },
+    {
+     "name": "sigDeadline",
+     "json": "sigDeadline",
+     "type": "String",
+     "doc": "When the signature stops being valid (Unix seconds)."
+    },
+    {
+     "name": "spender",
+     "json": "spender",
+     "type": "String",
+     "doc": "Contract allowed to spend the tokens."
+    },
+    {
+     "name": "details",
+     "json": "details",
+     "type": "Details",
+     "doc": "What the permit allows: token, amount, expiry, nonce."
+    }
+   ]
+  },
+  {
+   "name": "PoolConfig",
+   "doc": "The pool configuration Zora uses to launch a coin: encoded config plus the currency it pairs with.",
+   "fields": [
+    {
+     "name": "zoraType",
+     "json": "__typename",
+     "type": "String",
+     "doc": "The type name Zora's GraphQL backend reports for this object, when it includes one."
+    },
+    {
+     "name": "encodedConfig",
+     "json": "encodedConfig",
+     "type": "String",
+     "doc": "The pool configuration, ABI-encoded as the coin factory expects it."
+    },
+    {
+     "name": "currency",
+     "json": "currency",
+     "type": "String",
+     "doc": "The currency."
+    },
+    {
+     "name": "lowerTicks",
+     "json": "lowerTicks",
+     "type": "[Int!]",
+     "doc": "Lower tick of each liquidity position the pool starts with."
+    },
+    {
+     "name": "upperTicks",
+     "json": "upperTicks",
+     "type": "[Int!]",
+     "doc": "Upper tick of each liquidity position the pool starts with."
+    },
+    {
+     "name": "numDiscoveryPositions",
+     "json": "numDiscoveryPositions",
+     "type": "[Int!]",
+     "doc": "Number of price-discovery liquidity positions per range."
+    },
+    {
+     "name": "maxDiscoverySupplyShares",
+     "json": "maxDiscoverySupplyShares",
+     "type": "[String!]",
+     "doc": "Share of supply placed in each discovery range, in 18-decimal fixed point."
+    }
+   ]
+  },
+  {
+   "name": "PoolCurrencyToken",
+   "doc": "The currency a coin's pool trades against (ZORA, ETH, USDC or a creator coin).",
+   "fields": [
+    {
+     "name": "zoraType",
+     "json": "__typename",
+     "type": "String",
+     "doc": "The type name Zora's GraphQL backend reports for this object, when it includes one."
+    },
+    {
+     "name": "address",
+     "json": "address",
+     "type": "String",
+     "doc": "Contract address (lowercase 0x hex)."
+    },
+    {
+     "name": "name",
+     "json": "name",
+     "type": "String",
+     "doc": "Display name."
+    },
+    {
+     "name": "decimals",
+     "json": "decimals",
+     "type": "Int",
+     "doc": "Token decimals (18 for most, 6 for USDC)."
+    }
+   ]
+  },
+  {
+   "name": "PreviewImage",
+   "doc": null,
+   "fields": [
+    {
+     "name": "zoraType",
+     "json": "__typename",
+     "type": "String",
+     "doc": "The type name Zora's GraphQL backend reports for this object, when it includes one."
+    },
+    {
+     "name": "blurhash",
+     "json": "blurhash",
+     "type": "String",
+     "doc": "BlurHash placeholder to show while the image loads."
+    },
+    {
+     "name": "medium",
+     "json": "medium",
+     "type": "String",
+     "doc": "Medium preview image URL."
+    },
+    {
+     "name": "small",
+     "json": "small",
+     "type": "String",
+     "doc": "Small preview image URL."
+    }
+   ]
+  },
+  {
+   "name": "PricePoint",
+   "doc": "The price of a coin at a moment in time.",
+   "fields": [
+    {
+     "name": "zoraType",
+     "json": "__typename",
+     "type": "String",
+     "doc": "The type name Zora's GraphQL backend reports for this object, when it includes one."
+    },
+    {
+     "name": "timestamp",
+     "json": "timestamp",
+     "type": "String",
+     "doc": "Start of the interval (ISO 8601, UTC)."
+    },
+    {
+     "name": "closePrice",
+     "json": "closePrice",
+     "type": "String",
+     "doc": "Price at the end of the interval, in USD."
+    }
+   ]
+  },
+  {
+   "name": "Profile",
+   "doc": "A Zora profile: handle, avatar, linked wallets, creator coin, and (depending on the call) the coins it created or holds.",
+   "fields": [
+    {
+     "name": "zoraType",
+     "json": "__typename",
+     "type": "String",
+     "doc": "The profile kind, e.g. GraphQLAccountProfile."
+    },
+    {
+     "name": "id",
+     "json": "id",
+     "type": "String",
+     "doc": "Globally unique ID."
+    },
+    {
+     "name": "handle",
+     "json": "handle",
+     "type": "String",
+     "doc": "Zora handle, without @. Wallet-only profiles get a shortened address (0x06d7...b1c6)."
+    },
+    {
+     "name": "avatar",
+     "json": "avatar",
+     "type": "Avatar",
+     "doc": "Profile picture."
+    },
+    {
+     "name": "platformBlocked",
+     "json": "platformBlocked",
+     "type": "Boolean",
+     "doc": "True if Zora hides this from its own app."
+    },
+    {
+     "name": "socialAccounts",
+     "json": "socialAccounts",
+     "type": "SocialAccounts",
+     "doc": "Linked social accounts: X, TikTok, Instagram, Farcaster."
+    },
+    {
+     "name": "creatorCoin",
+     "json": "creatorCoin",
+     "type": "Zora20Token",
+     "doc": "The creator's own creator coin."
+    },
+    {
+     "name": "username",
+     "json": "username",
+     "type": "String",
+     "doc": "Username on that network."
+    },
+    {
+     "name": "createdAt",
+     "json": "createdAt",
+     "type": "String",
+     "doc": "When it was created (ISO 8601, UTC)."
+    },
+    {
+     "name": "displayName",
+     "json": "displayName",
+     "type": "String",
+     "doc": "Display name on that network."
+    },
+    {
+     "name": "bio",
+     "json": "bio",
+     "type": "String",
+     "doc": "Profile bio."
+    },
+    {
+     "name": "website",
+     "json": "website",
+     "type": "String",
+     "doc": "Website on the profile."
+    },
+    {
+     "name": "publicWallet",
+     "json": "publicWallet",
+     "type": "PublicWallet",
+     "doc": "The profile's primary public wallet."
+    },
+    {
+     "name": "linkedWallets",
+     "json": "linkedWallets",
+     "type": "LinkedWallets",
+     "doc": "Wallets linked to the profile."
+    },
+    {
+     "name": "coinBalances",
+     "json": "coinBalances",
+     "type": "CoinBalanceConnection",
+     "doc": "Coins the profile holds (only filled by the profile-balances endpoint)."
+    },
+    {
+     "name": "createdCoins",
+     "json": "createdCoins",
+     "type": "Zora20TokenConnection",
+     "doc": "Coins the profile created (only filled by the profile-coins endpoint)."
+    },
+    {
+     "name": "usernameChangesCount",
+     "json": "usernameChangesCount",
+     "type": "Int",
+     "doc": "How many times the handle has been changed."
+    },
+    {
+     "name": "externalWallet",
+     "json": "externalWallet",
+     "type": "ExternalWallet",
+     "doc": "An external wallet linked to the profile."
+    },
+    {
+     "name": "followers",
+     "json": "followers",
+     "type": "Followers",
+     "doc": "Who follows this profile."
+    },
+    {
+     "name": "following",
+     "json": "following",
+     "type": "Followers",
+     "doc": "Who this profile follows."
+    },
+    {
+     "name": "socialAccountLinkedEvents",
+     "json": "socialAccountLinkedEvents",
+     "type": "SocialAccountLinkedEvents",
+     "doc": "History of social accounts being linked and unlinked."
+    }
+   ]
+  },
+  {
+   "name": "ProfileBySocialHandle",
+   "doc": null,
+   "fields": [
+    {
+     "name": "zoraType",
+     "json": "__typename",
+     "type": "String",
+     "doc": "The type name Zora's GraphQL backend reports for this object, when it includes one."
+    },
+    {
+     "name": "id",
+     "json": "id",
+     "type": "String",
+     "doc": "Globally unique ID."
+    },
+    {
+     "name": "handle",
+     "json": "handle",
+     "type": "String",
+     "doc": "Zora handle, without @. Wallet-only profiles get a shortened address (0x06d7...b1c6)."
+    },
+    {
+     "name": "platformBlocked",
+     "json": "platformBlocked",
+     "type": "Boolean",
+     "doc": "True if Zora hides this from its own app."
+    },
+    {
+     "name": "avatar",
+     "json": "avatar",
+     "type": "Avatar",
+     "doc": "Profile picture."
+    },
+    {
+     "name": "socialAccounts",
+     "json": "socialAccounts",
+     "type": "SocialAccounts",
+     "doc": "Linked social accounts: X, TikTok, Instagram, Farcaster."
+    },
+    {
+     "name": "creatorCoin",
+     "json": "creatorCoin",
+     "type": "Zora20Token",
+     "doc": "The creator's own creator coin."
+    },
+    {
+     "name": "username",
+     "json": "username",
+     "type": "String",
+     "doc": "Username on that network."
+    },
+    {
+     "name": "displayName",
+     "json": "displayName",
+     "type": "String",
+     "doc": "Display name on that network."
+    }
+   ]
+  },
+  {
+   "name": "PublicWallet",
+   "doc": null,
+   "fields": [
+    {
+     "name": "zoraType",
+     "json": "__typename",
+     "type": "String",
+     "doc": "The type name Zora's GraphQL backend reports for this object, when it includes one."
+    },
+    {
+     "name": "walletAddress",
+     "json": "walletAddress",
+     "type": "String",
+     "doc": "Wallet address."
+    },
+    {
+     "name": "walletType",
+     "json": "walletType",
+     "type": "WalletType",
+     "doc": "How the wallet is held (Privy, external, smart wallet)."
+    }
+   ]
+  },
+  {
+   "name": "Quote",
+   "doc": "What a trade is expected to return.",
+   "fields": [
+    {
+     "name": "zoraType",
+     "json": "__typename",
+     "type": "String",
+     "doc": "The type name Zora's GraphQL backend reports for this object, when it includes one."
+    },
+    {
+     "name": "amountOut",
+     "json": "amountOut",
+     "type": "String",
+     "doc": "Expected output, in the output token's smallest unit."
+    },
+    {
+     "name": "slippage",
+     "json": "slippage",
+     "type": "Float",
+     "doc": "Slippage tolerance the quote was built with (0.05 = 5%)."
+    },
+    {
+     "name": "tokenIn",
+     "json": "tokenIn",
+     "type": "TokenSpec",
+     "doc": "The token being sold."
+    }
+   ]
+  },
+  {
+   "name": "QuoteResponse",
+   "doc": "A trade quote and the transaction that executes it.",
+   "fields": [
+    {
+     "name": "success",
+     "json": "success",
+     "type": "Boolean",
+     "doc": "Whether a route was found. Sent by the API as a string; the SDKs read it as a boolean."
+    },
+    {
+     "name": "call",
+     "json": "call",
+     "type": "Call",
+     "doc": "The transaction to send from the sender's wallet."
+    },
+    {
+     "name": "permits",
+     "json": "permits",
+     "type": "[SignedPermit!]",
+     "doc": "Permit2 permits the sender must sign first, when selling an ERC-20."
+    },
+    {
+     "name": "trade",
+     "json": "trade",
+     "type": "Trade",
+     "doc": "The Universal Router trade encoded in the call."
+    },
+    {
+     "name": "quote",
+     "json": "quote",
+     "type": "Quote",
+     "doc": "What the trade is expected to return."
+    }
+   ]
+  },
+  {
+   "name": "Replies",
+   "doc": null,
+   "fields": [
+    {
+     "name": "zoraType",
+     "json": "__typename",
+     "type": "String",
+     "doc": "The type name Zora's GraphQL backend reports for this object, when it includes one."
+    },
+    {
+     "name": "count",
+     "json": "count",
+     "type": "Int",
+     "doc": "Total number of items, where the API reports it."
+    },
+    {
+     "name": "edges",
+     "json": "edges",
+     "type": "[ReplyEdge!]",
+     "doc": "The items on this page, each wrapped in an edge."
+    }
+   ]
+  },
+  {
+   "name": "Reply",
+   "doc": null,
+   "fields": [
+    {
+     "name": "zoraType",
+     "json": "__typename",
+     "type": "String",
+     "doc": "The type name Zora's GraphQL backend reports for this object, when it includes one."
+    },
+    {
+     "name": "commentId",
+     "json": "commentId",
+     "type": "String",
+     "doc": "ID of the comment."
+    },
+    {
+     "name": "nonce",
+     "json": "nonce",
+     "type": "String",
+     "doc": "Nonce the comment was signed or posted with."
+    },
+    {
+     "name": "userAddress",
+     "json": "userAddress",
+     "type": "String",
+     "doc": "Wallet of the user who posted it."
+    },
+    {
+     "name": "txHash",
+     "json": "txHash",
+     "type": "String",
+     "doc": "Hash of the transaction that posted it onchain, if it was posted onchain."
+    },
+    {
+     "name": "comment",
+     "json": "comment",
+     "type": "String",
+     "doc": "The comment text."
+    },
+    {
+     "name": "timestamp",
+     "json": "timestamp",
+     "type": "Int",
+     "doc": "When it happened (Unix seconds)."
+    },
+    {
+     "name": "userProfile",
+     "json": "userProfile",
+     "type": "UserProfile",
+     "doc": "Profile of the user who posted it."
+    },
+    {
+     "name": "contractAddress",
+     "json": "contractAddress",
+     "type": "String",
+     "doc": "Contract of the coin the comment is on."
+    },
+    {
+     "name": "text",
+     "json": "text",
+     "type": "String",
+     "doc": "The comment text."
+    },
+    {
+     "name": "commentedAt",
+     "json": "commentedAt",
+     "type": "String",
+     "doc": "Date with time (isoformat)"
+    },
+    {
+     "name": "replyToOnChainId",
+     "json": "replyToOnChainId",
+     "type": "String",
+     "doc": "Onchain ID of the comment this replies to, if any."
+    },
+    {
+     "name": "replyToOffChainId",
+     "json": "replyToOffChainId",
+     "type": "String",
+     "doc": "Offchain ID of the comment this replies to, if any."
+    },
+    {
+     "name": "sparkCount",
+     "json": "sparkCount",
+     "type": "Int",
+     "doc": "Sparks (Zora's likes) the comment received."
+    },
+    {
+     "name": "profile",
+     "json": "profile",
+     "type": "Profile",
+     "doc": "The profile."
+    }
+   ]
+  },
+  {
+   "name": "ReplyEdge",
+   "doc": "Wraps one Reply in a page of results.",
+   "fields": [
+    {
+     "name": "node",
+     "json": "node",
+     "type": "Reply",
+     "doc": "The item."
+    }
+   ]
+  },
+  {
+   "name": "SearchResult",
+   "doc": "One search hit: a profile, a coin, a piece of content or a trend.",
+   "fields": [
+    {
+     "name": "zoraType",
+     "json": "__typename",
+     "type": "String",
+     "doc": "What was found: GlobalSearchCoinResult, GlobalSearchTrendResult or GlobalSearchUserProfileResult."
+    },
+    {
+     "name": "entityType",
+     "json": "entityType",
+     "type": "EntityType",
+     "doc": "What kind of thing this result is."
+    },
+    {
+     "name": "profile",
+     "json": "profile",
+     "type": "Profile",
+     "doc": "The profile."
+    },
+    {
+     "name": "coin",
+     "json": "coin",
+     "type": "Zora20Token",
+     "doc": "The coin."
+    },
+    {
+     "name": "trend",
+     "json": "trend",
+     "type": "Zora20Token",
+     "doc": "The trend coin, for trend search results."
+    }
+   ]
+  },
+  {
+   "name": "SearchResultConnection",
+   "doc": "One page of SearchResult results. Nodes() lists them; PageInfo says how to get the next page.",
+   "fields": [
+    {
+     "name": "pageInfo",
+     "json": "pageInfo",
+     "type": "PageInfo",
+     "doc": "How to fetch the next page."
+    },
+    {
+     "name": "edges",
+     "json": "edges",
+     "type": "[SearchResultEdge!]",
+     "doc": "The items on this page, each wrapped in an edge."
+    }
+   ]
+  },
+  {
+   "name": "SearchResultEdge",
+   "doc": "Wraps one SearchResult in a page of results.",
+   "fields": [
+    {
+     "name": "cursor",
+     "json": "cursor",
+     "type": "String",
+     "doc": "Cursor pointing at this item."
+    },
+    {
+     "name": "node",
+     "json": "node",
+     "type": "SearchResult",
+     "doc": "The item."
+    }
+   ]
+  },
+  {
+   "name": "SignedPermit",
+   "doc": null,
+   "fields": [
+    {
+     "name": "zoraType",
+     "json": "__typename",
+     "type": "String",
+     "doc": "The type name Zora's GraphQL backend reports for this object, when it includes one."
+    },
+    {
+     "name": "signature",
+     "json": "signature",
+     "type": "String",
+     "doc": "The signature."
+    },
+    {
+     "name": "permit",
+     "json": "permit",
+     "type": "Permit",
+     "doc": "The Permit2 permit."
+    }
+   ]
+  },
+  {
+   "name": "SocialAccountLinkedEvent",
+   "doc": null,
+   "fields": [
+    {
+     "name": "zoraType",
+     "json": "__typename",
+     "type": "String",
+     "doc": "The type name Zora's GraphQL backend reports for this object, when it includes one."
+    },
+    {
+     "name": "id",
+     "json": "id",
+     "type": "String",
+     "doc": "Globally unique ID."
+    },
+    {
+     "name": "platform",
+     "json": "platform",
+     "type": "Platform",
+     "doc": "The social network."
+    },
+    {
+     "name": "socialAccountUsername",
+     "json": "socialAccountUsername",
+     "type": "String",
+     "doc": "Username on the social network."
+    },
+    {
+     "name": "occurredAt",
+     "json": "occurredAt",
+     "type": "String",
+     "doc": "Date with time (isoformat)"
+    },
+    {
+     "name": "eventType",
+     "json": "eventType",
+     "type": "EventType",
+     "doc": "Whether the account was linked or unlinked."
+    }
+   ]
+  },
+  {
+   "name": "SocialAccountLinkedEventEdge",
+   "doc": "Wraps one SocialAccountLinkedEvent in a page of results.",
+   "fields": [
+    {
+     "name": "node",
+     "json": "node",
+     "type": "SocialAccountLinkedEvent",
+     "doc": "The item."
+    }
+   ]
+  },
+  {
+   "name": "SocialAccountLinkedEvents",
+   "doc": null,
+   "fields": [
+    {
+     "name": "zoraType",
+     "json": "__typename",
+     "type": "String",
+     "doc": "The type name Zora's GraphQL backend reports for this object, when it includes one."
+    },
+    {
+     "name": "edges",
+     "json": "edges",
+     "type": "[SocialAccountLinkedEventEdge!]",
+     "doc": "The items on this page, each wrapped in an edge."
+    }
+   ]
+  },
+  {
+   "name": "SocialAccounts",
+   "doc": null,
+   "fields": [
+    {
+     "name": "zoraType",
+     "json": "__typename",
+     "type": "String",
+     "doc": "The type name Zora's GraphQL backend reports for this object, when it includes one."
+    },
+    {
+     "name": "instagram",
+     "json": "instagram",
+     "type": "Instagram",
+     "doc": "Linked Instagram account."
+    },
+    {
+     "name": "tiktok",
+     "json": "tiktok",
+     "type": "Instagram",
+     "doc": "Linked TikTok account."
+    },
+    {
+     "name": "twitter",
+     "json": "twitter",
+     "type": "Instagram",
+     "doc": "Linked X (Twitter) account."
+    },
+    {
+     "name": "farcaster",
+     "json": "farcaster",
+     "type": "Instagram",
+     "doc": "Linked Farcaster account."
+    }
+   ]
+  },
+  {
+   "name": "SwapActivity",
+   "doc": "One buy or sell of a coin.",
+   "fields": [
+    {
+     "name": "zoraType",
+     "json": "__typename",
+     "type": "String",
+     "doc": "The type name Zora's GraphQL backend reports for this object, when it includes one."
+    },
+    {
+     "name": "id",
+     "json": "id",
+     "type": "String",
+     "doc": "Globally unique ID."
+    },
+    {
+     "name": "currencyAmountWithPrice",
+     "json": "currencyAmountWithPrice",
+     "type": "CurrencyAmountWithPrice",
+     "doc": "Amount in the pool's currency, with the currency's USD price at the time."
+    },
+    {
+     "name": "senderAddress",
+     "json": "senderAddress",
+     "type": "String",
+     "doc": "Wallet that sent the swap."
+    },
+    {
+     "name": "recipientAddress",
+     "json": "recipientAddress",
+     "type": "String",
+     "doc": "Wallet that received the output."
+    },
+    {
+     "name": "transactionHash",
+     "json": "transactionHash",
+     "type": "String",
+     "doc": "Hash of the transaction it happened in."
+    },
+    {
+     "name": "coinAmount",
+     "json": "coinAmount",
+     "type": "String",
+     "doc": "Coins bought or sold, in the smallest unit (18 decimals)."
+    },
+    {
+     "name": "blockTimestamp",
+     "json": "blockTimestamp",
+     "type": "String",
+     "doc": "Time of the block it happened in (ISO 8601, UTC)."
+    },
+    {
+     "name": "activityType",
+     "json": "activityType",
+     "type": "SwapType",
+     "doc": "BUY or SELL."
+    },
+    {
+     "name": "senderProfile",
+     "json": "senderProfile",
+     "type": "OwnerProfile",
+     "doc": "Profile of the wallet that sent the trade."
+    }
+   ]
+  },
+  {
+   "name": "SwapActivityConnection",
+   "doc": "One page of SwapActivity results. Nodes() lists them; PageInfo says how to get the next page.",
+   "fields": [
+    {
+     "name": "count",
+     "json": "count",
+     "type": "Int",
+     "doc": "Total number of items, where the API reports it."
+    },
+    {
+     "name": "edges",
+     "json": "edges",
+     "type": "[SwapActivityEdge!]",
+     "doc": "The items on this page, each wrapped in an edge."
+    },
+    {
+     "name": "pageInfo",
+     "json": "pageInfo",
+     "type": "PageInfo",
+     "doc": "How to fetch the next page."
+    }
+   ]
+  },
+  {
+   "name": "SwapActivityEdge",
+   "doc": "Wraps one SwapActivity in a page of results.",
+   "fields": [
+    {
+     "name": "node",
+     "json": "node",
+     "type": "SwapActivity",
+     "doc": "The item."
+    },
+    {
+     "name": "cursor",
+     "json": "cursor",
+     "type": "String",
+     "doc": "Cursor pointing at this item."
+    }
+   ]
+  },
+  {
+   "name": "TokenBalance",
+   "doc": "One holder of a coin and how much they hold.",
+   "fields": [
+    {
+     "name": "zoraType",
+     "json": "__typename",
+     "type": "String",
+     "doc": "The type name Zora's GraphQL backend reports for this object, when it includes one."
+    },
+    {
+     "name": "balance",
+     "json": "balance",
+     "type": "String",
+     "doc": "Amount held, in the coin's smallest unit (18 decimals) \u2014 divide by 1e18 for whole coins."
+    },
+    {
+     "name": "ownerAddress",
+     "json": "ownerAddress",
+     "type": "String",
+     "doc": "Wallet holding the coin."
+    },
+    {
+     "name": "ownerProfile",
+     "json": "ownerProfile",
+     "type": "OwnerProfile",
+     "doc": "Profile of the holder (a wallet profile if the holder has no Zora account)."
+    }
+   ]
+  },
+  {
+   "name": "TokenBalanceConnection",
+   "doc": "One page of TokenBalance results. Nodes() lists them; PageInfo says how to get the next page.",
+   "fields": [
+    {
+     "name": "pageInfo",
+     "json": "pageInfo",
+     "type": "PageInfo",
+     "doc": "How to fetch the next page."
+    },
+    {
+     "name": "count",
+     "json": "count",
+     "type": "Int",
+     "doc": "Total number of items, where the API reports it."
+    },
+    {
+     "name": "edges",
+     "json": "edges",
+     "type": "[TokenBalanceEdge!]",
+     "doc": "The items on this page, each wrapped in an edge."
+    }
+   ]
+  },
+  {
+   "name": "TokenBalanceEdge",
+   "doc": "Wraps one TokenBalance in a page of results.",
+   "fields": [
+    {
+     "name": "node",
+     "json": "node",
+     "type": "TokenBalance",
+     "doc": "The item."
+    }
+   ]
+  },
+  {
+   "name": "TokenPrice",
+   "doc": "A coin's current price, in the pool's currency and in USD.",
+   "fields": [
+    {
+     "name": "zoraType",
+     "json": "__typename",
+     "type": "String",
+     "doc": "The type name Zora's GraphQL backend reports for this object, when it includes one."
+    },
+    {
+     "name": "priceInUsdc",
+     "json": "priceInUsdc",
+     "type": "String",
+     "doc": "Price of one whole coin in USDC (\u2248 USD), as a decimal string."
+    },
+    {
+     "name": "currencyAddress",
+     "json": "currencyAddress",
+     "type": "String",
+     "doc": "The coin the price is for."
+    },
+    {
+     "name": "priceInPoolToken",
+     "json": "priceInPoolToken",
+     "type": "String",
+     "doc": "Price of one whole coin in the pool's currency, as a decimal string."
+    }
+   ]
+  },
+  {
+   "name": "TokenSpec",
+   "doc": "A token in a trade quote: native ETH or an ERC-20 address.",
+   "fields": [
+    {
+     "name": "zoraType",
+     "json": "__typename",
+     "type": "String",
+     "doc": "The type name Zora's GraphQL backend reports for this object, when it includes one."
+    },
+    {
+     "name": "type",
+     "json": "type",
+     "type": "String",
+     "doc": "eth for native ETH, erc20 for a token (which then needs an address)."
+    },
+    {
+     "name": "address",
+     "json": "address",
+     "type": "String",
+     "doc": "Contract address (lowercase 0x hex)."
+    }
+   ]
+  },
+  {
+   "name": "Trade",
+   "doc": null,
+   "fields": [
+    {
+     "name": "zoraType",
+     "json": "__typename",
+     "type": "String",
+     "doc": "The type name Zora's GraphQL backend reports for this object, when it includes one."
+    },
+    {
+     "name": "commands",
+     "json": "commands",
+     "type": "[String!]",
+     "doc": "Universal Router commands the trade executes (hex)."
+    },
+    {
+     "name": "value",
+     "json": "value",
+     "type": "String",
+     "doc": "ETH to send, in wei."
+    },
+    {
+     "name": "inputs",
+     "json": "inputs",
+     "type": "[String!]",
+     "doc": "ABI-encoded input for each command."
+    }
+   ]
+  },
+  {
+   "name": "TradeActivity",
+   "doc": "One trade made by a wallet.",
+   "fields": [
+    {
+     "name": "zoraType",
+     "json": "__typename",
+     "type": "String",
+     "doc": "The activity kind, e.g. GraphQLCoinSwapActivity."
+    },
+    {
+     "name": "transactionHash",
+     "json": "transactionHash",
+     "type": "String",
+     "doc": "Hash of the transaction it happened in."
+    },
+    {
+     "name": "transactionLogIndex",
+     "json": "transactionLogIndex",
+     "type": "Int",
+     "doc": "Index of the swap's log within its transaction."
+    },
+    {
+     "name": "blockTimestamp",
+     "json": "blockTimestamp",
+     "type": "String",
+     "doc": "Time of the block it happened in (ISO 8601, UTC)."
+    },
+    {
+     "name": "coinAmount",
+     "json": "coinAmount",
+     "type": "String",
+     "doc": "Coins traded, in the smallest unit (18 decimals)."
+    },
+    {
+     "name": "coin",
+     "json": "coin",
+     "type": "Zora20Token",
+     "doc": "The coin."
+    },
+    {
+     "name": "id",
+     "json": "id",
+     "type": "String",
+     "doc": "Globally unique ID."
+    },
+    {
+     "name": "swapActivityType",
+     "json": "swapActivityType",
+     "type": "SwapType",
+     "doc": "BUY or SELL."
+    },
+    {
+     "name": "currencyAmountWithPrice",
+     "json": "currencyAmountWithPrice",
+     "type": "CurrencyAmountWithPrice",
+     "doc": "Amount in the pool's currency, with the currency's USD price at the time."
+    },
+    {
+     "name": "senderProfile",
+     "json": "senderProfile",
+     "type": "OwnerProfile",
+     "doc": "Profile of the wallet that sent the trade."
+    },
+    {
+     "name": "orderId",
+     "json": "orderId",
+     "type": "String",
+     "doc": "Zora's ID for the trade."
+    },
+    {
+     "name": "initialBuyAmount",
+     "json": "initialBuyAmount",
+     "type": "String",
+     "doc": "For a coin launch, how much the creator bought at creation."
+    },
+    {
+     "name": "initialBuyAmountUsd",
+     "json": "initialBuyAmountUsd",
+     "type": "Float",
+     "doc": "That initial buy in USD."
+    },
+    {
+     "name": "multiplier",
+     "json": "multiplier",
+     "type": "Int",
+     "doc": "How many times its value the trade has returned, where Zora computes it."
+    },
+    {
+     "name": "makerProfile",
+     "json": "makerProfile",
+     "type": "OwnerProfile",
+     "doc": "Profile of the wallet that made the trade."
+    }
+   ]
+  },
+  {
+   "name": "TradeActivityConnection",
+   "doc": "One page of TradeActivity results. Nodes() lists them; PageInfo says how to get the next page.",
+   "fields": [
+    {
+     "name": "count",
+     "json": "count",
+     "type": "Int",
+     "doc": "Total number of items, where the API reports it."
+    },
+    {
+     "name": "edges",
+     "json": "edges",
+     "type": "[TradeActivityEdge!]",
+     "doc": "The items on this page, each wrapped in an edge."
+    },
+    {
+     "name": "pageInfo",
+     "json": "pageInfo",
+     "type": "PageInfo",
+     "doc": "How to fetch the next page."
+    }
+   ]
+  },
+  {
+   "name": "TradeActivityEdge",
+   "doc": "Wraps one TradeActivity in a page of results.",
+   "fields": [
+    {
+     "name": "node",
+     "json": "node",
+     "type": "TradeActivity",
+     "doc": "The item."
+    },
+    {
+     "name": "cursor",
+     "json": "cursor",
+     "type": "String",
+     "doc": "Cursor pointing at this item."
+    }
+   ]
+  },
+  {
+   "name": "TraderLeaderboardEntry",
+   "doc": "One trader's position on the weekly leaderboard.",
+   "fields": [
+    {
+     "name": "zoraType",
+     "json": "__typename",
+     "type": "String",
+     "doc": "The type name Zora's GraphQL backend reports for this object, when it includes one."
+    },
+    {
+     "name": "entityName",
+     "json": "entityName",
+     "type": "String",
+     "doc": "Name of the coin."
+    },
+    {
+     "name": "score",
+     "json": "score",
+     "type": "Int",
+     "doc": "Leaderboard score."
+    },
+    {
+     "name": "weekVolumeUsd",
+     "json": "weekVolumeUsd",
+     "type": "Float",
+     "doc": "Trading volume this week in USD."
+    },
+    {
+     "name": "weekTradesCount",
+     "json": "weekTradesCount",
+     "type": "Int",
+     "doc": "Trades made this week."
+    },
+    {
+     "name": "weekGrossVolumeZora",
+     "json": "weekGrossVolumeZora",
+     "type": "Float",
+     "doc": "Gross trading volume this week, in ZORA."
+    },
+    {
+     "name": "traderProfile",
+     "json": "traderProfile",
+     "type": "FeaturedCreator",
+     "doc": "Profile of the trader."
+    }
+   ]
+  },
+  {
+   "name": "TraderLeaderboardEntryConnection",
+   "doc": "One page of TraderLeaderboardEntry results. Nodes() lists them; PageInfo says how to get the next page.",
+   "fields": [
+    {
+     "name": "count",
+     "json": "count",
+     "type": "Int",
+     "doc": "Total number of items, where the API reports it."
+    },
+    {
+     "name": "edges",
+     "json": "edges",
+     "type": "[TraderLeaderboardEntryEdge!]",
+     "doc": "The items on this page, each wrapped in an edge."
+    },
+    {
+     "name": "pageInfo",
+     "json": "pageInfo",
+     "type": "PageInfo",
+     "doc": "How to fetch the next page."
+    }
+   ]
+  },
+  {
+   "name": "TraderLeaderboardEntryEdge",
+   "doc": "Wraps one TraderLeaderboardEntry in a page of results.",
+   "fields": [
+    {
+     "name": "node",
+     "json": "node",
+     "type": "TraderLeaderboardEntry",
+     "doc": "The item."
+    }
+   ]
+  },
+  {
+   "name": "UniswapV4PoolKey",
+   "doc": "The Uniswap V4 pool key of a coin's market.",
+   "fields": [
+    {
+     "name": "zoraType",
+     "json": "__typename",
+     "type": "String",
+     "doc": "The type name Zora's GraphQL backend reports for this object, when it includes one."
+    },
+    {
+     "name": "token0Address",
+     "json": "token0Address",
+     "type": "String",
+     "doc": "currency0 of the Uniswap V4 pool key."
+    },
+    {
+     "name": "token1Address",
+     "json": "token1Address",
+     "type": "String",
+     "doc": "currency1 of the Uniswap V4 pool key."
+    },
+    {
+     "name": "fee",
+     "json": "fee",
+     "type": "Int",
+     "doc": "Pool fee, in hundredths of a basis point."
+    },
+    {
+     "name": "tickSpacing",
+     "json": "tickSpacing",
+     "type": "Int",
+     "doc": "Tick spacing of the pool."
+    },
+    {
+     "name": "hookAddress",
+     "json": "hookAddress",
+     "type": "String",
+     "doc": "The pool's hook contract (Zora's coin hook)."
+    }
+   ]
+  },
+  {
+   "name": "UserProfile",
+   "doc": null,
+   "fields": [
+    {
+     "name": "zoraType",
+     "json": "__typename",
+     "type": "String",
+     "doc": "The type name Zora's GraphQL backend reports for this object, when it includes one."
+    },
+    {
+     "name": "id",
+     "json": "id",
+     "type": "String",
+     "doc": "Globally unique ID."
+    },
+    {
+     "name": "handle",
+     "json": "handle",
+     "type": "String",
+     "doc": "Zora handle, without @. Wallet-only profiles get a shortened address (0x06d7...b1c6)."
+    },
+    {
+     "name": "avatar",
+     "json": "avatar",
+     "type": "Avatar",
+     "doc": "Profile picture."
+    }
+   ]
+  },
+  {
+   "name": "Valuation",
+   "doc": null,
+   "fields": [
+    {
+     "name": "zoraType",
+     "json": "__typename",
+     "type": "String",
+     "doc": "The type name Zora's GraphQL backend reports for this object, when it includes one."
+    },
+    {
+     "name": "marketValueUsd",
+     "json": "marketValueUsd",
+     "type": "String",
+     "doc": "What the holding would fetch at the current price, in USD."
+    },
+    {
+     "name": "faceValueUsd",
+     "json": "faceValueUsd",
+     "type": "String",
+     "doc": "Balance \u00d7 price, in USD, ignoring slippage."
+    },
+    {
+     "name": "blockNumber",
+     "json": "blockNumber",
+     "type": "Int",
+     "doc": "Block the valuation was computed at."
+    },
+    {
+     "name": "maxSwappable",
+     "json": "maxSwappable",
+     "type": "MaxSwappable",
+     "doc": "The most of the holding that can be sold into the pool right now."
+    },
+    {
+     "name": "currencyAmount",
+     "json": "currencyAmount",
+     "type": "Amount",
+     "doc": "Amount paid or received, in the pool's currency."
+    },
+    {
+     "name": "error",
+     "json": "error",
+     "type": "String",
+     "doc": "Why the valuation couldn't be computed, when it couldn't."
+    }
+   ]
+  },
+  {
+   "name": "Zora20Token",
+   "doc": "A Zora coin: an ERC-20 with a Uniswap V4 market, created by a creator or for a piece of content or a trend. Endpoints return different selections of its fields; anything not selected is empty.",
+   "fields": [
+    {
+     "name": "zoraType",
+     "json": "__typename",
+     "type": "String",
+     "doc": "Which kind of coin this is: GraphQLZora20Token, GraphQLZora20V4Token, GraphQLZora20CreatorToken or GraphQLZora20TrendToken."
+    },
+    {
+     "name": "id",
+     "json": "id",
+     "type": "String",
+     "doc": "Globally unique ID."
+    },
+    {
+     "name": "platformBlocked",
+     "json": "platformBlocked",
+     "type": "Boolean",
+     "doc": "True if Zora hides this from its own app."
+    },
+    {
+     "name": "name",
+     "json": "name",
+     "type": "String",
+     "doc": "Display name."
+    },
+    {
+     "name": "description",
+     "json": "description",
+     "type": "String",
+     "doc": "Description from the coin's metadata."
+    },
+    {
+     "name": "address",
+     "json": "address",
+     "type": "String",
+     "doc": "Contract address (lowercase 0x hex)."
+    },
+    {
+     "name": "coinType",
+     "json": "coinType",
+     "type": "CoinType",
+     "doc": "Whether this is a creator coin, a content coin or a trend."
+    },
+    {
+     "name": "symbol",
+     "json": "symbol",
+     "type": "String",
+     "doc": "Ticker symbol."
+    },
+    {
+     "name": "totalSupply",
+     "json": "totalSupply",
+     "type": "String",
+     "doc": "Total supply in whole tokens, as a decimal string (\"1000000000\" = one billion)."
+    },
+    {
+     "name": "totalVolume",
+     "json": "totalVolume",
+     "type": "String",
+     "doc": "All-time trading volume in USD, as a decimal string."
+    },
+    {
+     "name": "volume24h",
+     "json": "volume24h",
+     "type": "String",
+     "doc": "Trading volume over the last 24 hours in USD, as a decimal string."
+    },
+    {
+     "name": "createdAt",
+     "json": "createdAt",
+     "type": "String",
+     "doc": "When it was created (ISO 8601, UTC)."
+    },
+    {
+     "name": "creatorAddress",
+     "json": "creatorAddress",
+     "type": "String",
+     "doc": "Wallet that created the coin."
+    },
+    {
+     "name": "poolCurrencyToken",
+     "json": "poolCurrencyToken",
+     "type": "PoolCurrencyToken",
+     "doc": "What the coin's pool trades against."
+    },
+    {
+     "name": "tokenPrice",
+     "json": "tokenPrice",
+     "type": "TokenPrice",
+     "doc": "Current price."
+    },
+    {
+     "name": "marketCap",
+     "json": "marketCap",
+     "type": "String",
+     "doc": "Market cap in USD, as a decimal string."
+    },
+    {
+     "name": "marketCapDelta24h",
+     "json": "marketCapDelta24h",
+     "type": "String",
+     "doc": "Change in market cap over the last 24 hours in USD (negative when it fell), as a decimal string."
+    },
+    {
+     "name": "chainId",
+     "json": "chainId",
+     "type": "Int",
+     "doc": "Chain ID (8453 = Base)."
+    },
+    {
+     "name": "tokenUri",
+     "json": "tokenUri",
+     "type": "String",
+     "doc": "Metadata URI (EIP-7572 JSON, usually ipfs://)."
+    },
+    {
+     "name": "platformReferrerAddress",
+     "json": "platformReferrerAddress",
+     "type": "String",
+     "doc": "The app that launched the coin; it earns the platform referral share of every trade, for good."
+    },
+    {
+     "name": "payoutRecipientAddress",
+     "json": "payoutRecipientAddress",
+     "type": "String",
+     "doc": "Wallet that receives the creator's share of trading fees."
+    },
+    {
+     "name": "creatorProfile",
+     "json": "creatorProfile",
+     "type": "CreatorProfile",
+     "doc": "Profile of the creator."
+    },
+    {
+     "name": "mediaContent",
+     "json": "mediaContent",
+     "type": "MediaContent",
+     "doc": "The image or video attached to the coin."
+    },
+    {
+     "name": "uniqueHolders",
+     "json": "uniqueHolders",
+     "type": "Int",
+     "doc": "Number of distinct wallets holding the coin."
+    },
+    {
+     "name": "uniswapV4PoolKey",
+     "json": "uniswapV4PoolKey",
+     "type": "UniswapV4PoolKey",
+     "doc": "Pool key of a V4 coin's market."
+    },
+    {
+     "name": "uniswapV3PoolAddress",
+     "json": "uniswapV3PoolAddress",
+     "type": "String",
+     "doc": "Pool of a legacy V3 coin. Empty for V4 coins, which use uniswapV4PoolKey."
+    },
+    {
+     "name": "zoraComments",
+     "json": "zoraComments",
+     "type": "ZoraCommentConnection",
+     "doc": "Comments (only filled by the coin-comments endpoint)."
+    },
+    {
+     "name": "creatorEarnings",
+     "json": "creatorEarnings",
+     "type": "[CreatorEarning!]",
+     "doc": "What the creator has earned from trading fees, per currency."
+    },
+    {
+     "name": "tokenBalances",
+     "json": "tokenBalances",
+     "type": "TokenBalanceConnection",
+     "doc": "Holders (only filled by the coin-holders endpoint)."
+    },
+    {
+     "name": "comments",
+     "json": "comments",
+     "type": "CommentConnection",
+     "doc": "Comments."
+    },
+    {
+     "name": "oneHour",
+     "json": "oneHour",
+     "type": "[PricePoint!]",
+     "doc": "Prices over the last hour (only filled by the price-history endpoint)."
+    },
+    {
+     "name": "oneDay",
+     "json": "oneDay",
+     "type": "[PricePoint!]",
+     "doc": "Prices over the last day."
+    },
+    {
+     "name": "oneWeek",
+     "json": "oneWeek",
+     "type": "[PricePoint!]",
+     "doc": "Prices over the last week."
+    },
+    {
+     "name": "oneMonth",
+     "json": "oneMonth",
+     "type": "[PricePoint!]",
+     "doc": "Prices over the last month."
+    },
+    {
+     "name": "all",
+     "json": "all",
+     "type": "[PricePoint!]",
+     "doc": "Prices over the coin's whole life."
+    },
+    {
+     "name": "swapActivities",
+     "json": "swapActivities",
+     "type": "SwapActivityConnection",
+     "doc": "Buys and sells (only filled by the coin-swaps endpoint)."
+    },
+    {
+     "name": "multichainAddress",
+     "json": "multichainAddress",
+     "type": "String",
+     "doc": "The coin's address on other chains, where Zora reports one."
+    },
+    {
+     "name": "uniswapPoolAddress",
+     "json": "uniswapPoolAddress",
+     "type": "String",
+     "doc": "The coin's Uniswap pool address, where the API reports one."
+    }
+   ]
+  },
+  {
+   "name": "Zora20TokenConnection",
+   "doc": "One page of Zora20Token results. Nodes() lists them; PageInfo says how to get the next page.",
+   "fields": [
+    {
+     "name": "edges",
+     "json": "edges",
+     "type": "[Zora20TokenEdge!]",
+     "doc": "The items on this page, each wrapped in an edge."
+    },
+    {
+     "name": "pageInfo",
+     "json": "pageInfo",
+     "type": "PageInfo",
+     "doc": "How to fetch the next page."
+    },
+    {
+     "name": "count",
+     "json": "count",
+     "type": "Int",
+     "doc": "Total number of items, where the API reports it."
+    }
+   ]
+  },
+  {
+   "name": "Zora20TokenEdge",
+   "doc": "Wraps one Zora20Token in a page of results.",
+   "fields": [
+    {
+     "name": "node",
+     "json": "node",
+     "type": "Zora20Token",
+     "doc": "The item."
+    },
+    {
+     "name": "cursor",
+     "json": "cursor",
+     "type": "String",
+     "doc": "Cursor pointing at this item."
+    }
+   ]
+  },
+  {
+   "name": "ZoraComment",
+   "doc": "A comment posted on a coin.",
+   "fields": [
+    {
+     "name": "zoraType",
+     "json": "__typename",
+     "type": "String",
+     "doc": "The type name Zora's GraphQL backend reports for this object, when it includes one."
+    },
+    {
+     "name": "commentId",
+     "json": "commentId",
+     "type": "String",
+     "doc": "ID of the comment."
+    },
+    {
+     "name": "nonce",
+     "json": "nonce",
+     "type": "String",
+     "doc": "Nonce the comment was signed or posted with."
+    },
+    {
+     "name": "userAddress",
+     "json": "userAddress",
+     "type": "String",
+     "doc": "Wallet of the user who posted it."
+    },
+    {
+     "name": "txHash",
+     "json": "txHash",
+     "type": "String",
+     "doc": "Hash of the transaction that posted it onchain, if it was posted onchain."
+    },
+    {
+     "name": "comment",
+     "json": "comment",
+     "type": "String",
+     "doc": "The comment text."
+    },
+    {
+     "name": "timestamp",
+     "json": "timestamp",
+     "type": "Int",
+     "doc": "When it happened (Unix seconds)."
+    },
+    {
+     "name": "userProfile",
+     "json": "userProfile",
+     "type": "UserProfile",
+     "doc": "Profile of the user who posted it."
+    },
+    {
+     "name": "replies",
+     "json": "replies",
+     "type": "Replies",
+     "doc": "Replies to this comment."
+    }
+   ]
+  },
+  {
+   "name": "ZoraCommentConnection",
+   "doc": "One page of ZoraComment results. Nodes() lists them; PageInfo says how to get the next page.",
+   "fields": [
+    {
+     "name": "pageInfo",
+     "json": "pageInfo",
+     "type": "PageInfo",
+     "doc": "How to fetch the next page."
+    },
+    {
+     "name": "count",
+     "json": "count",
+     "type": "Int",
+     "doc": "Total number of items, where the API reports it."
+    },
+    {
+     "name": "edges",
+     "json": "edges",
+     "type": "[ZoraCommentEdge!]",
+     "doc": "The items on this page, each wrapped in an edge."
+    }
+   ]
+  },
+  {
+   "name": "ZoraCommentEdge",
+   "doc": "Wraps one ZoraComment in a page of results.",
+   "fields": [
+    {
+     "name": "node",
+     "json": "node",
+     "type": "ZoraComment",
+     "doc": "The item."
+    }
+   ]
+  }
+ ],
+ "inputs": [
+  {
+   "name": "CoinRefInput",
+   "doc": "A coin to fetch with Coins: its chain and contract address.",
+   "fields": [
+    {
+     "name": "chainId",
+     "json": "chainId",
+     "type": "Int!",
+     "doc": "Chain ID (8453 = Base)."
+    },
+    {
+     "name": "collectionAddress",
+     "json": "collectionAddress",
+     "type": "String!",
+     "doc": "Contract address of the coin."
+    }
+   ]
+  },
+  {
+   "name": "CreateContentCoinRequest",
+   "doc": "A content coin to create. Metadata must point at EIP-7572 JSON (ipfs:// or https://).",
+   "fields": [
+    {
+     "name": "creator",
+     "json": "creator",
+     "type": "String!",
+     "doc": "Wallet creating the coin."
+    },
+    {
+     "name": "name",
+     "json": "name",
+     "type": "String!",
+     "doc": "Display name."
+    },
+    {
+     "name": "symbol",
+     "json": "symbol",
+     "type": "String!",
+     "doc": "Ticker symbol."
+    },
+    {
+     "name": "metadata",
+     "json": "metadata",
+     "type": "MetadataInput!",
+     "doc": "Where the coin's EIP-7572 metadata lives."
+    },
+    {
+     "name": "currency",
+     "json": "currency",
+     "type": "ContentCoinCurrency!",
+     "doc": "The currency."
+    },
+    {
+     "name": "chainId",
+     "json": "chainId",
+     "type": "Int",
+     "doc": "Chain ID (8453 = Base)."
+    },
+    {
+     "name": "startingMarketCap",
+     "json": "startingMarketCap",
+     "type": "StartingMarketCap",
+     "doc": "Starting market cap tier."
+    },
+    {
+     "name": "platformReferrer",
+     "json": "platformReferrer",
+     "type": "String",
+     "doc": "Your app's address: it earns the platform referral share of this coin's trading fees for good."
+    },
+    {
+     "name": "additionalOwners",
+     "json": "additionalOwners",
+     "type": "[String!]",
+     "doc": "More wallets allowed to manage the coin."
+    },
+    {
+     "name": "payoutRecipientOverride",
+     "json": "payoutRecipientOverride",
+     "type": "String",
+     "doc": "Wallet to receive the creator's fee share instead of the creator."
+    },
+    {
+     "name": "enableSmartWalletRouting",
+     "json": "enableSmartWalletRouting",
+     "type": "Boolean",
+     "doc": "Optional flag to enable smart wallet routing. Defaults to false if omitted."
+    }
+   ]
+  },
+  {
+   "name": "CreateUploadJwtRequest",
+   "doc": "Who the upload token is for.",
+   "fields": [
+    {
+     "name": "creatorAddress",
+     "json": "creatorAddress",
+     "type": "String!",
+     "doc": "Wallet the upload token is for."
+    }
+   ]
+  },
+  {
+   "name": "DetailsInput",
+   "doc": null,
+   "fields": [
+    {
+     "name": "token",
+     "json": "token",
+     "type": "String!",
+     "doc": "Token address."
+    },
+    {
+     "name": "amount",
+     "json": "amount",
+     "type": "String!",
+     "doc": "The amount."
+    },
+    {
+     "name": "expiration",
+     "json": "expiration",
+     "type": "Float!",
+     "doc": "When the allowance expires (Unix seconds)."
+    },
+    {
+     "name": "nonce",
+     "json": "nonce",
+     "type": "Float!",
+     "doc": "Nonce the comment was signed or posted with."
+    }
+   ]
+  },
+  {
+   "name": "MetadataInput",
+   "doc": null,
+   "fields": [
+    {
+     "name": "type",
+     "json": "type",
+     "type": "MetadataType!",
+     "doc": "eth for native ETH, erc20 for a token (which then needs an address)."
+    },
+    {
+     "name": "uri",
+     "json": "uri",
+     "type": "String!",
+     "doc": "Metadata URI."
+    }
+   ]
+  },
+  {
+   "name": "PermitInput",
+   "doc": null,
+   "fields": [
+    {
+     "name": "details",
+     "json": "details",
+     "type": "DetailsInput!",
+     "doc": "What the permit allows: token, amount, expiry, nonce."
+    },
+    {
+     "name": "spender",
+     "json": "spender",
+     "type": "String!",
+     "doc": "Contract allowed to spend the tokens."
+    },
+    {
+     "name": "sigDeadline",
+     "json": "sigDeadline",
+     "type": "String!",
+     "doc": "When the signature stops being valid (Unix seconds)."
+    }
+   ]
+  },
+  {
+   "name": "QuoteRequest",
+   "doc": "A trade to quote. TokenIn, TokenOut, AmountIn and Sender are required; Recipient defaults to Sender and Slippage to 0.05.",
+   "fields": [
+    {
+     "name": "referrer",
+     "json": "referrer",
+     "type": "String",
+     "doc": "Address that earns the trade referral reward for routing this trade."
+    },
+    {
+     "name": "signatures",
+     "json": "signatures",
+     "type": "[SignatureInput!]",
+     "doc": "Permit2 signatures, when selling an ERC-20 without a prior approval."
+    },
+    {
+     "name": "permitActiveSeconds",
+     "json": "permitActiveSeconds",
+     "type": "Float",
+     "doc": "How long a Permit2 signature stays valid, in seconds."
+    },
+    {
+     "name": "chainId",
+     "json": "chainId",
+     "type": "Int",
+     "doc": "Chain ID (8453 = Base)."
+    },
+    {
+     "name": "tokenOut",
+     "json": "tokenOut",
+     "type": "TokenSpecInput!",
+     "doc": "What to buy. Use ETH() or ERC20(address)."
+    },
+    {
+     "name": "tokenIn",
+     "json": "tokenIn",
+     "type": "TokenSpecInput!",
+     "doc": "What to sell. Use ETH() or ERC20(address)."
+    },
+    {
+     "name": "amountIn",
+     "json": "amountIn",
+     "type": "String!",
+     "doc": "Amount to sell, in the input token's smallest unit (wei for ETH)."
+    },
+    {
+     "name": "slippage",
+     "json": "slippage",
+     "type": "Float",
+     "doc": "Maximum slippage (0.05 = 5%). Defaults to 5% with QuoteTrade."
+    },
+    {
+     "name": "recipient",
+     "json": "recipient",
+     "type": "String",
+     "doc": "Wallet that receives the output. Defaults to the sender with QuoteTrade."
+    },
+    {
+     "name": "sender",
+     "json": "sender",
+     "type": "String!",
+     "doc": "Wallet that will send the transaction."
+    }
+   ]
+  },
+  {
+   "name": "SignatureInput",
+   "doc": null,
+   "fields": [
+    {
+     "name": "permit",
+     "json": "permit",
+     "type": "PermitInput!",
+     "doc": "The Permit2 permit."
+    },
+    {
+     "name": "signature",
+     "json": "signature",
+     "type": "String!",
+     "doc": "The signature."
+    }
+   ]
+  },
+  {
+   "name": "TokenSpecInput",
+   "doc": "A token to trade: native ETH (type \"eth\") or an ERC-20 (type \"erc20\" plus address). Build one with ETH() or ERC20(address).",
+   "fields": [
+    {
+     "name": "type",
+     "json": "type",
+     "type": "TokenType!",
+     "doc": "eth for native ETH, erc20 for a token (which then needs an address)."
+    },
+    {
+     "name": "address",
+     "json": "address",
+     "type": "String",
+     "doc": "Contract address (lowercase 0x hex)."
+    }
+   ]
+  }
+ ],
+ "query": [
+  {
+   "op": "GetApiKey",
+   "name": "apiKey",
+   "args": [
+    {
+     "name": "apiKey",
+     "type": "String!",
+     "doc": "The API key to look up.",
+     "param": "apiKey"
+    }
+   ],
+   "type": "ApiKey",
+   "doc": "Look up an API key: whether it exists and is active.",
+   "mutation": false
+  },
+  {
+   "op": "GetCoin",
+   "name": "coin",
+   "args": [
+    {
+     "name": "address",
+     "type": "String!",
+     "doc": "Contract address (0x\u2026).",
+     "param": "address"
+    },
+    {
+     "name": "chainId",
+     "type": "Int",
+     "doc": "Chain ID. Defaults to Base (8453).",
+     "param": "chain"
+    }
+   ],
+   "type": "Zora20Token",
+   "doc": "One coin by contract address: market data, creator profile, media, pool key and creator earnings.",
+   "mutation": false
+  },
+  {
+   "op": "GetCoinComments",
+   "name": "coinComments",
+   "args": [
+    {
+     "name": "address",
+     "type": "String!",
+     "doc": "Contract address (0x\u2026).",
+     "param": "address"
+    },
+    {
+     "name": "chainId",
+     "type": "Int",
+     "doc": "Chain ID. Defaults to Base (8453).",
+     "param": "chain"
+    },
+    {
+     "name": "after",
+     "type": "String",
+     "doc": "Cursor to continue from: the previous page's pageInfo.endCursor.",
+     "param": "after"
+    },
+    {
+     "name": "pageSize",
+     "type": "Int",
+     "doc": "Page size.",
+     "param": "count"
+    }
+   ],
+   "type": "ZoraCommentConnection",
+   "doc": "Comments posted on a coin, newest first. One page; pass pageInfo.endCursor as `after` for the next.",
+   "mutation": false
+  },
+  {
+   "op": "GetCoinHolders",
+   "name": "coinHolders",
+   "args": [
+    {
+     "name": "chainId",
+     "type": "Int",
+     "doc": "Chain ID. Defaults to Base (8453).",
+     "param": "chainId"
+    },
+    {
+     "name": "address",
+     "type": "String!",
+     "doc": "Contract address (0x\u2026).",
+     "param": "address"
+    },
+    {
+     "name": "after",
+     "type": "String",
+     "doc": "Cursor to continue from: the previous page's pageInfo.endCursor.",
+     "param": "after"
+    },
+    {
+     "name": "pageSize",
+     "type": "Int",
+     "doc": "Page size.",
+     "param": "count"
+    }
+   ],
+   "type": "TokenBalanceConnection",
+   "doc": "Holders of a coin and their balances, largest first. One page; pass pageInfo.endCursor as `after` for the next.",
+   "mutation": false
+  },
+  {
+   "op": "GetCoinMergedComments",
+   "name": "coinMergedComments",
+   "args": [
+    {
+     "name": "address",
+     "type": "String!",
+     "doc": "Contract address (0x\u2026).",
+     "param": "address"
+    },
+    {
+     "name": "chainId",
+     "type": "Int",
+     "doc": "Chain ID. Defaults to Base (8453).",
+     "param": "chain"
+    },
+    {
+     "name": "after",
+     "type": "String",
+     "doc": "Cursor to continue from: the previous page's pageInfo.endCursor.",
+     "param": "after"
+    },
+    {
+     "name": "pageSize",
+     "type": "Int",
+     "doc": "Page size.",
+     "param": "count"
+    }
+   ],
+   "type": "CommentConnection",
+   "doc": "A coin's comment feed with replies threaded in, newest first. One page; pass pageInfo.endCursor as `after` for the next.",
+   "mutation": false
+  },
+  {
+   "op": "GetCoinPriceHistory",
+   "name": "coinPriceHistory",
+   "args": [
+    {
+     "name": "address",
+     "type": "String!",
+     "doc": "Contract address (0x\u2026).",
+     "param": "address"
+    },
+    {
+     "name": "chainId",
+     "type": "Int",
+     "doc": "Chain ID. Defaults to Base (8453).",
+     "param": "chain"
+    }
+   ],
+   "type": "Zora20Token",
+   "doc": "A coin's price history at five resolutions: the last hour, day, week, month, and all time.",
+   "mutation": false
+  },
+  {
+   "op": "GetCoinSwaps",
+   "name": "coinSwaps",
+   "args": [
+    {
+     "name": "address",
+     "type": "String!",
+     "doc": "Contract address (0x\u2026).",
+     "param": "address"
+    },
+    {
+     "name": "chainId",
+     "type": "Int",
+     "doc": "Chain ID. Defaults to Base (8453).",
+     "param": "chain"
+    },
+    {
+     "name": "after",
+     "type": "String",
+     "doc": "Cursor to continue from: the previous page's pageInfo.endCursor.",
+     "param": "after"
+    },
+    {
+     "name": "pageSize",
+     "type": "Int",
+     "doc": "Page size.",
+     "param": "first"
+    }
+   ],
+   "type": "SwapActivityConnection",
+   "doc": "Buys and sells of a coin, newest first. One page; pass pageInfo.endCursor as `after` for the next.",
+   "mutation": false
+  },
+  {
+   "op": "GetCoins",
+   "name": "coins",
+   "args": [
+    {
+     "name": "coins",
+     "type": "[CoinRefInput!]!",
+     "doc": "The coins to fetch.",
+     "param": "coins"
+    }
+   ],
+   "type": "[Zora20Token!]",
+   "doc": "Several coins in one request. Missing coins are left out of the result.",
+   "mutation": false
+  },
+  {
+   "op": "GetCoinsList",
+   "name": "coinsList",
+   "args": [
+    {
+     "name": "pageSize",
+     "type": "Int",
+     "doc": "Page size.",
+     "param": "first"
+    },
+    {
+     "name": "after",
+     "type": "String",
+     "doc": "Cursor to continue from: the previous page's pageInfo.endCursor.",
+     "param": "after"
+    },
+    {
+     "name": "includeUSDCPrice",
+     "type": "Boolean",
+     "doc": "Include each coin's price in USDC. Defaults to true.",
+     "param": "includeUSDCPrice"
+    }
+   ],
+   "type": "CoinBasicInfoConnection",
+   "doc": "Basic information (address, name, symbol, price) for every coin, in pages of up to 1,000. One page; pass pageInfo.endCursor as `after` for the next.",
+   "mutation": false
+  },
+  {
+   "op": "GetContentCoinPoolConfig",
+   "name": "contentCoinPoolConfig",
+   "args": [
+    {
+     "name": "creatorIdentifier",
+     "type": "String",
+     "doc": "Profile handle or wallet of the creator, used to pair with their creator coin.",
+     "param": "creatorIdentifier"
+    },
+    {
+     "name": "currencyType",
+     "type": "CurrencyType!",
+     "doc": "The currency the new coin trades against.",
+     "param": "currencyType"
+    }
+   ],
+   "type": "PoolConfig",
+   "doc": "The Uniswap V4 pool configuration Zora uses to launch a content coin paired with the given currency.",
+   "mutation": false
+  },
+  {
+   "op": "GetCreatorCoinPoolConfig",
+   "name": "creatorCoinPoolConfig",
+   "args": [
+    {
+     "name": "targetMarketCapUsd",
+     "type": "Int",
+     "doc": "Starting market cap to size the pool for, in USD.",
+     "param": "targetMarketCapUsd"
+    }
+   ],
+   "type": "PoolConfig",
+   "doc": "The Uniswap V4 pool configuration Zora uses to launch a creator coin, optionally sized for a starting market cap in USD.",
+   "mutation": false
+  },
+  {
+   "op": "GetCreatorLivestreamComments",
+   "name": "creatorLivestreamComments",
+   "args": [
+    {
+     "name": "address",
+     "type": "String!",
+     "doc": "Contract address (0x\u2026).",
+     "param": "address"
+    },
+    {
+     "name": "chainId",
+     "type": "Int",
+     "doc": "Chain ID. Defaults to Base (8453).",
+     "param": "chain"
+    },
+    {
+     "name": "after",
+     "type": "String",
+     "doc": "Cursor to continue from: the previous page's pageInfo.endCursor.",
+     "param": "after"
+    },
+    {
+     "name": "pageSize",
+     "type": "Int",
+     "doc": "Page size.",
+     "param": "count"
+    }
+   ],
+   "type": "CommentConnection",
+   "doc": "Comments on the live stream of the creator behind a coin. One page; pass pageInfo.endCursor as `after` for the next.",
+   "mutation": false
+  },
+  {
+   "op": "GetExplore",
+   "name": "explore",
+   "args": [
+    {
+     "name": "listType",
+     "type": "ListType!",
+     "doc": "Which Explore list to return.",
+     "param": "listType"
+    },
+    {
+     "name": "pageSize",
+     "type": "Int",
+     "doc": "Page size.",
+     "param": "count"
+    },
+    {
+     "name": "after",
+     "type": "String",
+     "doc": "Cursor to continue from: the previous page's pageInfo.endCursor.",
+     "param": "after"
+    }
+   ],
+   "type": "Zora20TokenConnection",
+   "doc": "A Zora Explore list: top gainers, 24h volume, newest, most valuable creators and more. See ListType for all 25. One page; pass pageInfo.endCursor as `after` for the next.",
+   "mutation": false
+  },
+  {
+   "op": "GetFeaturedCreators",
+   "name": "featuredCreators",
+   "args": [
+    {
+     "name": "year",
+     "type": "Int",
+     "doc": "Year of the ISO week. Defaults to the current year.",
+     "param": "year"
+    },
+    {
+     "name": "week",
+     "type": "Int",
+     "doc": "ISO week number. Defaults to the current week.",
+     "param": "week"
+    },
+    {
+     "name": "pageSize",
+     "type": "Int",
+     "doc": "Page size.",
+     "param": "first"
+    },
+    {
+     "name": "after",
+     "type": "String",
+     "doc": "Cursor to continue from: the previous page's pageInfo.endCursor.",
+     "param": "after"
+    }
+   ],
+   "type": "FeaturedCreatorConnection",
+   "doc": "Creators featured on the weekly leaderboard. Defaults to the current week. One page; pass pageInfo.endCursor as `after` for the next.",
+   "mutation": false
+  },
+  {
+   "op": "GetLatestLiveStreams",
+   "name": "latestLiveStreams",
+   "args": [
+    {
+     "name": "pageSize",
+     "type": "Int",
+     "doc": "Page size.",
+     "param": "first"
+    },
+    {
+     "name": "after",
+     "type": "String",
+     "doc": "Cursor to continue from: the previous page's pageInfo.endCursor.",
+     "param": "after"
+    }
+   ],
+   "type": "LiveStreamConnection",
+   "doc": "Live streams, most recently started first. One page; pass pageInfo.endCursor as `after` for the next.",
+   "mutation": false
+  },
+  {
+   "op": "GetProfile",
+   "name": "profile",
+   "args": [
+    {
+     "name": "identifier",
+     "type": "String!",
+     "doc": "Profile handle (without @) or wallet address.",
+     "param": "identifier"
+    }
+   ],
+   "type": "Profile",
+   "doc": "A profile by handle or wallet address, with its linked wallets and creator coin.",
+   "mutation": false
+  },
+  {
+   "op": "GetProfileBalances",
+   "name": "profileBalances",
+   "args": [
+    {
+     "name": "identifier",
+     "type": "String!",
+     "doc": "Profile handle (without @) or wallet address.",
+     "param": "identifier"
+    },
+    {
+     "name": "pageSize",
+     "type": "Int",
+     "doc": "Page size.",
+     "param": "count"
+    },
+    {
+     "name": "after",
+     "type": "String",
+     "doc": "Cursor to continue from: the previous page's pageInfo.endCursor.",
+     "param": "after"
+    },
+    {
+     "name": "sortOption",
+     "type": "SortOption",
+     "doc": "How to order the balances.",
+     "param": "sortOption"
+    },
+    {
+     "name": "excludeHidden",
+     "type": "Boolean",
+     "doc": "Leave out coins the profile has hidden. Defaults to true.",
+     "param": "excludeHidden"
+    },
+    {
+     "name": "chainIds",
+     "type": "[Int!]",
+     "doc": "Only include these chains. Defaults to Base.",
+     "param": "chainIds"
+    }
+   ],
+   "type": "CoinBalanceConnection",
+   "doc": "Coins a profile holds, with balances and current values. One page; pass pageInfo.endCursor as `after` for the next.",
+   "mutation": false
+  },
+  {
+   "op": "GetProfileBySocialHandle",
+   "name": "profileBySocialHandle",
+   "args": [
+    {
+     "name": "platform",
+     "type": "Platform!",
+     "doc": "The social network the handle belongs to.",
+     "param": "platform"
+    },
+    {
+     "name": "handle",
+     "type": "String!",
+     "doc": "Handle on that network, without @.",
+     "param": "handle"
+    }
+   ],
+   "type": "ProfileBySocialHandle",
+   "doc": "Find a Zora profile from its handle on X, TikTok, Farcaster or Instagram.",
+   "mutation": false
+  },
+  {
+   "op": "GetProfileCoins",
+   "name": "profileCoins",
+   "args": [
+    {
+     "name": "identifier",
+     "type": "String!",
+     "doc": "Profile handle (without @) or wallet address.",
+     "param": "identifier"
+    },
+    {
+     "name": "pageSize",
+     "type": "Int",
+     "doc": "Page size.",
+     "param": "count"
+    },
+    {
+     "name": "after",
+     "type": "String",
+     "doc": "Cursor to continue from: the previous page's pageInfo.endCursor.",
+     "param": "after"
+    },
+    {
+     "name": "chainIds",
+     "type": "[Int!]",
+     "doc": "Only include these chains. Defaults to Base.",
+     "param": "chainIds"
+    },
+    {
+     "name": "platformReferrerAddress",
+     "type": "[String!]",
+     "doc": "Only coins created through one of these platform referrer addresses.",
+     "param": "platformReferrerAddress"
+    }
+   ],
+   "type": "Zora20TokenConnection",
+   "doc": "Coins a profile created. Filter by platform referrer to list only coins launched through a given app. One page; pass pageInfo.endCursor as `after` for the next.",
+   "mutation": false
+  },
+  {
+   "op": "GetProfileSocial",
+   "name": "profileSocial",
+   "args": [
+    {
+     "name": "identifier",
+     "type": "String!",
+     "doc": "Profile handle (without @) or wallet address.",
+     "param": "identifier"
+    }
+   ],
+   "type": "Profile",
+   "doc": "A profile's linked social accounts (X, TikTok, Instagram, Farcaster) and follower counts.",
+   "mutation": false
+  },
+  {
+   "op": "GetSearch",
+   "name": "search",
+   "args": [
+    {
+     "name": "text",
+     "type": "String!",
+     "doc": "What to search for.",
+     "param": "text"
+    },
+    {
+     "name": "entityType",
+     "type": "EntityType",
+     "doc": "Only return results of this kind.",
+     "param": "entityType"
+    },
+    {
+     "name": "pageSize",
+     "type": "Int",
+     "doc": "Page size.",
+     "param": "first"
+    },
+    {
+     "name": "after",
+     "type": "String",
+     "doc": "Cursor to continue from: the previous page's pageInfo.endCursor.",
+     "param": "after"
+    }
+   ],
+   "type": "SearchResultConnection",
+   "doc": "Search coins, profiles, content and trends by text. One page; pass pageInfo.endCursor as `after` for the next.",
+   "mutation": false
+  },
+  {
+   "op": "GetTokenInfo",
+   "name": "tokenInfo",
+   "args": [
+    {
+     "name": "address",
+     "type": "String!",
+     "doc": "Contract address (0x\u2026).",
+     "param": "address"
+    },
+    {
+     "name": "chainId",
+     "type": "Int",
+     "doc": "Chain ID. Defaults to Base (8453).",
+     "param": "chainId"
+    }
+   ],
+   "type": "Erc20Token",
+   "doc": "Symbol, decimals and current USD price of any ERC-20 on the chain: ZORA, USDC, WETH, or a coin.",
+   "mutation": false
+  },
+  {
+   "op": "GetTopLiveStreams",
+   "name": "topLiveStreams",
+   "args": [
+    {
+     "name": "pageSize",
+     "type": "Int",
+     "doc": "Page size.",
+     "param": "first"
+    },
+    {
+     "name": "after",
+     "type": "String",
+     "doc": "Cursor to continue from: the previous page's pageInfo.endCursor.",
+     "param": "after"
+    }
+   ],
+   "type": "LiveStreamConnection",
+   "doc": "Live streams with the most viewers right now. One page; pass pageInfo.endCursor as `after` for the next.",
+   "mutation": false
+  },
+  {
+   "op": "GetTraderLeaderboard",
+   "name": "traderLeaderboard",
+   "args": [
+    {
+     "name": "week",
+     "type": "Int",
+     "doc": "ISO week number. Defaults to the current week.",
+     "param": "week"
+    },
+    {
+     "name": "year",
+     "type": "Int",
+     "doc": "Year of the ISO week. Defaults to the current year.",
+     "param": "year"
+    },
+    {
+     "name": "pageSize",
+     "type": "Int",
+     "doc": "Page size.",
+     "param": "first"
+    },
+    {
+     "name": "after",
+     "type": "String",
+     "doc": "Cursor to continue from: the previous page's pageInfo.endCursor.",
+     "param": "after"
+    }
+   ],
+   "type": "TraderLeaderboardEntryConnection",
+   "doc": "The weekly trader leaderboard. Defaults to the current week. One page; pass pageInfo.endCursor as `after` for the next.",
+   "mutation": false
+  },
+  {
+   "op": "GetTrendCoin",
+   "name": "trendCoin",
+   "args": [
+    {
+     "name": "ticker",
+     "type": "String!",
+     "doc": "Trend ticker, without $.",
+     "param": "ticker"
+    },
+    {
+     "name": "chainId",
+     "type": "Int",
+     "doc": "Chain ID. Defaults to Base (8453).",
+     "param": "chainId"
+    }
+   ],
+   "type": "Zora20Token",
+   "doc": "A trend coin by its ticker.",
+   "mutation": false
+  },
+  {
+   "op": "GetTrendsByName",
+   "name": "trendsByName",
+   "args": [
+    {
+     "name": "name",
+     "type": "String!",
+     "doc": "Trend name to match.",
+     "param": "name"
+    },
+    {
+     "name": "pageSize",
+     "type": "Int",
+     "doc": "Page size.",
+     "param": "first"
+    },
+    {
+     "name": "after",
+     "type": "String",
+     "doc": "Cursor to continue from: the previous page's pageInfo.endCursor.",
+     "param": "after"
+    }
+   ],
+   "type": "Zora20TokenConnection",
+   "doc": "Trend coins whose name matches, best match first. One page; pass pageInfo.endCursor as `after` for the next.",
+   "mutation": false
+  },
+  {
+   "op": "GetWalletTradeActivity",
+   "name": "walletTradeActivity",
+   "args": [
+    {
+     "name": "identifier",
+     "type": "String!",
+     "doc": "Profile handle (without @) or wallet address.",
+     "param": "identifier"
+    },
+    {
+     "name": "after",
+     "type": "String",
+     "doc": "Cursor to continue from: the previous page's pageInfo.endCursor.",
+     "param": "after"
+    },
+    {
+     "name": "pageSize",
+     "type": "Int",
+     "doc": "Page size.",
+     "param": "first"
+    }
+   ],
+   "type": "TradeActivityConnection",
+   "doc": "Trades made by a wallet or profile, newest first. One page; pass pageInfo.endCursor as `after` for the next.",
+   "mutation": false
+  },
+  {
+   "op": "PostQuote",
+   "name": "quote",
+   "args": [
+    {
+     "name": "input",
+     "type": "QuoteRequest!",
+     "doc": "The request.",
+     "param": "__body"
+    }
+   ],
+   "type": "QuoteResponse",
+   "doc": "Quote a trade. The result holds the transaction that executes it. Amounts are in the input token's smallest unit (wei for ETH). Set Referrer to earn the trade referral reward. Nothing is signed or sent: pass the returned call to your wallet.",
+   "mutation": false
+  },
+  {
+   "op": "PostCreateContent",
+   "name": "createContentCoin",
+   "args": [
+    {
+     "name": "input",
+     "type": "CreateContentCoinRequest!",
+     "doc": "The request.",
+     "param": "__body"
+    }
+   ],
+   "type": "CreateContentCoinResponse",
+   "doc": "Build the transaction that creates a content coin. The result also holds the coin's predicted address. Set PlatformReferrer to earn the platform referral share of the coin's trading fees for its whole life. Nothing is signed or sent.",
+   "mutation": false
+  },
+  {
+   "op": "__rewards",
+   "name": "rewards",
+   "type": "RewardsReport",
+   "mutation": false,
+   "doc": "What addresses earned from Zora trading fees as creator, platform referrer or trade referrer, read straight from Base (CoinMarketRewardsV4 events). Scans live, so keep `hours` small; USD uses current prices.",
+   "args": [
+    {
+     "name": "addresses",
+     "type": "[String!]!",
+     "doc": "Payout recipients or referrer addresses.",
+     "param": "addresses"
+    },
+    {
+     "name": "hours",
+     "type": "Float",
+     "doc": "How far back to scan, up to 24. Defaults to 6.",
+     "param": "hours"
+    }
+   ]
+  }
+ ],
+ "mutation": [
+  {
+   "op": "SetCreateUploadJWT",
+   "name": "createUploadJWT",
+   "args": [
+    {
+     "name": "input",
+     "type": "CreateUploadJwtRequest!",
+     "doc": "The request.",
+     "param": "__body"
+    }
+   ],
+   "type": "String",
+   "doc": "Create a short-lived token for uploading coin media and metadata to Zora's uploader. Requires an API key.",
+   "mutation": true
+  }
+ ]
+}

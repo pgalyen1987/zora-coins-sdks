@@ -1,0 +1,1727 @@
+"""
+The Zora Coins API as one GraphQL schema: coins, profiles, holders, swaps, comments, Explore
+lists, search, leaderboards, live streams, trade quotes, coin creation, and onchain creator and
+referral rewards. Unofficial; not affiliated with Zora. Generated from Zora's OpenAPI spec.
+"""
+schema {
+  query: Query
+  mutation: Mutation
+}
+
+"""What a coin represents: a creator, a piece of content, or a trend."""
+enum CoinType {
+  CREATOR
+  CONTENT
+  TREND
+}
+
+"""What a new content coin trades against."""
+enum ContentCoinCurrency {
+  CREATOR_COIN
+  ZORA
+  ETH
+  CREATOR_COIN_OR_ZORA
+}
+
+"""What a new coin's pool trades against."""
+enum CurrencyType {
+  ETH
+  ZORA
+  CREATOR_COIN
+  CREATOR_COIN_OR_ZORA
+  CUSTOM_COIN
+}
+
+"""What kind of thing a search result is."""
+enum EntityType {
+  USER_PROFILE
+  CONTENT
+  TREND
+  COIN
+}
+
+"""Whether a social account was linked or unlinked."""
+enum EventType {
+  LINK
+  UNLINK
+}
+
+"""Which Zora Explore list to fetch."""
+enum ListType {
+  TOP_GAINERS
+  TOP_VOLUME_24H
+  MOST_VALUABLE
+  MOST_VALUABLE_TRENDS
+  NEW
+  NEW_TRENDS
+  OLD
+  LAST_TRADED
+  LAST_TRADED_UNIQUE
+  FEATURED
+  FEATURED_VIDEOS
+  NEW_CREATORS
+  MOST_VALUABLE_CREATORS
+  FEATURED_CREATORS
+  TOP_VOLUME_CREATORS_24H
+  TOP_VOLUME_ALL_24H
+  NEW_ALL
+  TRENDING_POSTS
+  TRENDING_TRENDS
+  TRENDING_CREATORS
+  TRENDING_ALL
+  TOP_VOLUME_TRENDS_24H
+  MOST_VALUABLE_ALL
+  TRENDING_AGENTS
+  MOST_VALUABLE_AGENTS
+}
+
+"""How coin metadata is supplied. Only RAW_URI is supported."""
+enum MetadataType {
+  RAW_URI
+}
+
+"""A social network Zora profiles link to."""
+enum Platform {
+  TWITTER
+  TIKTOK
+  FARCASTER
+  INSTAGRAM
+}
+
+"""How to order a profile's balances."""
+enum SortOption {
+  BALANCE
+  MARKET_CAP
+  USD_VALUE
+  PRICE_CHANGE
+  MARKET_VALUE_USD
+}
+
+"""The starting market cap tier for a new coin."""
+enum StartingMarketCap {
+  LOW
+  HIGH
+}
+
+"""Whether a trade was a buy or a sell."""
+enum SwapType {
+  BUY
+  SELL
+}
+
+"""Native ETH or an ERC-20."""
+enum TokenType {
+  eth
+  erc20
+}
+
+"""How a wallet linked to a profile is held."""
+enum WalletType {
+  PRIVY
+  EXTERNAL
+  SMART_WALLET
+}
+
+type Amount {
+  """The type name Zora's GraphQL backend reports for this object, when it includes one."""
+  zoraType: String
+  """The currency (WETH, ZORA, USDC or a creator coin)."""
+  currencyAddress: String
+  """Amount in the currency's smallest unit, as an integer string."""
+  amountRaw: String
+  """Amount in whole units of the currency."""
+  amountDecimal: Float
+}
+
+"""Whether an API key exists and is active."""
+type ApiKey {
+  """The type name Zora's GraphQL backend reports for this object, when it includes one."""
+  zoraType: String
+  """The API key."""
+  apiKey: String
+  """Whether the key is active."""
+  isActive: Boolean
+}
+
+type Avatar {
+  """The type name Zora's GraphQL backend reports for this object, when it includes one."""
+  zoraType: String
+  """Resized preview of the image."""
+  previewImage: PreviewImage
+  """Small avatar image URL."""
+  small: String
+  """Medium avatar image URL."""
+  medium: String
+  """BlurHash placeholder to show while the image loads."""
+  blurhash: String
+}
+
+"""A transaction to send from the user's wallet: target (to), calldata and ETH value."""
+type Call {
+  """The type name Zora's GraphQL backend reports for this object, when it includes one."""
+  zoraType: String
+  """Calldata (0x hex)."""
+  data: String
+  """ETH to send with the transaction, in wei, as an integer string."""
+  value: String
+  """Contract to send the transaction to."""
+  target: String
+  """Same as target."""
+  to: String
+}
+
+"""One coin a profile holds, with the balance and the coin itself."""
+type CoinBalance {
+  """The type name Zora's GraphQL backend reports for this object, when it includes one."""
+  zoraType: String
+  """Amount held, in the coin's smallest unit (18 decimals)."""
+  balance: String
+  """Amount held in the profile's own wallets, in the smallest unit (18 decimals)."""
+  walletBalance: String
+  """Globally unique ID."""
+  id: String
+  """What the holding is worth."""
+  valuation: Valuation
+  """The coin."""
+  coin: Zora20Token
+}
+
+"""
+One page of CoinBalance results. Nodes() lists them; PageInfo says how to get the next page.
+"""
+type CoinBalanceConnection {
+  """Total number of items, where the API reports it."""
+  count: Int
+  """The items on this page, each wrapped in an edge."""
+  edges: [CoinBalanceEdge!]
+  """How to fetch the next page."""
+  pageInfo: PageInfo
+}
+
+"""Wraps one CoinBalance in a page of results."""
+type CoinBalanceEdge {
+  """The item."""
+  node: CoinBalance
+}
+
+"""The compact form of a coin returned by the coins list."""
+type CoinBasicInfo {
+  """The type name Zora's GraphQL backend reports for this object, when it includes one."""
+  zoraType: String
+  """Creator, content or trend coin."""
+  coinType: CoinType
+  """Price in USDC (≈ USD), as a decimal string."""
+  priceUsdc: String
+  """Name of the coin."""
+  entityName: String
+  """Display name."""
+  name: String
+  """Ticker symbol."""
+  symbol: String
+  """Metadata URI."""
+  uri: String
+  """Contract address of the coin."""
+  coinAddress: String
+  """Wallet that created the coin."""
+  createdUserAddress: String
+  """Date with time (isoformat)"""
+  createdTimestamp: String
+  """True if Zora hides this from its own app."""
+  platformBlocked: Boolean
+}
+
+"""
+One page of CoinBasicInfo results. Nodes() lists them; PageInfo says how to get the next page.
+"""
+type CoinBasicInfoConnection {
+  """How to fetch the next page."""
+  pageInfo: PageInfo
+  """The items on this page, each wrapped in an edge."""
+  edges: [CoinBasicInfoEdge!]
+}
+
+"""Wraps one CoinBasicInfo in a page of results."""
+type CoinBasicInfoEdge {
+  """The item."""
+  node: CoinBasicInfo
+}
+
+"""A comment in a coin's merged feed or on a live stream."""
+type Comment {
+  """The type name Zora's GraphQL backend reports for this object, when it includes one."""
+  zoraType: String
+  """ID of the comment."""
+  commentId: String
+  """Nonce the comment was signed or posted with."""
+  nonce: String
+  """Wallet of the user who posted it."""
+  userAddress: String
+  """Hash of the transaction that posted it onchain, if it was posted onchain."""
+  txHash: String
+  """The comment text."""
+  comment: String
+  """When it happened (Unix seconds)."""
+  timestamp: Int
+  """Profile of the user who posted it."""
+  userProfile: UserProfile
+  """Replies to this comment."""
+  replies: Replies
+  """Contract of the coin the comment is on."""
+  contractAddress: String
+  """The comment text."""
+  text: String
+  """Date with time (isoformat)"""
+  commentedAt: String
+  """Onchain ID of the comment this replies to, if any."""
+  replyToOnChainId: String
+  """Offchain ID of the comment this replies to, if any."""
+  replyToOffChainId: String
+  """Sparks (Zora's likes) the comment received."""
+  sparkCount: Int
+  """The profile."""
+  profile: Profile
+  """Globally unique ID."""
+  id: String
+}
+
+"""One page of Comment results. Nodes() lists them; PageInfo says how to get the next page."""
+type CommentConnection {
+  """How to fetch the next page."""
+  pageInfo: PageInfo
+  """Total number of items, where the API reports it."""
+  count: Int
+  """The items on this page, each wrapped in an edge."""
+  edges: [CommentEdge!]
+}
+
+"""Wraps one Comment in a page of results."""
+type CommentEdge {
+  """The item."""
+  node: Comment
+  """Cursor pointing at this item."""
+  cursor: String
+}
+
+"""The calls that create a content coin, and the address it will have."""
+type CreateContentCoinResponse {
+  """Transactions to send from the creator's wallet, in order."""
+  calls: [Call!]
+  """The address the coin will have once created."""
+  predictedCoinAddress: String
+  """The result. Client methods return this field directly."""
+  backingCurrency: String
+  """The result. Client methods return this field directly."""
+  usedSmartWalletRouting: Boolean
+}
+
+"""What a coin's creator has earned from trading fees, in one currency."""
+type CreatorEarning {
+  """The type name Zora's GraphQL backend reports for this object, when it includes one."""
+  zoraType: String
+  """The amount."""
+  amount: Amount
+  """The amount in USD."""
+  amountUsd: String
+}
+
+"""The profile of the creator behind a coin."""
+type CreatorProfile {
+  """The profile kind, e.g. GraphQLAccountProfile."""
+  zoraType: String
+  """Globally unique ID."""
+  id: String
+  """Zora handle, without @. Wallet-only profiles get a shortened address (0x06d7...b1c6)."""
+  handle: String
+  """True if Zora hides this from its own app."""
+  platformBlocked: Boolean
+  """Profile picture."""
+  avatar: Avatar
+  """Linked social accounts: X, TikTok, Instagram, Farcaster."""
+  socialAccounts: SocialAccounts
+  """The creator's own creator coin."""
+  creatorCoin: Zora20Token
+  """The creator's live stream, if any."""
+  liveStream: LiveStream
+}
+
+type Currency {
+  """The type name Zora's GraphQL backend reports for this object, when it includes one."""
+  zoraType: String
+  """Current USD price of one whole token, as a decimal string."""
+  priceUsd: String
+  """Token decimals (18 for most, 6 for USDC)."""
+  decimals: Int
+  """Display name."""
+  name: String
+  """Ticker symbol."""
+  symbol: String
+  """Token icon URL."""
+  icon: String
+}
+
+type CurrencyAmountWithPrice {
+  """The type name Zora's GraphQL backend reports for this object, when it includes one."""
+  zoraType: String
+  """USD price of one unit of the currency at the time of the swap."""
+  priceUsdc: String
+  """Amount paid or received, in the pool's currency."""
+  currencyAmount: Amount
+  """The amount in USD."""
+  amountUsd: String
+  """Change in the currency's price over the last 24 hours."""
+  priceDelta24h: String
+}
+
+type Details {
+  """The type name Zora's GraphQL backend reports for this object, when it includes one."""
+  zoraType: String
+  """Token address."""
+  token: String
+  """The amount."""
+  amount: String
+  """When the allowance expires (Unix seconds)."""
+  expiration: Float
+  """Nonce the comment was signed or posted with."""
+  nonce: Float
+}
+
+"""ERC-20 metadata and price for any token."""
+type Erc20Token {
+  """The type name Zora's GraphQL backend reports for this object, when it includes one."""
+  zoraType: String
+  """The token's symbol, decimals and USD price."""
+  currency: Currency
+}
+
+type ExternalWallet {
+  """The type name Zora's GraphQL backend reports for this object, when it includes one."""
+  zoraType: String
+  """ENS name of the wallet, if it has one."""
+  ensName: String
+  """Wallet address."""
+  walletAddress: String
+}
+
+"""A creator featured on the weekly leaderboard."""
+type FeaturedCreator {
+  """The type name Zora's GraphQL backend reports for this object, when it includes one."""
+  zoraType: String
+  """Globally unique ID."""
+  id: String
+  """Zora handle, without @. Wallet-only profiles get a shortened address (0x06d7...b1c6)."""
+  handle: String
+}
+
+"""
+One page of FeaturedCreator results. Nodes() lists them; PageInfo says how to get the next page.
+"""
+type FeaturedCreatorConnection {
+  """Total number of items, where the API reports it."""
+  count: Int
+  """How to fetch the next page."""
+  pageInfo: PageInfo
+  """The items on this page, each wrapped in an edge."""
+  edges: [FeaturedCreatorEdge!]
+}
+
+"""Wraps one FeaturedCreator in a page of results."""
+type FeaturedCreatorEdge {
+  """The item."""
+  node: FeaturedCreator
+}
+
+type Followers {
+  """The type name Zora's GraphQL backend reports for this object, when it includes one."""
+  zoraType: String
+  """Total number of items, where the API reports it."""
+  count: Int
+}
+
+type Instagram {
+  """The type name Zora's GraphQL backend reports for this object, when it includes one."""
+  zoraType: String
+  """Username on that network."""
+  username: String
+  """Display name on that network."""
+  displayName: String
+  """Followers on that network."""
+  followerCount: Int
+  """Globally unique ID."""
+  id: String
+}
+
+"""Wraps one LinkedWallet in a page of results."""
+type LinkedWalletEdge {
+  """The item."""
+  node: PublicWallet
+}
+
+type LinkedWallets {
+  """The type name Zora's GraphQL backend reports for this object, when it includes one."""
+  zoraType: String
+  """The items on this page, each wrapped in an edge."""
+  edges: [LinkedWalletEdge!]
+}
+
+"""A creator's live stream."""
+type LiveStream {
+  """The type name Zora's GraphQL backend reports for this object, when it includes one."""
+  zoraType: String
+  """Comments."""
+  comments: CommentConnection
+  """Globally unique ID."""
+  id: String
+  """Whether the stream is live right now."""
+  isOnline: Boolean
+  """Whether the key is active."""
+  isActive: Boolean
+  """People watching right now."""
+  concurrentViewers: Int
+  """Still thumbnail image URL."""
+  staticThumbnailUrl: String
+  """Animated thumbnail URL."""
+  animatedThumbnailUrl: String
+  """Profile of the creator."""
+  creatorProfile: CreatorProfile
+}
+
+"""
+One page of LiveStream results. Nodes() lists them; PageInfo says how to get the next page.
+"""
+type LiveStreamConnection {
+  """How to fetch the next page."""
+  pageInfo: PageInfo
+  """The items on this page, each wrapped in an edge."""
+  edges: [LiveStreamEdge!]
+}
+
+"""Wraps one LiveStream in a page of results."""
+type LiveStreamEdge {
+  """The item."""
+  node: LiveStream
+}
+
+type MaxSwappable {
+  """The type name Zora's GraphQL backend reports for this object, when it includes one."""
+  zoraType: String
+  """Raw amount of the currency, in wei. Not formatted with decimals"""
+  amountRaw: String
+  """Amount of the currency, in float format accounting for currency decimals"""
+  amountDecimal: Float
+}
+
+"""The image, video or other media attached to a coin."""
+type MediaContent {
+  """The type name Zora's GraphQL backend reports for this object, when it includes one."""
+  zoraType: String
+  """MIME type of the original media."""
+  mimeType: String
+  """The original media file (often ipfs://)."""
+  originalUri: String
+  """Resized previews served over https."""
+  previewImage: PreviewImage
+  """Short video preview URL."""
+  videoPreviewUrl: String
+  """HLS stream URL of the video."""
+  videoHlsUrl: String
+}
+
+type OwnerProfile {
+  """GraphQLAccountProfile for a Zora account, GraphQLWalletProfile for a bare wallet."""
+  zoraType: String
+  """Globally unique ID."""
+  id: String
+  """Zora handle, without @. Wallet-only profiles get a shortened address (0x06d7...b1c6)."""
+  handle: String
+  """True if Zora hides this from its own app."""
+  platformBlocked: Boolean
+  """Profile picture."""
+  avatar: Avatar
+}
+
+"""
+Where a page sits in a paginated list. Pass EndCursor as After to get the next page while
+HasNextPage is true.
+"""
+type PageInfo {
+  """Cursor to pass as After for the next page."""
+  endCursor: String
+  """Whether another page follows."""
+  hasNextPage: Boolean
+  """Cursor of the first item on this page."""
+  startCursor: String
+}
+
+type Permit {
+  """The type name Zora's GraphQL backend reports for this object, when it includes one."""
+  zoraType: String
+  """When the signature stops being valid (Unix seconds)."""
+  sigDeadline: String
+  """Contract allowed to spend the tokens."""
+  spender: String
+  """What the permit allows: token, amount, expiry, nonce."""
+  details: Details
+}
+
+"""
+The pool configuration Zora uses to launch a coin: encoded config plus the currency it pairs
+with.
+"""
+type PoolConfig {
+  """The type name Zora's GraphQL backend reports for this object, when it includes one."""
+  zoraType: String
+  """The pool configuration, ABI-encoded as the coin factory expects it."""
+  encodedConfig: String
+  """The currency."""
+  currency: String
+  """Lower tick of each liquidity position the pool starts with."""
+  lowerTicks: [Int!]
+  """Upper tick of each liquidity position the pool starts with."""
+  upperTicks: [Int!]
+  """Number of price-discovery liquidity positions per range."""
+  numDiscoveryPositions: [Int!]
+  """Share of supply placed in each discovery range, in 18-decimal fixed point."""
+  maxDiscoverySupplyShares: [String!]
+}
+
+"""The currency a coin's pool trades against (ZORA, ETH, USDC or a creator coin)."""
+type PoolCurrencyToken {
+  """The type name Zora's GraphQL backend reports for this object, when it includes one."""
+  zoraType: String
+  """Contract address (lowercase 0x hex)."""
+  address: String
+  """Display name."""
+  name: String
+  """Token decimals (18 for most, 6 for USDC)."""
+  decimals: Int
+}
+
+type PreviewImage {
+  """The type name Zora's GraphQL backend reports for this object, when it includes one."""
+  zoraType: String
+  """BlurHash placeholder to show while the image loads."""
+  blurhash: String
+  """Medium preview image URL."""
+  medium: String
+  """Small preview image URL."""
+  small: String
+}
+
+"""The price of a coin at a moment in time."""
+type PricePoint {
+  """The type name Zora's GraphQL backend reports for this object, when it includes one."""
+  zoraType: String
+  """Start of the interval (ISO 8601, UTC)."""
+  timestamp: String
+  """Price at the end of the interval, in USD."""
+  closePrice: String
+}
+
+"""
+A Zora profile: handle, avatar, linked wallets, creator coin, and (depending on the call) the
+coins it created or holds.
+"""
+type Profile {
+  """The profile kind, e.g. GraphQLAccountProfile."""
+  zoraType: String
+  """Globally unique ID."""
+  id: String
+  """Zora handle, without @. Wallet-only profiles get a shortened address (0x06d7...b1c6)."""
+  handle: String
+  """Profile picture."""
+  avatar: Avatar
+  """True if Zora hides this from its own app."""
+  platformBlocked: Boolean
+  """Linked social accounts: X, TikTok, Instagram, Farcaster."""
+  socialAccounts: SocialAccounts
+  """The creator's own creator coin."""
+  creatorCoin: Zora20Token
+  """Username on that network."""
+  username: String
+  """When it was created (ISO 8601, UTC)."""
+  createdAt: String
+  """Display name on that network."""
+  displayName: String
+  """Profile bio."""
+  bio: String
+  """Website on the profile."""
+  website: String
+  """The profile's primary public wallet."""
+  publicWallet: PublicWallet
+  """Wallets linked to the profile."""
+  linkedWallets: LinkedWallets
+  """Coins the profile holds (only filled by the profile-balances endpoint)."""
+  coinBalances: CoinBalanceConnection
+  """Coins the profile created (only filled by the profile-coins endpoint)."""
+  createdCoins: Zora20TokenConnection
+  """How many times the handle has been changed."""
+  usernameChangesCount: Int
+  """An external wallet linked to the profile."""
+  externalWallet: ExternalWallet
+  """Who follows this profile."""
+  followers: Followers
+  """Who this profile follows."""
+  following: Followers
+  """History of social accounts being linked and unlinked."""
+  socialAccountLinkedEvents: SocialAccountLinkedEvents
+}
+
+type ProfileBySocialHandle {
+  """The type name Zora's GraphQL backend reports for this object, when it includes one."""
+  zoraType: String
+  """Globally unique ID."""
+  id: String
+  """Zora handle, without @. Wallet-only profiles get a shortened address (0x06d7...b1c6)."""
+  handle: String
+  """True if Zora hides this from its own app."""
+  platformBlocked: Boolean
+  """Profile picture."""
+  avatar: Avatar
+  """Linked social accounts: X, TikTok, Instagram, Farcaster."""
+  socialAccounts: SocialAccounts
+  """The creator's own creator coin."""
+  creatorCoin: Zora20Token
+  """Username on that network."""
+  username: String
+  """Display name on that network."""
+  displayName: String
+}
+
+type PublicWallet {
+  """The type name Zora's GraphQL backend reports for this object, when it includes one."""
+  zoraType: String
+  """Wallet address."""
+  walletAddress: String
+  """How the wallet is held (Privy, external, smart wallet)."""
+  walletType: WalletType
+}
+
+"""What a trade is expected to return."""
+type Quote {
+  """The type name Zora's GraphQL backend reports for this object, when it includes one."""
+  zoraType: String
+  """Expected output, in the output token's smallest unit."""
+  amountOut: String
+  """Slippage tolerance the quote was built with (0.05 = 5%)."""
+  slippage: Float
+  """The token being sold."""
+  tokenIn: TokenSpec
+}
+
+"""A trade quote and the transaction that executes it."""
+type QuoteResponse {
+  """Whether a route was found. Sent by the API as a string; the SDKs read it as a boolean."""
+  success: Boolean
+  """The transaction to send from the sender's wallet."""
+  call: Call
+  """Permit2 permits the sender must sign first, when selling an ERC-20."""
+  permits: [SignedPermit!]
+  """The Universal Router trade encoded in the call."""
+  trade: Trade
+  """What the trade is expected to return."""
+  quote: Quote
+}
+
+type Replies {
+  """The type name Zora's GraphQL backend reports for this object, when it includes one."""
+  zoraType: String
+  """Total number of items, where the API reports it."""
+  count: Int
+  """The items on this page, each wrapped in an edge."""
+  edges: [ReplyEdge!]
+}
+
+type Reply {
+  """The type name Zora's GraphQL backend reports for this object, when it includes one."""
+  zoraType: String
+  """ID of the comment."""
+  commentId: String
+  """Nonce the comment was signed or posted with."""
+  nonce: String
+  """Wallet of the user who posted it."""
+  userAddress: String
+  """Hash of the transaction that posted it onchain, if it was posted onchain."""
+  txHash: String
+  """The comment text."""
+  comment: String
+  """When it happened (Unix seconds)."""
+  timestamp: Int
+  """Profile of the user who posted it."""
+  userProfile: UserProfile
+  """Contract of the coin the comment is on."""
+  contractAddress: String
+  """The comment text."""
+  text: String
+  """Date with time (isoformat)"""
+  commentedAt: String
+  """Onchain ID of the comment this replies to, if any."""
+  replyToOnChainId: String
+  """Offchain ID of the comment this replies to, if any."""
+  replyToOffChainId: String
+  """Sparks (Zora's likes) the comment received."""
+  sparkCount: Int
+  """The profile."""
+  profile: Profile
+}
+
+"""Wraps one Reply in a page of results."""
+type ReplyEdge {
+  """The item."""
+  node: Reply
+}
+
+"""One search hit: a profile, a coin, a piece of content or a trend."""
+type SearchResult {
+  """
+  What was found: GlobalSearchCoinResult, GlobalSearchTrendResult or
+  GlobalSearchUserProfileResult.
+  """
+  zoraType: String
+  """What kind of thing this result is."""
+  entityType: EntityType
+  """The profile."""
+  profile: Profile
+  """The coin."""
+  coin: Zora20Token
+  """The trend coin, for trend search results."""
+  trend: Zora20Token
+}
+
+"""
+One page of SearchResult results. Nodes() lists them; PageInfo says how to get the next page.
+"""
+type SearchResultConnection {
+  """How to fetch the next page."""
+  pageInfo: PageInfo
+  """The items on this page, each wrapped in an edge."""
+  edges: [SearchResultEdge!]
+}
+
+"""Wraps one SearchResult in a page of results."""
+type SearchResultEdge {
+  """Cursor pointing at this item."""
+  cursor: String
+  """The item."""
+  node: SearchResult
+}
+
+type SignedPermit {
+  """The type name Zora's GraphQL backend reports for this object, when it includes one."""
+  zoraType: String
+  """The signature."""
+  signature: String
+  """The Permit2 permit."""
+  permit: Permit
+}
+
+type SocialAccountLinkedEvent {
+  """The type name Zora's GraphQL backend reports for this object, when it includes one."""
+  zoraType: String
+  """Globally unique ID."""
+  id: String
+  """The social network."""
+  platform: Platform
+  """Username on the social network."""
+  socialAccountUsername: String
+  """Date with time (isoformat)"""
+  occurredAt: String
+  """Whether the account was linked or unlinked."""
+  eventType: EventType
+}
+
+"""Wraps one SocialAccountLinkedEvent in a page of results."""
+type SocialAccountLinkedEventEdge {
+  """The item."""
+  node: SocialAccountLinkedEvent
+}
+
+type SocialAccountLinkedEvents {
+  """The type name Zora's GraphQL backend reports for this object, when it includes one."""
+  zoraType: String
+  """The items on this page, each wrapped in an edge."""
+  edges: [SocialAccountLinkedEventEdge!]
+}
+
+type SocialAccounts {
+  """The type name Zora's GraphQL backend reports for this object, when it includes one."""
+  zoraType: String
+  """Linked Instagram account."""
+  instagram: Instagram
+  """Linked TikTok account."""
+  tiktok: Instagram
+  """Linked X (Twitter) account."""
+  twitter: Instagram
+  """Linked Farcaster account."""
+  farcaster: Instagram
+}
+
+"""One buy or sell of a coin."""
+type SwapActivity {
+  """The type name Zora's GraphQL backend reports for this object, when it includes one."""
+  zoraType: String
+  """Globally unique ID."""
+  id: String
+  """Amount in the pool's currency, with the currency's USD price at the time."""
+  currencyAmountWithPrice: CurrencyAmountWithPrice
+  """Wallet that sent the swap."""
+  senderAddress: String
+  """Wallet that received the output."""
+  recipientAddress: String
+  """Hash of the transaction it happened in."""
+  transactionHash: String
+  """Coins bought or sold, in the smallest unit (18 decimals)."""
+  coinAmount: String
+  """Time of the block it happened in (ISO 8601, UTC)."""
+  blockTimestamp: String
+  """BUY or SELL."""
+  activityType: SwapType
+  """Profile of the wallet that sent the trade."""
+  senderProfile: OwnerProfile
+}
+
+"""
+One page of SwapActivity results. Nodes() lists them; PageInfo says how to get the next page.
+"""
+type SwapActivityConnection {
+  """Total number of items, where the API reports it."""
+  count: Int
+  """The items on this page, each wrapped in an edge."""
+  edges: [SwapActivityEdge!]
+  """How to fetch the next page."""
+  pageInfo: PageInfo
+}
+
+"""Wraps one SwapActivity in a page of results."""
+type SwapActivityEdge {
+  """The item."""
+  node: SwapActivity
+  """Cursor pointing at this item."""
+  cursor: String
+}
+
+"""One holder of a coin and how much they hold."""
+type TokenBalance {
+  """The type name Zora's GraphQL backend reports for this object, when it includes one."""
+  zoraType: String
+  """Amount held, in the coin's smallest unit (18 decimals) — divide by 1e18 for whole coins."""
+  balance: String
+  """Wallet holding the coin."""
+  ownerAddress: String
+  """Profile of the holder (a wallet profile if the holder has no Zora account)."""
+  ownerProfile: OwnerProfile
+}
+
+"""
+One page of TokenBalance results. Nodes() lists them; PageInfo says how to get the next page.
+"""
+type TokenBalanceConnection {
+  """How to fetch the next page."""
+  pageInfo: PageInfo
+  """Total number of items, where the API reports it."""
+  count: Int
+  """The items on this page, each wrapped in an edge."""
+  edges: [TokenBalanceEdge!]
+}
+
+"""Wraps one TokenBalance in a page of results."""
+type TokenBalanceEdge {
+  """The item."""
+  node: TokenBalance
+}
+
+"""A coin's current price, in the pool's currency and in USD."""
+type TokenPrice {
+  """The type name Zora's GraphQL backend reports for this object, when it includes one."""
+  zoraType: String
+  """Price of one whole coin in USDC (≈ USD), as a decimal string."""
+  priceInUsdc: String
+  """The coin the price is for."""
+  currencyAddress: String
+  """Price of one whole coin in the pool's currency, as a decimal string."""
+  priceInPoolToken: String
+}
+
+"""A token in a trade quote: native ETH or an ERC-20 address."""
+type TokenSpec {
+  """The type name Zora's GraphQL backend reports for this object, when it includes one."""
+  zoraType: String
+  """eth for native ETH, erc20 for a token (which then needs an address)."""
+  type: String
+  """Contract address (lowercase 0x hex)."""
+  address: String
+}
+
+type Trade {
+  """The type name Zora's GraphQL backend reports for this object, when it includes one."""
+  zoraType: String
+  """Universal Router commands the trade executes (hex)."""
+  commands: [String!]
+  """ETH to send, in wei."""
+  value: String
+  """ABI-encoded input for each command."""
+  inputs: [String!]
+}
+
+"""One trade made by a wallet."""
+type TradeActivity {
+  """The activity kind, e.g. GraphQLCoinSwapActivity."""
+  zoraType: String
+  """Hash of the transaction it happened in."""
+  transactionHash: String
+  """Index of the swap's log within its transaction."""
+  transactionLogIndex: Int
+  """Time of the block it happened in (ISO 8601, UTC)."""
+  blockTimestamp: String
+  """Coins traded, in the smallest unit (18 decimals)."""
+  coinAmount: String
+  """The coin."""
+  coin: Zora20Token
+  """Globally unique ID."""
+  id: String
+  """BUY or SELL."""
+  swapActivityType: SwapType
+  """Amount in the pool's currency, with the currency's USD price at the time."""
+  currencyAmountWithPrice: CurrencyAmountWithPrice
+  """Profile of the wallet that sent the trade."""
+  senderProfile: OwnerProfile
+  """Zora's ID for the trade."""
+  orderId: String
+  """For a coin launch, how much the creator bought at creation."""
+  initialBuyAmount: String
+  """That initial buy in USD."""
+  initialBuyAmountUsd: Float
+  """How many times its value the trade has returned, where Zora computes it."""
+  multiplier: Int
+  """Profile of the wallet that made the trade."""
+  makerProfile: OwnerProfile
+}
+
+"""
+One page of TradeActivity results. Nodes() lists them; PageInfo says how to get the next page.
+"""
+type TradeActivityConnection {
+  """Total number of items, where the API reports it."""
+  count: Int
+  """The items on this page, each wrapped in an edge."""
+  edges: [TradeActivityEdge!]
+  """How to fetch the next page."""
+  pageInfo: PageInfo
+}
+
+"""Wraps one TradeActivity in a page of results."""
+type TradeActivityEdge {
+  """The item."""
+  node: TradeActivity
+  """Cursor pointing at this item."""
+  cursor: String
+}
+
+"""One trader's position on the weekly leaderboard."""
+type TraderLeaderboardEntry {
+  """The type name Zora's GraphQL backend reports for this object, when it includes one."""
+  zoraType: String
+  """Name of the coin."""
+  entityName: String
+  """Leaderboard score."""
+  score: Int
+  """Trading volume this week in USD."""
+  weekVolumeUsd: Float
+  """Trades made this week."""
+  weekTradesCount: Int
+  """Gross trading volume this week, in ZORA."""
+  weekGrossVolumeZora: Float
+  """Profile of the trader."""
+  traderProfile: FeaturedCreator
+}
+
+"""
+One page of TraderLeaderboardEntry results. Nodes() lists them; PageInfo says how to get the
+next page.
+"""
+type TraderLeaderboardEntryConnection {
+  """Total number of items, where the API reports it."""
+  count: Int
+  """The items on this page, each wrapped in an edge."""
+  edges: [TraderLeaderboardEntryEdge!]
+  """How to fetch the next page."""
+  pageInfo: PageInfo
+}
+
+"""Wraps one TraderLeaderboardEntry in a page of results."""
+type TraderLeaderboardEntryEdge {
+  """The item."""
+  node: TraderLeaderboardEntry
+}
+
+"""The Uniswap V4 pool key of a coin's market."""
+type UniswapV4PoolKey {
+  """The type name Zora's GraphQL backend reports for this object, when it includes one."""
+  zoraType: String
+  """currency0 of the Uniswap V4 pool key."""
+  token0Address: String
+  """currency1 of the Uniswap V4 pool key."""
+  token1Address: String
+  """Pool fee, in hundredths of a basis point."""
+  fee: Int
+  """Tick spacing of the pool."""
+  tickSpacing: Int
+  """The pool's hook contract (Zora's coin hook)."""
+  hookAddress: String
+}
+
+type UserProfile {
+  """The type name Zora's GraphQL backend reports for this object, when it includes one."""
+  zoraType: String
+  """Globally unique ID."""
+  id: String
+  """Zora handle, without @. Wallet-only profiles get a shortened address (0x06d7...b1c6)."""
+  handle: String
+  """Profile picture."""
+  avatar: Avatar
+}
+
+type Valuation {
+  """The type name Zora's GraphQL backend reports for this object, when it includes one."""
+  zoraType: String
+  """What the holding would fetch at the current price, in USD."""
+  marketValueUsd: String
+  """Balance × price, in USD, ignoring slippage."""
+  faceValueUsd: String
+  """Block the valuation was computed at."""
+  blockNumber: Int
+  """The most of the holding that can be sold into the pool right now."""
+  maxSwappable: MaxSwappable
+  """Amount paid or received, in the pool's currency."""
+  currencyAmount: Amount
+  """Why the valuation couldn't be computed, when it couldn't."""
+  error: String
+}
+
+"""
+A Zora coin: an ERC-20 with a Uniswap V4 market, created by a creator or for a piece of content
+or a trend. Endpoints return different selections of its fields; anything not selected is empty.
+"""
+type Zora20Token {
+  """
+  Which kind of coin this is: GraphQLZora20Token, GraphQLZora20V4Token, GraphQLZora20CreatorToken
+  or GraphQLZora20TrendToken.
+  """
+  zoraType: String
+  """Globally unique ID."""
+  id: String
+  """True if Zora hides this from its own app."""
+  platformBlocked: Boolean
+  """Display name."""
+  name: String
+  """Description from the coin's metadata."""
+  description: String
+  """Contract address (lowercase 0x hex)."""
+  address: String
+  """Whether this is a creator coin, a content coin or a trend."""
+  coinType: CoinType
+  """Ticker symbol."""
+  symbol: String
+  """Total supply in whole tokens, as a decimal string ("1000000000" = one billion)."""
+  totalSupply: String
+  """All-time trading volume in USD, as a decimal string."""
+  totalVolume: String
+  """Trading volume over the last 24 hours in USD, as a decimal string."""
+  volume24h: String
+  """When it was created (ISO 8601, UTC)."""
+  createdAt: String
+  """Wallet that created the coin."""
+  creatorAddress: String
+  """What the coin's pool trades against."""
+  poolCurrencyToken: PoolCurrencyToken
+  """Current price."""
+  tokenPrice: TokenPrice
+  """Market cap in USD, as a decimal string."""
+  marketCap: String
+  """
+  Change in market cap over the last 24 hours in USD (negative when it fell), as a decimal string.
+  """
+  marketCapDelta24h: String
+  """Chain ID (8453 = Base)."""
+  chainId: Int
+  """Metadata URI (EIP-7572 JSON, usually ipfs://)."""
+  tokenUri: String
+  """
+  The app that launched the coin; it earns the platform referral share of every trade, for good.
+  """
+  platformReferrerAddress: String
+  """Wallet that receives the creator's share of trading fees."""
+  payoutRecipientAddress: String
+  """Profile of the creator."""
+  creatorProfile: CreatorProfile
+  """The image or video attached to the coin."""
+  mediaContent: MediaContent
+  """Number of distinct wallets holding the coin."""
+  uniqueHolders: Int
+  """Pool key of a V4 coin's market."""
+  uniswapV4PoolKey: UniswapV4PoolKey
+  """Pool of a legacy V3 coin. Empty for V4 coins, which use uniswapV4PoolKey."""
+  uniswapV3PoolAddress: String
+  """Comments (only filled by the coin-comments endpoint)."""
+  zoraComments: ZoraCommentConnection
+  """What the creator has earned from trading fees, per currency."""
+  creatorEarnings: [CreatorEarning!]
+  """Holders (only filled by the coin-holders endpoint)."""
+  tokenBalances: TokenBalanceConnection
+  """Comments."""
+  comments: CommentConnection
+  """Prices over the last hour (only filled by the price-history endpoint)."""
+  oneHour: [PricePoint!]
+  """Prices over the last day."""
+  oneDay: [PricePoint!]
+  """Prices over the last week."""
+  oneWeek: [PricePoint!]
+  """Prices over the last month."""
+  oneMonth: [PricePoint!]
+  """Prices over the coin's whole life."""
+  all: [PricePoint!]
+  """Buys and sells (only filled by the coin-swaps endpoint)."""
+  swapActivities: SwapActivityConnection
+  """The coin's address on other chains, where Zora reports one."""
+  multichainAddress: String
+  """The coin's Uniswap pool address, where the API reports one."""
+  uniswapPoolAddress: String
+}
+
+"""
+One page of Zora20Token results. Nodes() lists them; PageInfo says how to get the next page.
+"""
+type Zora20TokenConnection {
+  """The items on this page, each wrapped in an edge."""
+  edges: [Zora20TokenEdge!]
+  """How to fetch the next page."""
+  pageInfo: PageInfo
+  """Total number of items, where the API reports it."""
+  count: Int
+}
+
+"""Wraps one Zora20Token in a page of results."""
+type Zora20TokenEdge {
+  """The item."""
+  node: Zora20Token
+  """Cursor pointing at this item."""
+  cursor: String
+}
+
+"""A comment posted on a coin."""
+type ZoraComment {
+  """The type name Zora's GraphQL backend reports for this object, when it includes one."""
+  zoraType: String
+  """ID of the comment."""
+  commentId: String
+  """Nonce the comment was signed or posted with."""
+  nonce: String
+  """Wallet of the user who posted it."""
+  userAddress: String
+  """Hash of the transaction that posted it onchain, if it was posted onchain."""
+  txHash: String
+  """The comment text."""
+  comment: String
+  """When it happened (Unix seconds)."""
+  timestamp: Int
+  """Profile of the user who posted it."""
+  userProfile: UserProfile
+  """Replies to this comment."""
+  replies: Replies
+}
+
+"""
+One page of ZoraComment results. Nodes() lists them; PageInfo says how to get the next page.
+"""
+type ZoraCommentConnection {
+  """How to fetch the next page."""
+  pageInfo: PageInfo
+  """Total number of items, where the API reports it."""
+  count: Int
+  """The items on this page, each wrapped in an edge."""
+  edges: [ZoraCommentEdge!]
+}
+
+"""Wraps one ZoraComment in a page of results."""
+type ZoraCommentEdge {
+  """The item."""
+  node: ZoraComment
+}
+
+"""A coin to fetch with Coins: its chain and contract address."""
+input CoinRefInput {
+  """Chain ID (8453 = Base)."""
+  chainId: Int!
+  """Contract address of the coin."""
+  collectionAddress: String!
+}
+
+"""A content coin to create. Metadata must point at EIP-7572 JSON (ipfs:// or https://)."""
+input CreateContentCoinRequest {
+  """Wallet creating the coin."""
+  creator: String!
+  """Display name."""
+  name: String!
+  """Ticker symbol."""
+  symbol: String!
+  """Where the coin's EIP-7572 metadata lives."""
+  metadata: MetadataInput!
+  """The currency."""
+  currency: ContentCoinCurrency!
+  """Chain ID (8453 = Base)."""
+  chainId: Int
+  """Starting market cap tier."""
+  startingMarketCap: StartingMarketCap
+  """
+  Your app's address: it earns the platform referral share of this coin's trading fees for good.
+  """
+  platformReferrer: String
+  """More wallets allowed to manage the coin."""
+  additionalOwners: [String!]
+  """Wallet to receive the creator's fee share instead of the creator."""
+  payoutRecipientOverride: String
+  """Optional flag to enable smart wallet routing. Defaults to false if omitted."""
+  enableSmartWalletRouting: Boolean
+}
+
+"""Who the upload token is for."""
+input CreateUploadJwtRequest {
+  """Wallet the upload token is for."""
+  creatorAddress: String!
+}
+
+input DetailsInput {
+  """Token address."""
+  token: String!
+  """The amount."""
+  amount: String!
+  """When the allowance expires (Unix seconds)."""
+  expiration: Float!
+  """Nonce the comment was signed or posted with."""
+  nonce: Float!
+}
+
+input MetadataInput {
+  """eth for native ETH, erc20 for a token (which then needs an address)."""
+  type: MetadataType!
+  """Metadata URI."""
+  uri: String!
+}
+
+input PermitInput {
+  """What the permit allows: token, amount, expiry, nonce."""
+  details: DetailsInput!
+  """Contract allowed to spend the tokens."""
+  spender: String!
+  """When the signature stops being valid (Unix seconds)."""
+  sigDeadline: String!
+}
+
+"""
+A trade to quote. TokenIn, TokenOut, AmountIn and Sender are required; Recipient defaults to
+Sender and Slippage to 0.05.
+"""
+input QuoteRequest {
+  """Address that earns the trade referral reward for routing this trade."""
+  referrer: String
+  """Permit2 signatures, when selling an ERC-20 without a prior approval."""
+  signatures: [SignatureInput!]
+  """How long a Permit2 signature stays valid, in seconds."""
+  permitActiveSeconds: Float
+  """Chain ID (8453 = Base)."""
+  chainId: Int
+  """What to buy. Use ETH() or ERC20(address)."""
+  tokenOut: TokenSpecInput!
+  """What to sell. Use ETH() or ERC20(address)."""
+  tokenIn: TokenSpecInput!
+  """Amount to sell, in the input token's smallest unit (wei for ETH)."""
+  amountIn: String!
+  """Maximum slippage (0.05 = 5%). Defaults to 5% with QuoteTrade."""
+  slippage: Float
+  """Wallet that receives the output. Defaults to the sender with QuoteTrade."""
+  recipient: String
+  """Wallet that will send the transaction."""
+  sender: String!
+}
+
+input SignatureInput {
+  """The Permit2 permit."""
+  permit: PermitInput!
+  """The signature."""
+  signature: String!
+}
+
+"""
+A token to trade: native ETH (type "eth") or an ERC-20 (type "erc20" plus address). Build one
+with ETH() or ERC20(address).
+"""
+input TokenSpecInput {
+  """eth for native ETH, erc20 for a token (which then needs an address)."""
+  type: TokenType!
+  """Contract address (lowercase 0x hex)."""
+  address: String
+}
+
+"""What a set of addresses earned, per role and token, valued at current prices."""
+type RewardsReport {
+  addresses: [String!]
+  """Reward events that paid any of the addresses."""
+  events: Int
+  fromBlock: Int
+  toBlock: Int
+  """Sum of every priced line, in USD at current prices."""
+  totalUsd: Float
+  lines: [RewardLine!]
+}
+
+"""What one role earned in one token."""
+type RewardLine {
+  """creator, platform_referrer, trade_referrer, protocol or doppler."""
+  role: String
+  """Token address (0x000… for native ETH)."""
+  token: String
+  symbol: String
+  """Amount in the token's smallest unit, as an integer string."""
+  raw: String
+  """Amount in whole tokens."""
+  amount: Float
+  """Value at current prices; null when the token has no price."""
+  usd: Float
+  payouts: Int
+}
+
+type Query {
+  """Look up an API key: whether it exists and is active."""
+  apiKey(
+    """The API key to look up."""
+    apiKey: String!
+  ): ApiKey
+  """
+  One coin by contract address: market data, creator profile, media, pool key and creator
+  earnings.
+  """
+  coin(
+    """Contract address (0x…)."""
+    address: String!
+    """Chain ID. Defaults to Base (8453)."""
+    chainId: Int
+  ): Zora20Token
+  """
+  Comments posted on a coin, newest first. One page; pass pageInfo.endCursor as `after` for the
+  next.
+  """
+  coinComments(
+    """Contract address (0x…)."""
+    address: String!
+    """Chain ID. Defaults to Base (8453)."""
+    chainId: Int
+    """Cursor to continue from: the previous page's pageInfo.endCursor."""
+    after: String
+    """Page size."""
+    pageSize: Int
+  ): ZoraCommentConnection
+  """
+  Holders of a coin and their balances, largest first. One page; pass pageInfo.endCursor as
+  `after` for the next.
+  """
+  coinHolders(
+    """Chain ID. Defaults to Base (8453)."""
+    chainId: Int
+    """Contract address (0x…)."""
+    address: String!
+    """Cursor to continue from: the previous page's pageInfo.endCursor."""
+    after: String
+    """Page size."""
+    pageSize: Int
+  ): TokenBalanceConnection
+  """
+  A coin's comment feed with replies threaded in, newest first. One page; pass pageInfo.endCursor
+  as `after` for the next.
+  """
+  coinMergedComments(
+    """Contract address (0x…)."""
+    address: String!
+    """Chain ID. Defaults to Base (8453)."""
+    chainId: Int
+    """Cursor to continue from: the previous page's pageInfo.endCursor."""
+    after: String
+    """Page size."""
+    pageSize: Int
+  ): CommentConnection
+  """
+  A coin's price history at five resolutions: the last hour, day, week, month, and all time.
+  """
+  coinPriceHistory(
+    """Contract address (0x…)."""
+    address: String!
+    """Chain ID. Defaults to Base (8453)."""
+    chainId: Int
+  ): Zora20Token
+  """
+  Buys and sells of a coin, newest first. One page; pass pageInfo.endCursor as `after` for the
+  next.
+  """
+  coinSwaps(
+    """Contract address (0x…)."""
+    address: String!
+    """Chain ID. Defaults to Base (8453)."""
+    chainId: Int
+    """Cursor to continue from: the previous page's pageInfo.endCursor."""
+    after: String
+    """Page size."""
+    pageSize: Int
+  ): SwapActivityConnection
+  """Several coins in one request. Missing coins are left out of the result."""
+  coins(
+    """The coins to fetch."""
+    coins: [CoinRefInput!]!
+  ): [Zora20Token!]
+  """
+  Basic information (address, name, symbol, price) for every coin, in pages of up to 1,000. One
+  page; pass pageInfo.endCursor as `after` for the next.
+  """
+  coinsList(
+    """Page size."""
+    pageSize: Int
+    """Cursor to continue from: the previous page's pageInfo.endCursor."""
+    after: String
+    """Include each coin's price in USDC. Defaults to true."""
+    includeUSDCPrice: Boolean
+  ): CoinBasicInfoConnection
+  """
+  The Uniswap V4 pool configuration Zora uses to launch a content coin paired with the given
+  currency.
+  """
+  contentCoinPoolConfig(
+    """Profile handle or wallet of the creator, used to pair with their creator coin."""
+    creatorIdentifier: String
+    """The currency the new coin trades against."""
+    currencyType: CurrencyType!
+  ): PoolConfig
+  """
+  The Uniswap V4 pool configuration Zora uses to launch a creator coin, optionally sized for a
+  starting market cap in USD.
+  """
+  creatorCoinPoolConfig(
+    """Starting market cap to size the pool for, in USD."""
+    targetMarketCapUsd: Int
+  ): PoolConfig
+  """
+  Comments on the live stream of the creator behind a coin. One page; pass pageInfo.endCursor as
+  `after` for the next.
+  """
+  creatorLivestreamComments(
+    """Contract address (0x…)."""
+    address: String!
+    """Chain ID. Defaults to Base (8453)."""
+    chainId: Int
+    """Cursor to continue from: the previous page's pageInfo.endCursor."""
+    after: String
+    """Page size."""
+    pageSize: Int
+  ): CommentConnection
+  """
+  A Zora Explore list: top gainers, 24h volume, newest, most valuable creators and more. See
+  ListType for all 25. One page; pass pageInfo.endCursor as `after` for the next.
+  """
+  explore(
+    """Which Explore list to return."""
+    listType: ListType!
+    """Page size."""
+    pageSize: Int
+    """Cursor to continue from: the previous page's pageInfo.endCursor."""
+    after: String
+  ): Zora20TokenConnection
+  """
+  Creators featured on the weekly leaderboard. Defaults to the current week. One page; pass
+  pageInfo.endCursor as `after` for the next.
+  """
+  featuredCreators(
+    """Year of the ISO week. Defaults to the current year."""
+    year: Int
+    """ISO week number. Defaults to the current week."""
+    week: Int
+    """Page size."""
+    pageSize: Int
+    """Cursor to continue from: the previous page's pageInfo.endCursor."""
+    after: String
+  ): FeaturedCreatorConnection
+  """
+  Live streams, most recently started first. One page; pass pageInfo.endCursor as `after` for the
+  next.
+  """
+  latestLiveStreams(
+    """Page size."""
+    pageSize: Int
+    """Cursor to continue from: the previous page's pageInfo.endCursor."""
+    after: String
+  ): LiveStreamConnection
+  """A profile by handle or wallet address, with its linked wallets and creator coin."""
+  profile(
+    """Profile handle (without @) or wallet address."""
+    identifier: String!
+  ): Profile
+  """
+  Coins a profile holds, with balances and current values. One page; pass pageInfo.endCursor as
+  `after` for the next.
+  """
+  profileBalances(
+    """Profile handle (without @) or wallet address."""
+    identifier: String!
+    """Page size."""
+    pageSize: Int
+    """Cursor to continue from: the previous page's pageInfo.endCursor."""
+    after: String
+    """How to order the balances."""
+    sortOption: SortOption
+    """Leave out coins the profile has hidden. Defaults to true."""
+    excludeHidden: Boolean
+    """Only include these chains. Defaults to Base."""
+    chainIds: [Int!]
+  ): CoinBalanceConnection
+  """Find a Zora profile from its handle on X, TikTok, Farcaster or Instagram."""
+  profileBySocialHandle(
+    """The social network the handle belongs to."""
+    platform: Platform!
+    """Handle on that network, without @."""
+    handle: String!
+  ): ProfileBySocialHandle
+  """
+  Coins a profile created. Filter by platform referrer to list only coins launched through a given
+  app. One page; pass pageInfo.endCursor as `after` for the next.
+  """
+  profileCoins(
+    """Profile handle (without @) or wallet address."""
+    identifier: String!
+    """Page size."""
+    pageSize: Int
+    """Cursor to continue from: the previous page's pageInfo.endCursor."""
+    after: String
+    """Only include these chains. Defaults to Base."""
+    chainIds: [Int!]
+    """Only coins created through one of these platform referrer addresses."""
+    platformReferrerAddress: [String!]
+  ): Zora20TokenConnection
+  """A profile's linked social accounts (X, TikTok, Instagram, Farcaster) and follower counts."""
+  profileSocial(
+    """Profile handle (without @) or wallet address."""
+    identifier: String!
+  ): Profile
+  """
+  Search coins, profiles, content and trends by text. One page; pass pageInfo.endCursor as `after`
+  for the next.
+  """
+  search(
+    """What to search for."""
+    text: String!
+    """Only return results of this kind."""
+    entityType: EntityType
+    """Page size."""
+    pageSize: Int
+    """Cursor to continue from: the previous page's pageInfo.endCursor."""
+    after: String
+  ): SearchResultConnection
+  """
+  Symbol, decimals and current USD price of any ERC-20 on the chain: ZORA, USDC, WETH, or a coin.
+  """
+  tokenInfo(
+    """Contract address (0x…)."""
+    address: String!
+    """Chain ID. Defaults to Base (8453)."""
+    chainId: Int
+  ): Erc20Token
+  """
+  Live streams with the most viewers right now. One page; pass pageInfo.endCursor as `after` for
+  the next.
+  """
+  topLiveStreams(
+    """Page size."""
+    pageSize: Int
+    """Cursor to continue from: the previous page's pageInfo.endCursor."""
+    after: String
+  ): LiveStreamConnection
+  """
+  The weekly trader leaderboard. Defaults to the current week. One page; pass pageInfo.endCursor
+  as `after` for the next.
+  """
+  traderLeaderboard(
+    """ISO week number. Defaults to the current week."""
+    week: Int
+    """Year of the ISO week. Defaults to the current year."""
+    year: Int
+    """Page size."""
+    pageSize: Int
+    """Cursor to continue from: the previous page's pageInfo.endCursor."""
+    after: String
+  ): TraderLeaderboardEntryConnection
+  """A trend coin by its ticker."""
+  trendCoin(
+    """Trend ticker, without $."""
+    ticker: String!
+    """Chain ID. Defaults to Base (8453)."""
+    chainId: Int
+  ): Zora20Token
+  """
+  Trend coins whose name matches, best match first. One page; pass pageInfo.endCursor as `after`
+  for the next.
+  """
+  trendsByName(
+    """Trend name to match."""
+    name: String!
+    """Page size."""
+    pageSize: Int
+    """Cursor to continue from: the previous page's pageInfo.endCursor."""
+    after: String
+  ): Zora20TokenConnection
+  """
+  Trades made by a wallet or profile, newest first. One page; pass pageInfo.endCursor as `after`
+  for the next.
+  """
+  walletTradeActivity(
+    """Profile handle (without @) or wallet address."""
+    identifier: String!
+    """Cursor to continue from: the previous page's pageInfo.endCursor."""
+    after: String
+    """Page size."""
+    pageSize: Int
+  ): TradeActivityConnection
+  """
+  Quote a trade. The result holds the transaction that executes it. Amounts are in the input
+  token's smallest unit (wei for ETH). Set Referrer to earn the trade referral reward. Nothing is
+  signed or sent: pass the returned call to your wallet.
+  """
+  quote(
+    """The request."""
+    input: QuoteRequest!
+  ): QuoteResponse
+  """
+  Build the transaction that creates a content coin. The result also holds the coin's predicted
+  address. Set PlatformReferrer to earn the platform referral share of the coin's trading fees for
+  its whole life. Nothing is signed or sent.
+  """
+  createContentCoin(
+    """The request."""
+    input: CreateContentCoinRequest!
+  ): CreateContentCoinResponse
+  """
+  What addresses earned from Zora trading fees as creator, platform referrer or trade referrer,
+  read straight from Base (CoinMarketRewardsV4 events). Scans live, so keep `hours` small; USD
+  uses current prices.
+  """
+  rewards(
+    """Payout recipients or referrer addresses."""
+    addresses: [String!]!
+    """How far back to scan, up to 24. Defaults to 6."""
+    hours: Float
+  ): RewardsReport
+}
+
+type Mutation {
+  """
+  Create a short-lived token for uploading coin media and metadata to Zora's uploader. Requires an
+  API key.
+  """
+  createUploadJWT(
+    """The request."""
+    input: CreateUploadJwtRequest!
+  ): String
+}

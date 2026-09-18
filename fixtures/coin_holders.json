@@ -1,0 +1,58 @@
+{
+ "zora20Token": {
+  "tokenBalances": {
+   "pageInfo": {
+    "endCursor": "eyJiYWxhbmNlIjogIjAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDA0MDAwMDAwMDAwMDAwMDAwMzYwMzY4ODc4MiIsICJfaWQiOiB7IiRvaWQiOiAiNmExYWFhZTA1ZGFmMTk3YmZhMTE1ODFlIn19",
+    "hasNextPage": true
+   },
+   "count": 79016,
+   "edges": [
+    {
+     "node": {
+      "balance": "134741843002689019097477140",
+      "ownerAddress": "0x06d7874037e622d6ef42294cf32eb259806cb1c6",
+      "ownerProfile": {
+       "__typename": "GraphQLWalletProfile",
+       "id": "R3JhcGhRTFdhbGxldFByb2ZpbGU6MHgwNmQ3ODc0MDM3ZTYyMmQ2ZWY0MjI5NGNmMzJlYjI1OTgwNmNiMWM2",
+       "handle": "0x06d7...b1c6",
+       "platformBlocked": false,
+       "avatar": null
+      }
+     }
+    },
+    {
+     "node": {
+      "balance": "52360030828853070318585579",
+      "ownerAddress": "0x9652721d02b9db43f4311102820158abb4ecc95b",
+      "ownerProfile": {
+       "__typename": "GraphQLAccountProfile",
+       "id": "R3JhcGhRTEFjY291bnRQcm9maWxlOjY1YWVkY2U5NDk2NTBiNWU1NTI5ZjFhMg==",
+       "handle": "base",
+       "platformBlocked": false,
+       "avatar": {
+        "previewImage": {
+         "blurhash": null,
+         "medium": "https://scontent-iad4-1.choicecdn.com/-/rs:fit:1200:1200/f:best/aHR0cHM6Ly9tYWdpYy5kZWNlbnRyYWxpemVkLWNvbnRlbnQuY29tL2lwZnMvYmFma3JlaWdnMmtuM3Y0bWp5a3hsdzZwYnpkN3U1c2pneGRjZ2t5enZ6NWN1ajRwY2c1MmF6NzdsbWU=",
+         "small": "https://scontent-iad4-1.choicecdn.com/-/rs:fit:600:600/f:best/aHR0cHM6Ly9tYWdpYy5kZWNlbnRyYWxpemVkLWNvbnRlbnQuY29tL2lwZnMvYmFma3JlaWdnMmtuM3Y0bWp5a3hsdzZwYnpkN3U1c2pneGRjZ2t5enZ6NWN1ajRwY2c1MmF6NzdsbWU="
+        }
+       }
+      }
+     }
+    },
+    {
+     "node": {
+      "balance": "40000000000000003603688782",
+      "ownerAddress": "0xa0c3a8823844468f699381a6f2ebb54bf04a83e2",
+      "ownerProfile": {
+       "__typename": "GraphQLWalletProfile",
+       "id": "R3JhcGhRTFdhbGxldFByb2ZpbGU6MHhhMGMzYTg4MjM4NDQ0NjhmNjk5MzgxYTZmMmViYjU0YmYwNGE4M2Uy",
+       "handle": "0xa0c3...83e2",
+       "platformBlocked": false,
+       "avatar": null
+      }
+     }
+    }
+   ]
+  }
+ }
+}

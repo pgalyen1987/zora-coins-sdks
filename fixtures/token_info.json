@@ -1,0 +1,11 @@
+{
+ "erc20Token": {
+  "currency": {
+   "priceUsd": "0.0079040904988276055013373464517463006796",
+   "decimals": 18,
+   "name": "Zora",
+   "symbol": "ZORA",
+   "icon": null
+  }
+ }
+}

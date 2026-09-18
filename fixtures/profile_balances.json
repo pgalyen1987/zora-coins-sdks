@@ -1,0 +1,344 @@
+{
+ "profile": {
+  "__typename": "GraphQLAccountProfile",
+  "id": "R3JhcGhRTEFjY291bnRQcm9maWxlOjY1MWQ3OTQyNzcyNjVmOWJhNmNlZTMyOQ==",
+  "handle": "jacob",
+  "platformBlocked": false,
+  "avatar": {
+   "previewImage": {
+    "blurhash": null,
+    "medium": "https://scontent-iad4-1.choicecdn.com/-/rs:fit:1200:1200/f:best/aHR0cHM6Ly9tYWdpYy5kZWNlbnRyYWxpemVkLWNvbnRlbnQuY29tL2lwZnMvYmFmeWJlaWVuNzR1cnVibmNxNmkzanZ2dHIybWE0YXI0N2Nna3VpeTV5a21ibnl5amlubGk3NGh4dWE=",
+    "small": "https://scontent-iad4-1.choicecdn.com/-/rs:fit:600:600/f:best/aHR0cHM6Ly9tYWdpYy5kZWNlbnRyYWxpemVkLWNvbnRlbnQuY29tL2lwZnMvYmFmeWJlaWVuNzR1cnVibmNxNmkzanZ2dHIybWE0YXI0N2Nna3VpeTV5a21ibnl5amlubGk3NGh4dWE="
+   }
+  },
+  "socialAccounts": {
+   "instagram": null,
+   "tiktok": null,
+   "twitter": {
+    "username": "js_horne",
+    "displayName": "jacob",
+    "followerCount": 64175,
+    "id": null
+   },
+   "farcaster": {
+    "username": "jacob",
+    "displayName": "jacob",
+    "followerCount": 292097,
+    "id": "8"
+   }
+  },
+  "creatorCoin": {
+   "address": "0x9b13358e3a023507e7046c18f508a958cda75f54"
+  },
+  "coinBalances": {
+   "count": 10836,
+   "edges": [
+    {
+     "node": {
+      "balance": "82421706780204291346978501",
+      "walletBalance": "82421706780204291346978501",
+      "id": "R3JhcGhRTENvaW5CYWxhbmNlOkJBU0UtTUFJTk5FVC4kLjB4NDQ1ZTljMGEyOTYwNjhkYzQyNTc3NjdiNWVkMzU0Yjc3Y2Y1MTNkZS4kLjB4M2E1ZGYwM2RkMWEwMDFkNzA1NTI4NGMyYzJjMTQ3Y2JiYzc4ZDE0Mg==",
+      "valuation": {
+       "marketValueUsd": "817.96",
+       "faceValueUsd": "982.46",
+       "blockNumber": 51471195,
+       "maxSwappable": {
+        "amountRaw": "82421706780204291346978501",
+        "amountDecimal": 82421706.7802043
+       },
+       "currencyAmount": {
+        "amountRaw": "82421706780204291346978501",
+        "amountDecimal": 82421706.7802043
+       },
+       "error": null
+      },
+      "coin": {
+       "__typename": "GraphQLZora20Token",
+       "id": "R3JhcGhRTFpvcmEyMFRva2VuOkJBU0UtTUFJTk5FVC4weDQ0NWU5YzBhMjk2MDY4ZGM0MjU3NzY3YjVlZDM1NGI3N2NmNTEzZGU=",
+       "platformBlocked": false,
+       "name": "up",
+       "description": "",
+       "address": "0x445e9c0a296068dc4257767b5ed354b77cf513de",
+       "coinType": "CONTENT",
+       "symbol": "up",
+       "totalSupply": "1000000000",
+       "totalVolume": "1403711.5671005317",
+       "volume24h": "0.0",
+       "createdAt": "2025-04-04T20:40:37+00:00",
+       "creatorAddress": "0x3a5df03dd1a001d7055284c2c2c147cbbc78d142",
+       "poolCurrencyToken": {
+        "address": "0x4200000000000000000000000000000000000006",
+        "name": "WETH",
+        "decimals": 18
+       },
+       "tokenPrice": {
+        "priceInUsdc": "0.000011281216563656084669964327729649201889",
+        "currencyAddress": "0x445e9c0a296068dc4257767b5ed354b77cf513de",
+        "priceInPoolToken": "0.000000004498305999999999913678872562154686942648140757228247821331024169921875"
+       },
+       "marketCap": "8625.08",
+       "marketCapDelta24h": "222.29",
+       "chainId": 8453,
+       "tokenUri": "ipfs://bafybeiad5ftagr5wnyc3bqfhzmbdy2yna4hq4amjw642imo4yoltdigr5m",
+       "platformReferrerAddress": "0x7bf90111ad7c22bec9e9dff8a01a44713cc1b1b6",
+       "payoutRecipientAddress": "0x3a5df03dd1a001d7055284c2c2c147cbbc78d142",
+       "creatorProfile": {
+        "__typename": "GraphQLAccountProfile",
+        "id": "R3JhcGhRTEFjY291bnRQcm9maWxlOjY1MWQ3OTQyNzcyNjVmOWJhNmNlZTMyOQ==",
+        "handle": "jacob",
+        "platformBlocked": false,
+        "avatar": {
+         "previewImage": {
+          "blurhash": null,
+          "medium": "https://scontent-iad4-1.choicecdn.com/-/rs:fit:1200:1200/f:best/aHR0cHM6Ly9tYWdpYy5kZWNlbnRyYWxpemVkLWNvbnRlbnQuY29tL2lwZnMvYmFmeWJlaWVuNzR1cnVibmNxNmkzanZ2dHIybWE0YXI0N2Nna3VpeTV5a21ibnl5amlubGk3NGh4dWE=",
+          "small": "https://scontent-iad4-1.choicecdn.com/-/rs:fit:600:600/f:best/aHR0cHM6Ly9tYWdpYy5kZWNlbnRyYWxpemVkLWNvbnRlbnQuY29tL2lwZnMvYmFmeWJlaWVuNzR1cnVibmNxNmkzanZ2dHIybWE0YXI0N2Nna3VpeTV5a21ibnl5amlubGk3NGh4dWE="
+         }
+        },
+        "socialAccounts": {
+         "instagram": null,
+         "tiktok": null,
+         "twitter": {
+          "username": "js_horne",
+          "displayName": "jacob",
+          "followerCount": 64175,
+          "id": null
+         },
+         "farcaster": {
+          "username": "jacob",
+          "displayName": "jacob",
+          "followerCount": 292097,
+          "id": "8"
+         }
+        },
+        "creatorCoin": {
+         "address": "0x9b13358e3a023507e7046c18f508a958cda75f54"
+        }
+       },
+       "mediaContent": {
+        "mimeType": "image/png",
+        "originalUri": "ipfs://bafybeiegl3k6l3blwxadb5eeo6aslojv2qxdxhm3dgzxte33tfr72itvba",
+        "previewImage": {
+         "small": "https://scontent-iad4-1.choicecdn.com/-/rs:fit:600:600/f:best/aHR0cHM6Ly9tYWdpYy5kZWNlbnRyYWxpemVkLWNvbnRlbnQuY29tL2lwZnMvYmFmeWJlaWVnbDNrNmwzYmx3eGFkYjVlZW82YXNsb2p2MnF4ZHhobTNkZ3p4dGUzM3RmcjcyaXR2YmE=",
+         "medium": "https://scontent-iad4-1.choicecdn.com/-/rs:fit:1200:1200/f:best/aHR0cHM6Ly9tYWdpYy5kZWNlbnRyYWxpemVkLWNvbnRlbnQuY29tL2lwZnMvYmFmeWJlaWVnbDNrNmwzYmx3eGFkYjVlZW82YXNsb2p2MnF4ZHhobTNkZ3p4dGUzM3RmcjcyaXR2YmE=",
+         "blurhash": "e7SsEL]uF.xJ?IP1#aJ4xbnm~XSci~WUIUIBx[s;M{t7ImnmW,oMxb"
+        }
+       },
+       "uniqueHolders": 19283,
+       "uniswapV3PoolAddress": "0x4efea436ef3c03b700fd3230d415f04c94a60d2f"
+      }
+     }
+    },
+    {
+     "node": {
+      "balance": "8295773788653099533176128",
+      "walletBalance": "8295773788653099533176128",
+      "id": "R3JhcGhRTENvaW5CYWxhbmNlOkJBU0UtTUFJTk5FVC4kLjB4ZjFmYzk1ODA3ODQzMzViMjYxM2MxMzkyYTUzMGMxYWEyYTY5YmEzZC4kLjB4MTdjZDA3MmNiZDQ1MDMxZWZjMjFkYTUzOGM3ODNlMGVkM2IyNWRjYw==",
+      "valuation": {
+       "marketValueUsd": "668.63",
+       "faceValueUsd": "710.04",
+       "blockNumber": 51471195,
+       "maxSwappable": {
+        "amountRaw": "8295773788653099533176128",
+        "amountDecimal": 8295773.788653099
+       },
+       "currencyAmount": {
+        "amountRaw": "8295773788653099533176128",
+        "amountDecimal": 8295773.788653099
+       },
+       "error": null
+      },
+      "coin": {
+       "__typename": "GraphQLZora20Token",
+       "id": "R3JhcGhRTFpvcmEyMFRva2VuOkJBU0UtTUFJTk5FVC4weGYxZmM5NTgwNzg0MzM1YjI2MTNjMTM5MmE1MzBjMWFhMmE2OWJhM2Q=",
+       "platformBlocked": false,
+       "name": "horse",
+       "description": "",
+       "address": "0xf1fc9580784335b2613c1392a530c1aa2a69ba3d",
+       "coinType": "CONTENT",
+       "symbol": "horse",
+       "totalSupply": "1000000000",
+       "totalVolume": "15312802.342915248",
+       "volume24h": "425.35",
+       "createdAt": "2025-03-12T16:09:53+00:00",
+       "creatorAddress": "0x3a5df03dd1a001d7055284c2c2c147cbbc78d142",
+       "poolCurrencyToken": {
+        "address": "0x4200000000000000000000000000000000000006",
+        "name": "WETH",
+        "decimals": 18
+       },
+       "tokenPrice": {
+        "priceInUsdc": "0.00015921087498155682508809840418110228099",
+        "currencyAddress": "0xf1fc9580784335b2613c1392a530c1aa2a69ba3d",
+        "priceInPoolToken": "0.0000000634842200000000051736298340050723698624324242700822651386260986328125"
+       },
+       "marketCap": "119099.90",
+       "marketCapDelta24h": "-10167.44",
+       "chainId": 8453,
+       "tokenUri": "ipfs://bafybeifogv6tnrfrblnwyfdboao3d4kwsa4qc2k7befgany4mwy45xp3nu",
+       "platformReferrerAddress": "0x7bf90111ad7c22bec9e9dff8a01a44713cc1b1b6",
+       "payoutRecipientAddress": "0x17cd072cbd45031efc21da538c783e0ed3b25dcc",
+       "creatorProfile": {
+        "__typename": "GraphQLAccountProfile",
+        "id": "R3JhcGhRTEFjY291bnRQcm9maWxlOjY1MWQ3OTQyNzcyNjVmOWJhNmNlZTMyOQ==",
+        "handle": "jacob",
+        "platformBlocked": false,
+        "avatar": {
+         "previewImage": {
+          "blurhash": null,
+          "medium": "https://scontent-iad4-1.choicecdn.com/-/rs:fit:1200:1200/f:best/aHR0cHM6Ly9tYWdpYy5kZWNlbnRyYWxpemVkLWNvbnRlbnQuY29tL2lwZnMvYmFmeWJlaWVuNzR1cnVibmNxNmkzanZ2dHIybWE0YXI0N2Nna3VpeTV5a21ibnl5amlubGk3NGh4dWE=",
+          "small": "https://scontent-iad4-1.choicecdn.com/-/rs:fit:600:600/f:best/aHR0cHM6Ly9tYWdpYy5kZWNlbnRyYWxpemVkLWNvbnRlbnQuY29tL2lwZnMvYmFmeWJlaWVuNzR1cnVibmNxNmkzanZ2dHIybWE0YXI0N2Nna3VpeTV5a21ibnl5amlubGk3NGh4dWE="
+         }
+        },
+        "socialAccounts": {
+         "instagram": null,
+         "tiktok": null,
+         "twitter": {
+          "username": "js_horne",
+          "displayName": "jacob",
+          "followerCount": 64175,
+          "id": null
+         },
+         "farcaster": {
+          "username": "jacob",
+          "displayName": "jacob",
+          "followerCount": 292097,
+          "id": "8"
+         }
+        },
+        "creatorCoin": {
+         "address": "0x9b13358e3a023507e7046c18f508a958cda75f54"
+        }
+       },
+       "mediaContent": {
+        "mimeType": "image/png",
+        "originalUri": "ipfs://bafybeibf3zpnj4n57ipoyg3lhaphq3sjjto7cmgfypi6xq7dbzggqcg5uy",
+        "previewImage": {
+         "small": "https://scontent-iad4-1.choicecdn.com/-/rs:fit:600:600/f:best/aHR0cHM6Ly9tYWdpYy5kZWNlbnRyYWxpemVkLWNvbnRlbnQuY29tL2lwZnMvYmFmeWJlaWJmM3pwbmo0bjU3aXBveWczbGhhcGhxM3NqanRvN2NtZ2Z5cGk2eHE3ZGJ6Z2dxY2c1dXk=",
+         "medium": "https://scontent-iad4-1.choicecdn.com/-/rs:fit:1200:1200/f:best/aHR0cHM6Ly9tYWdpYy5kZWNlbnRyYWxpemVkLWNvbnRlbnQuY29tL2lwZnMvYmFmeWJlaWJmM3pwbmo0bjU3aXBveWczbGhhcGhxM3NqanRvN2NtZ2Z5cGk2eHE3ZGJ6Z2dxY2c1dXk=",
+         "blurhash": "enEfsSRjoJj?t6%%V@WVayofNfR-ofazayD*j]t7j[afIUjZofjtWC"
+        }
+       },
+       "uniqueHolders": 40436,
+       "uniswapV3PoolAddress": "0xadb07748b855204dcfc2524ab7ba7e3a6661498a"
+      }
+     }
+    },
+    {
+     "node": {
+      "balance": "5803712566298828968261585",
+      "walletBalance": "5803712566298828968261585",
+      "id": "R3JhcGhRTENvaW5CYWxhbmNlOkJBU0UtTUFJTk5FVC4kLjB4YWZkM2E1NWFlOGM4NmZiNTUwNDk1MjIzZjkyZjFhZjE5MmUxNjNmZC4kLjB4M2E1ZGYwM2RkMWEwMDFkNzA1NTI4NGMyYzJjMTQ3Y2JiYzc4ZDE0Mg==",
+      "valuation": {
+       "marketValueUsd": "597.50",
+       "faceValueUsd": "646.94",
+       "blockNumber": 51471195,
+       "maxSwappable": {
+        "amountRaw": "5803712566298828968261585",
+        "amountDecimal": 5803712.566298828
+       },
+       "currencyAmount": {
+        "amountRaw": "5803712566298828968261585",
+        "amountDecimal": 5803712.566298828
+       },
+       "error": null
+      },
+      "coin": {
+       "__typename": "GraphQLZora20CreatorToken",
+       "id": "R3JhcGhRTFpvcmEyMENyZWF0b3JUb2tlbjpCQVNFLU1BSU5ORVQuMHhhZmQzYTU1YWU4Yzg2ZmI1NTA0OTUyMjNmOTJmMWFmMTkyZTE2M2Zk",
+       "platformBlocked": false,
+       "name": "11am",
+       "description": "",
+       "address": "0xafd3a55ae8c86fb550495223f92f1af192e163fd",
+       "coinType": "CREATOR",
+       "symbol": "11am",
+       "totalSupply": "1000000000",
+       "totalVolume": "2689402.510306618",
+       "volume24h": "0.01",
+       "createdAt": "2025-06-20T18:42:45+00:00",
+       "creatorAddress": "0x7023fd653adbb1f076042366637137f675012378",
+       "poolCurrencyToken": {
+        "address": "0x1111111111166b7fe7bd91427724b487980afc69",
+        "name": "ZORA",
+        "decimals": 18
+       },
+       "tokenPrice": {
+        "priceInUsdc": "0.00011147061632893463123128813118086684471",
+        "currencyAddress": "0xafd3a55ae8c86fb550495223f92f1af192e163fd",
+        "priceInPoolToken": "0.01410290233208599981751252272488272865302860736846923828125"
+       },
+       "marketCap": "111470.62",
+       "marketCapDelta24h": "5398.86",
+       "chainId": 8453,
+       "tokenUri": "ipfs://bafybeibhos4prtszqhm3unlsupn4pn3i5ric2uuul2emn67tnjzgib6aee",
+       "platformReferrerAddress": "0x0000000000000000000000000000000000000000",
+       "payoutRecipientAddress": "0x7023fd653adbb1f076042366637137f675012378",
+       "creatorProfile": {
+        "__typename": "GraphQLAccountProfile",
+        "id": "R3JhcGhRTEFjY291bnRQcm9maWxlOjY4NTMxN2QwOTdhYTI5MGMxMmM2MjdlZg==",
+        "handle": "11am",
+        "platformBlocked": false,
+        "avatar": {
+         "previewImage": {
+          "blurhash": null,
+          "medium": "https://scontent-iad4-1.choicecdn.com/-/rs:fit:1200:1200/f:best/aHR0cHM6Ly9tYWdpYy5kZWNlbnRyYWxpemVkLWNvbnRlbnQuY29tL2lwZnMvYmFmeWJlaWJubnZjb3dpaTRsenVlcDVpcmVidWhjd3k3czNpem40ZjZncTd1aW5uN3prcXdieXB0djQ=",
+          "small": "https://scontent-iad4-1.choicecdn.com/-/rs:fit:600:600/f:best/aHR0cHM6Ly9tYWdpYy5kZWNlbnRyYWxpemVkLWNvbnRlbnQuY29tL2lwZnMvYmFmeWJlaWJubnZjb3dpaTRsenVlcDVpcmVidWhjd3k3czNpem40ZjZncTd1aW5uN3prcXdieXB0djQ="
+         }
+        },
+        "socialAccounts": {
+         "instagram": {
+          "username": "11amdotclub",
+          "displayName": "11am",
+          "followerCount": 20,
+          "id": null
+         },
+         "tiktok": {
+          "username": "11amdotclub",
+          "displayName": "11AM w/ Seed Club",
+          "followerCount": 78,
+          "id": null
+         },
+         "twitter": {
+          "username": "11AMdotclub",
+          "displayName": "11AM w/ Seed Club",
+          "followerCount": 6323,
+          "id": null
+         },
+         "farcaster": {
+          "username": "11am",
+          "displayName": null,
+          "followerCount": 1396,
+          "id": "1131252"
+         }
+        },
+        "creatorCoin": {
+         "address": "0xafd3a55ae8c86fb550495223f92f1af192e163fd"
+        }
+       },
+       "mediaContent": {
+        "mimeType": null,
+        "originalUri": "ipfs://bafybeibnnvcowii4lzuep5irebuhcwy7s3izn4f6gq7uinn7zkqwbyptv4",
+        "previewImage": {
+         "small": "https://scontent-iad4-1.choicecdn.com/-/rs:fit:600:600/f:best/aHR0cHM6Ly9tYWdpYy5kZWNlbnRyYWxpemVkLWNvbnRlbnQuY29tL2lwZnMvYmFmeWJlaWJubnZjb3dpaTRsenVlcDVpcmVidWhjd3k3czNpem40ZjZncTd1aW5uN3prcXdieXB0djQ=",
+         "medium": "https://scontent-iad4-1.choicecdn.com/-/rs:fit:1200:1200/f:best/aHR0cHM6Ly9tYWdpYy5kZWNlbnRyYWxpemVkLWNvbnRlbnQuY29tL2lwZnMvYmFmeWJlaWJubnZjb3dpaTRsenVlcDVpcmVidWhjd3k3czNpem40ZjZncTd1aW5uN3prcXdieXB0djQ=",
+         "blurhash": null
+        }
+       },
+       "uniqueHolders": 13832,
+       "uniswapV4PoolKey": {
+        "token0Address": "0x1111111111166b7fe7bd91427724b487980afc69",
+        "token1Address": "0xafd3a55ae8c86fb550495223f92f1af192e163fd",
+        "fee": 30000,
+        "tickSpacing": 200,
+        "hookAddress": "0x5e5d19d22c85a4aef7c1fdf25fb22a5a38f71040"
+       }
+      }
+     }
+    }
+   ],
+   "pageInfo": {
+    "hasNextPage": true,
+    "endCursor": "eyJtYXJrZXRfdmFsdWVfdXNkIjogIjU5Ny41MDQxMzMiLCAiX2lkIjogeyIkb2lkIjogIjY4NTVhZTNiNjdhODUwMWY2MmRkNTRmOSJ9fQ=="
+   }
+  }
+ }
+}

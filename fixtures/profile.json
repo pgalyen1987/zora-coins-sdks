@@ -1,0 +1,70 @@
+{
+ "profile": {
+  "__typename": "GraphQLAccountProfile",
+  "id": "R3JhcGhRTEFjY291bnRQcm9maWxlOjY1MWQ3OTQyNzcyNjVmOWJhNmNlZTMyOQ==",
+  "handle": "jacob",
+  "platformBlocked": false,
+  "avatar": {
+   "previewImage": {
+    "blurhash": null,
+    "medium": "https://scontent-iad4-1.choicecdn.com/-/rs:fit:1200:1200/f:best/aHR0cHM6Ly9tYWdpYy5kZWNlbnRyYWxpemVkLWNvbnRlbnQuY29tL2lwZnMvYmFmeWJlaWVuNzR1cnVibmNxNmkzanZ2dHIybWE0YXI0N2Nna3VpeTV5a21ibnl5amlubGk3NGh4dWE=",
+    "small": "https://scontent-iad4-1.choicecdn.com/-/rs:fit:600:600/f:best/aHR0cHM6Ly9tYWdpYy5kZWNlbnRyYWxpemVkLWNvbnRlbnQuY29tL2lwZnMvYmFmeWJlaWVuNzR1cnVibmNxNmkzanZ2dHIybWE0YXI0N2Nna3VpeTV5a21ibnl5amlubGk3NGh4dWE="
+   },
+   "small": "https://scontent-iad4-1.choicecdn.com/-/rs:fit:600:600/f:best/aHR0cHM6Ly9tYWdpYy5kZWNlbnRyYWxpemVkLWNvbnRlbnQuY29tL2lwZnMvYmFmeWJlaWVuNzR1cnVibmNxNmkzanZ2dHIybWE0YXI0N2Nna3VpeTV5a21ibnl5amlubGk3NGh4dWE=",
+   "medium": "https://scontent-iad4-1.choicecdn.com/-/rs:fit:1200:1200/f:best/aHR0cHM6Ly9tYWdpYy5kZWNlbnRyYWxpemVkLWNvbnRlbnQuY29tL2lwZnMvYmFmeWJlaWVuNzR1cnVibmNxNmkzanZ2dHIybWE0YXI0N2Nna3VpeTV5a21ibnl5amlubGk3NGh4dWE=",
+   "blurhash": null
+  },
+  "username": "jacob",
+  "createdAt": "2023-10-04T14:40:02.879000+00:00",
+  "displayName": "jacob",
+  "bio": "+++???!!!",
+  "website": null,
+  "publicWallet": {
+   "walletAddress": "0x17cd072cbd45031efc21da538c783e0ed3b25dcc",
+   "walletType": "EXTERNAL"
+  },
+  "socialAccounts": {
+   "instagram": null,
+   "tiktok": null,
+   "twitter": {
+    "username": "js_horne",
+    "displayName": "jacob",
+    "followerCount": 64175,
+    "id": null
+   },
+   "farcaster": {
+    "username": "jacob",
+    "displayName": "jacob",
+    "followerCount": 292097,
+    "id": "8"
+   }
+  },
+  "linkedWallets": {
+   "edges": [
+    {
+     "node": {
+      "walletType": "EXTERNAL",
+      "walletAddress": "0x17cd072cbd45031efc21da538c783e0ed3b25dcc"
+     }
+    },
+    {
+     "node": {
+      "walletType": "PRIVY",
+      "walletAddress": "0x4e1749017f9d36c2c8b96a5d662118c42dbdc1a5"
+     }
+    },
+    {
+     "node": {
+      "walletType": "SMART_WALLET",
+      "walletAddress": "0x3a5df03dd1a001d7055284c2c2c147cbbc78d142"
+     }
+    }
+   ]
+  },
+  "creatorCoin": {
+   "address": "0x9b13358e3a023507e7046c18f508a958cda75f54",
+   "marketCap": "166216.71",
+   "marketCapDelta24h": "7146.49"
+  }
+ }
+}

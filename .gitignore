@@ -1,0 +1,10 @@
+rust/target/
+**/node_modules/
+dotnet/**/bin/
+dotnet/**/obj/
+java/**/build/
+java/.gradle/
+cpp/build/
+__pycache__/
+*.pyc
+.DS_Store

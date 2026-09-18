@@ -1,0 +1,167 @@
+{
+ "zora20Token": {
+  "__typename": "GraphQLZora20Token",
+  "id": "R3JhcGhRTFpvcmEyMFRva2VuOkJBU0UtTUFJTk5FVC4weGQ3NjlkNTZmNDc5ZTllNzJhNzdiYjE1MjNlODY2YTMzMDk4ZmVlYzU=",
+  "platformBlocked": false,
+  "name": "Base is for everyone",
+  "description": "Base is for coiners, collectors, traders, builders, creators, artists, writers, musicians, visionaries, sports fans, podcasters, travelers, DeFi users, students, and so much more.\n\nWhen we say everyone, we mean everyone.\n\n-\n\nThis and future coins on Zora are not an official network or protocol token for Base, Coinbase, or any other related product. They are created solely for artistic and cultural purposes as collectibles, not as investments or financial instruments. Base 'posts' are similar to those already shared on X - do not expect profits or returns and no ongoing development or efforts will be made to increase their value. There is a significant risk of losing all funds spent on them. Purchase only for entertainment and creative purposes.\n\nBase will receive 10 million tokens out of a total supply of 1 billion as creators and will never sell these tokens. All fees generated will go to grants supporting builders on Base.",
+  "address": "0xd769d56f479e9e72a77bb1523e866a33098feec5",
+  "coinType": "CONTENT",
+  "symbol": "Base is for everyone",
+  "totalSupply": "1000000000",
+  "totalVolume": "124039539.82813388",
+  "volume24h": "18651.37",
+  "createdAt": "2025-04-16T19:11:49+00:00",
+  "creatorAddress": "0x19ff7ea0badffa183f03533c3884f9ca03145aad",
+  "poolCurrencyToken": {
+   "address": "0x4200000000000000000000000000000000000006",
+   "name": "WETH",
+   "decimals": 18
+  },
+  "tokenPrice": {
+   "priceInUsdc": "0.00057947480459738989979407302516909059720",
+   "currencyAddress": "0xd769d56f479e9e72a77bb1523e866a33098feec5",
+   "priceInPoolToken": "0.000000231061592999999987417024198931014833391373031190596520900726318359375"
+  },
+  "marketCap": "434014.58",
+  "marketCapDelta24h": "-96921.14",
+  "chainId": 8453,
+  "tokenUri": "ipfs://bafybeibhzi643r3ogdmzuzfho7zrb6ua7jqo5bkhrnqq2g54xs5u74zcni",
+  "platformReferrerAddress": "0x7bf90111ad7c22bec9e9dff8a01a44713cc1b1b6",
+  "payoutRecipientAddress": "0x9652721d02b9db43f4311102820158abb4ecc95b",
+  "creatorProfile": {
+   "__typename": "GraphQLAccountProfile",
+   "id": "R3JhcGhRTEFjY291bnRQcm9maWxlOjY1YWVkY2U5NDk2NTBiNWU1NTI5ZjFhMg==",
+   "handle": "base",
+   "platformBlocked": false,
+   "avatar": {
+    "previewImage": {
+     "blurhash": null,
+     "medium": "https://scontent-iad4-1.choicecdn.com/-/rs:fit:1200:1200/f:best/aHR0cHM6Ly9tYWdpYy5kZWNlbnRyYWxpemVkLWNvbnRlbnQuY29tL2lwZnMvYmFma3JlaWdnMmtuM3Y0bWp5a3hsdzZwYnpkN3U1c2pneGRjZ2t5enZ6NWN1ajRwY2c1MmF6NzdsbWU=",
+     "small": "https://scontent-iad4-1.choicecdn.com/-/rs:fit:600:600/f:best/aHR0cHM6Ly9tYWdpYy5kZWNlbnRyYWxpemVkLWNvbnRlbnQuY29tL2lwZnMvYmFma3JlaWdnMmtuM3Y0bWp5a3hsdzZwYnpkN3U1c2pneGRjZ2t5enZ6NWN1ajRwY2c1MmF6NzdsbWU="
+    }
+   },
+   "socialAccounts": {
+    "instagram": null,
+    "tiktok": null,
+    "twitter": null,
+    "farcaster": null
+   },
+   "creatorCoin": null
+  },
+  "mediaContent": {
+   "mimeType": "image/png",
+   "originalUri": "ipfs://bafybeidgzeos5zfqbm2mac2crniwccnnlfvt26gojqg2xljfncdagmh67m",
+   "previewImage": {
+    "small": "https://scontent-iad4-1.choicecdn.com/-/rs:fit:600:600/f:best/aHR0cHM6Ly9tYWdpYy5kZWNlbnRyYWxpemVkLWNvbnRlbnQuY29tL2lwZnMvYmFmeWJlaWRnemVvczV6ZnFibTJtYWMyY3JuaXdjY25ubGZ2dDI2Z29qcWcyeGxqZm5jZGFnbWg2N20=",
+    "medium": "https://scontent-iad4-1.choicecdn.com/-/rs:fit:1200:1200/f:best/aHR0cHM6Ly9tYWdpYy5kZWNlbnRyYWxpemVkLWNvbnRlbnQuY29tL2lwZnMvYmFmeWJlaWRnemVvczV6ZnFibTJtYWMyY3JuaXdjY25ubGZ2dDI2Z29qcWcyeGxqZm5jZGFnbWg2N20=",
+    "blurhash": "eGSF^fj[_1ofjD-kfQRoj[Rk~Ua#9afPW?4^j@xoay%Ks,j[WEWVaz"
+   }
+  },
+  "uniqueHolders": 79583,
+  "uniswapV3PoolAddress": "0x06d7874037e622d6ef42294cf32eb259806cb1c6",
+  "zoraComments": {
+   "pageInfo": {
+    "endCursor": "eyJ0aW1lc3RhbXAiOiAxNzgzNzUwOTQ3LCAiX2lkIjogeyIkb2lkIjogIjZhNTFlMTI0MDZmMjdhMGM0NzNjOWE5MyJ9LCAicGVyX2NvbGxlY3Rpb24iOiB7IkVudENvbW1lbnRlZCI6IHsiX2lkIjogeyIkb2lkIjogIjZhNTFlMTI0MDZmMjdhMGM0NzNjOWE5MyJ9fX19",
+    "hasNextPage": true
+   },
+   "count": 1787,
+   "edges": [
+    {
+     "node": {
+      "commentId": "0x2b3492c1f656cdfbe9c54eb93e9c7f5beede86d47a99eff12813145328a1c6af",
+      "nonce": "0x0000000000000000000000000000000000000000000000000000000000082d45",
+      "userAddress": "0x26b56e4c6fd50e5249ae9ef6a2c43e7ac0050148",
+      "txHash": "0x85b9ce1663334747e01cd52dcedb6ef0697f62b21159a3e011667d24e6f64984",
+      "comment": "early \ud83c\udfaf",
+      "timestamp": 1784362275,
+      "userProfile": {
+       "id": "R3JhcGhRTEFjY291bnRQcm9maWxlOjZhNGQ3YmFiOTkwNjZkYWM5YTA2OWNhMg==",
+       "handle": "gentle_gecko_9996",
+       "avatar": {
+        "previewImage": {
+         "blurhash": null,
+         "small": "https://scontent-iad4-1.choicecdn.com/-/rs:fit:600:600/f:best/aHR0cHM6Ly9hcGkuZGljZWJlYXIuY29tLzkueC9ib3R0dHMvcG5nP3NlZWQ9MHg3MDYzYjM5MjFjMDY2ZTk1YmFmMDA1MjFlZGU4ODAxZjk0OTkwMWUz",
+         "medium": "https://scontent-iad4-1.choicecdn.com/-/rs:fit:1200:1200/f:best/aHR0cHM6Ly9hcGkuZGljZWJlYXIuY29tLzkueC9ib3R0dHMvcG5nP3NlZWQ9MHg3MDYzYjM5MjFjMDY2ZTk1YmFmMDA1MjFlZGU4ODAxZjk0OTkwMWUz"
+        }
+       }
+      }
+     }
+    },
+    {
+     "node": {
+      "commentId": "0x24c0283d6d2c5acce461a966fb27c6d92528a0391b05d87248758c700e819a1e",
+      "nonce": "0x0000000000000000000000000000000000000000000000000000000000082cb2",
+      "userAddress": "0x68c440483da184ffa5ec91ab239417b404d2ce27",
+      "txHash": "0x35ce350f9c739d56aba77ad9f59bc09aa5a780e693ef8b48ab551306f9f7c975",
+      "comment": "\ud83d\ude80\ud83d\ude80\ud83d\ude80",
+      "timestamp": 1784156781,
+      "userProfile": {
+       "id": "R3JhcGhRTEFjY291bnRQcm9maWxlOjY3ZDVmMDU2MTA5NzBkMGFkZjYyNTAzOA==",
+       "handle": "habibi_bitcoin",
+       "avatar": {
+        "previewImage": {
+         "blurhash": null,
+         "small": "https://scontent-iad4-1.choicecdn.com/-/rs:fit:600:600/f:best/aHR0cHM6Ly9tYWdpYy5kZWNlbnRyYWxpemVkLWNvbnRlbnQuY29tL2lwZnMvYmFmeWJlaWJxaGhvazc2cmZhcnluaDZvenBsdmozcHIzeDM0emsyaHNpdHNvdXFvdjMzZmR1bTUzbTQ=",
+         "medium": "https://scontent-iad4-1.choicecdn.com/-/rs:fit:1200:1200/f:best/aHR0cHM6Ly9tYWdpYy5kZWNlbnRyYWxpemVkLWNvbnRlbnQuY29tL2lwZnMvYmFmeWJlaWJxaGhvazc2cmZhcnluaDZvenBsdmozcHIzeDM0emsyaHNpdHNvdXFvdjMzZmR1bTUzbTQ="
+        }
+       }
+      }
+     }
+    },
+    {
+     "node": {
+      "commentId": "0x3214498b17e0fea6fe41fca75c155fd4138c1ac5a82ba9968f57e7afb4348f54",
+      "nonce": "0x0000000000000000000000000000000000000000000000000000000000082c52",
+      "userAddress": "0x1c3631e927eefe877831798985d39d82a7b03611",
+      "txHash": "0xea063e25d722cbdf5a7e80d8970e866b9410757c0329d09a26ee730ea05edd3a",
+      "comment": "A Base is an important space for people to interact",
+      "timestamp": 1784042469,
+      "userProfile": {
+       "id": "R3JhcGhRTEFjY291bnRQcm9maWxlOjZhNGI5M2RiNzllNWZkNTc4YzA4NDUzMw==",
+       "handle": "ironlady81",
+       "avatar": {
+        "previewImage": {
+         "blurhash": null,
+         "small": "https://scontent-iad4-1.choicecdn.com/-/rs:fit:600:600/f:best/aHR0cHM6Ly9tYWdpYy5kZWNlbnRyYWxpemVkLWNvbnRlbnQuY29tL2lwZnMvYmFmeWJlaWd1N3V2NzdkdHJ6Njd1cXo2czZhdmd5cHBpa29nZWZuenlna3hhaXl2eGNxYjJ1amJvbGk=",
+         "medium": "https://scontent-iad4-1.choicecdn.com/-/rs:fit:1200:1200/f:best/aHR0cHM6Ly9tYWdpYy5kZWNlbnRyYWxpemVkLWNvbnRlbnQuY29tL2lwZnMvYmFmeWJlaWd1N3V2NzdkdHJ6Njd1cXo2czZhdmd5cHBpa29nZWZuenlna3hhaXl2eGNxYjJ1amJvbGk="
+        }
+       }
+      }
+     }
+    },
+    {
+     "node": {
+      "commentId": "0xf5061c578c29f67105a4ae1205e0bf5598a980514f3df198a78ad6b7ac4d14be",
+      "nonce": "0x00000000000000000000000000000000000000000000000000000000000828a0",
+      "userAddress": "0x13659c3a5da2fca580528d6c869e2a983a05834a",
+      "txHash": "0x559ad6b27963402c5e267b47c692945b84afc72cff3e432867856688522fb112",
+      "comment": "early \ud83e\udee1",
+      "timestamp": 1783750947,
+      "userProfile": {
+       "id": "R3JhcGhRTEFjY291bnRQcm9maWxlOjZhM2ZhN2QwOGRjZGE5Mzg2YzVjZjUzYQ==",
+       "handle": "superagentx",
+       "avatar": {
+        "previewImage": {
+         "blurhash": null,
+         "small": "https://scontent-iad4-1.choicecdn.com/-/rs:fit:600:600/f:best/aHR0cHM6Ly9tYWdpYy5kZWNlbnRyYWxpemVkLWNvbnRlbnQuY29tL2lwZnMvYmFmeWJlaWF6cGlheWU2a2kyeHZobjc3NDdrZWlwbmg2dWJmdzdma2xmcG1waWR5c2Z3a2VscHpmaXU=",
+         "medium": "https://scontent-iad4-1.choicecdn.com/-/rs:fit:1200:1200/f:best/aHR0cHM6Ly9tYWdpYy5kZWNlbnRyYWxpemVkLWNvbnRlbnQuY29tL2lwZnMvYmFmeWJlaWF6cGlheWU2a2kyeHZobjc3NDdrZWlwbmg2dWJmdzdma2xmcG1waWR5c2Z3a2VscHpmaXU="
+        }
+       }
+      }
+     }
+    }
+   ]
+  },
+  "creatorEarnings": [
+   {
+    "amount": {
+     "currencyAddress": "0x4200000000000000000000000000000000000006",
+     "amountRaw": "80395295135524864000",
+     "amountDecimal": 80.39529513552486
+    },
+    "amountUsd": "154643.71"
+   }
+  ]
+ }
+}

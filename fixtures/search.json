@@ -1,0 +1,212 @@
+{
+ "globalSearch": {
+  "pageInfo": {
+   "hasNextPage": true,
+   "startCursor": "0",
+   "endCursor": "3"
+  },
+  "edges": [
+   {
+    "cursor": "0",
+    "node": {
+     "__typename": "GlobalSearchUserProfileResult",
+     "entityType": "USER_PROFILE",
+     "profile": {
+      "__typename": "GraphQLAccountProfile",
+      "id": "R3JhcGhRTEFjY291bnRQcm9maWxlOjY1MWQ5MTZjMTlhZWFlZTg0ZTUwMmQ5Yw==",
+      "handle": "zora",
+      "platformBlocked": false,
+      "avatar": {
+       "previewImage": {
+        "blurhash": null,
+        "medium": "https://scontent-iad4-1.choicecdn.com/-/rs:fit:1200:1200/f:best/aHR0cHM6Ly9tYWdpYy5kZWNlbnRyYWxpemVkLWNvbnRlbnQuY29tL2lwZnMvYmFmeWJlaWVzeXN0M2dnNnV0cWhycTVyN2dtNGZpZWZxdWg2dHJrc2RleHVvMjN6Mm5ha2JpcnZpMnk=",
+        "small": "https://scontent-iad4-1.choicecdn.com/-/rs:fit:600:600/f:best/aHR0cHM6Ly9tYWdpYy5kZWNlbnRyYWxpemVkLWNvbnRlbnQuY29tL2lwZnMvYmFmeWJlaWVzeXN0M2dnNnV0cWhycTVyN2dtNGZpZWZxdWg2dHJrc2RleHVvMjN6Mm5ha2JpcnZpMnk="
+       }
+      },
+      "creatorCoin": null
+     }
+    }
+   },
+   {
+    "cursor": "1",
+    "node": {
+     "__typename": "GlobalSearchCoinResult",
+     "entityType": "CONTENT",
+     "coin": {
+      "__typename": "GraphQLZora20V4Token",
+      "id": "R3JhcGhRTFpvcmEyMFY0VG9rZW46QkFTRS1NQUlOTkVULjB4MTdmZjA1ZDEzNzdjMzBjMzYwNzg2YTI0NWYyYTQ3NmNlZGViYjljMA==",
+      "platformBlocked": false,
+      "name": "Zora Creator Dashboard ",
+      "description": "\nZora Creators Dashboard, is a comprehensive analytical suite designed for real-time monitoring and risk assessment of creator tokens on the Zora and Base blockchains. It serves as a high-performance terminal for traders and developers to evaluate market health and detect manipulation patterns within the creator token ecosystem.\n\nCore Functionalities:\n------\n- Predictive Analytics: Features a proprietary Pump/Dump Prediction System that calculates probabilities based on holder density, volume momentum, and price action. It categorizes tokens into actionable trading signals like \"Strong Buy\" or \"Avoid.\"\n- Health & Risk Scoring: Implements an automated health audit that detects Wash Trading and Pump & Dump patterns by analyzing the ratio between 24h volume and total volume ($VolRatio = \\frac{Vol_{24h}}{TotalVol} \\times 100$) alongside holder counts.\n- Whale Analysis (under development): Integrates on-chain data retrieval via RPC and Explorer APIs to visualize holder concentration. It calculates the Nakamoto Coefficient and Gini Coefficient to identify wallet clusters that control significant token supplies.\n- Investment Grading: Provides a composite Investment Grade (A-F) by weighting metrics across four pillars: Health (35%), Liquidity (25%), Risk (25%), and Social Reach (15%).\n- Social & Market Intelligence: Aggregates metadata including Farcaster/Twitter follower counts and percentile rankings to compare a token\u2019s performance against the broader market.\t\n\nhttps://zoralit.streamlit.app/\n\nDisclaimer:\n- This is NOT financial advice. These are probability estimates based on patterns, not certainties. Past patterns do NOT guarantee future results. Crypto is extremely volatile. Always DYOR (Do Your Own Research). Never invest more than you can afford to lose.\n\t",
+      "address": "0x17ff05d1377c30c360786a245f2a476cedebb9c0",
+      "coinType": "CONTENT",
+      "symbol": "zoralit.streamlit.app",
+      "totalSupply": "1000000000",
+      "totalVolume": "2.018917",
+      "volume24h": "0.0",
+      "createdAt": "2026-01-11T17:17:15+00:00",
+      "creatorAddress": "0x9a0bdc03160d6ac93f9ba46aac66d34d5c455c1b",
+      "poolCurrencyToken": {
+       "address": "0x1111111111166b7fe7bd91427724b487980afc69",
+       "name": "ZORA",
+       "decimals": 18
+      },
+      "tokenPrice": {
+       "priceInUsdc": "0.00056412142205057004602548174165810669475",
+       "currencyAddress": "0x17ff05d1377c30c360786a245f2a476cedebb9c0",
+       "priceInPoolToken": "0.071370820227102005350872104827431030571460723876953125"
+      },
+      "marketCap": "576108.29",
+      "marketCapDelta24h": "-45830.5",
+      "chainId": 8453,
+      "tokenUri": "ipfs://QmUrRnpbSA1BSaKrZwvmPzAbPXpJ89N7YdmL1sAbsMArg2",
+      "platformReferrerAddress": "0x9a0bdc03160d6ac93f9ba46aac66d34d5c455c1b",
+      "payoutRecipientAddress": "0x9a0bdc03160d6ac93f9ba46aac66d34d5c455c1b",
+      "creatorProfile": {
+       "__typename": "GraphQLAccountProfile",
+       "id": "R3JhcGhRTEFjY291bnRQcm9maWxlOjY5MjYxZjRhYjVlMDZiYmU3M2EzMWVlMw==",
+       "handle": "tiwaka",
+       "platformBlocked": false,
+       "avatar": {
+        "previewImage": {
+         "blurhash": null,
+         "medium": "https://scontent-iad4-1.choicecdn.com/-/rs:fit:1200:1200/f:best/aHR0cHM6Ly9tYWdpYy5kZWNlbnRyYWxpemVkLWNvbnRlbnQuY29tL2lwZnMvYmFmeWJlaWZ0ZzV2ZHBwNTczczVzNjQzdTdodTJkcmxqM2FhZno2NjJ1bW5heGtybXk3bDVudDRobGU=",
+         "small": "https://scontent-iad4-1.choicecdn.com/-/rs:fit:600:600/f:best/aHR0cHM6Ly9tYWdpYy5kZWNlbnRyYWxpemVkLWNvbnRlbnQuY29tL2lwZnMvYmFmeWJlaWZ0ZzV2ZHBwNTczczVzNjQzdTdodTJkcmxqM2FhZno2NjJ1bW5heGtybXk3bDVudDRobGU="
+        }
+       },
+       "socialAccounts": {
+        "instagram": null,
+        "tiktok": null,
+        "twitter": null,
+        "farcaster": null
+       },
+       "creatorCoin": {
+        "address": "0x63ce8da039ab98c44d71ad28231b47bc051ceb22"
+       }
+      },
+      "mediaContent": {
+       "mimeType": "image/jpeg",
+       "originalUri": "ipfs://QmXyVPK2xepkTJW76cDJcrJiMhLBqf18B2GgLKLuZZqgn3",
+       "previewImage": {
+        "small": "https://scontent-iad4-1.choicecdn.com/-/rs:fit:600:600/f:best/aHR0cHM6Ly9tYWdpYy5kZWNlbnRyYWxpemVkLWNvbnRlbnQuY29tL2lwZnMvUW1YeVZQSzJ4ZXBrVEpXNzZjREpjckppTWhMQnFmMThCMkdnTEtMdVpacWduMw==",
+        "medium": "https://scontent-iad4-1.choicecdn.com/-/rs:fit:1200:1200/f:best/aHR0cHM6Ly9tYWdpYy5kZWNlbnRyYWxpemVkLWNvbnRlbnQuY29tL2lwZnMvUW1YeVZQSzJ4ZXBrVEpXNzZjREpjckppTWhMQnFmMThCMkdnTEtMdVpacWduMw==",
+        "blurhash": "e15E?M~VnMITIt_4-:V?MxtRQktnIVIUI9nKtTX9NGI9O]jCofjF%h"
+       }
+      },
+      "uniqueHolders": 8,
+      "uniswapV4PoolKey": {
+       "token0Address": "0x1111111111166b7fe7bd91427724b487980afc69",
+       "token1Address": "0x17ff05d1377c30c360786a245f2a476cedebb9c0",
+       "fee": 10000,
+       "tickSpacing": 200,
+       "hookAddress": "0xc8d077444625eb300a427a6dfb2b1dbf9b159040"
+      }
+     }
+    }
+   },
+   {
+    "cursor": "2",
+    "node": {
+     "__typename": "GlobalSearchTrendResult",
+     "entityType": "TREND",
+     "trend": {
+      "__typename": "GraphQLZora20TrendToken",
+      "id": "R3JhcGhRTFpvcmEyMFRyZW5kVG9rZW46QkFTRS1NQUlOTkVULjB4NWRkYTI3MWJjZjZiZmMwOTE5MzRjYmVhOTUzZTkyMGUyNmNhNzFjNA==",
+      "platformBlocked": false,
+      "name": "zoraprofiles",
+      "description": "",
+      "address": "0x5dda271bcf6bfc091934cbea953e920e26ca71c4",
+      "coinType": "TREND",
+      "symbol": "zoraprofiles",
+      "totalSupply": "1000000000",
+      "totalVolume": "15421.359868985272",
+      "volume24h": "17.66",
+      "createdAt": "2026-05-20T18:27:03+00:00",
+      "creatorAddress": "0x4fea1bbac2c7a849f31c8a0442c09cb9ffca349c",
+      "poolCurrencyToken": {
+       "address": "0x1111111111166b7fe7bd91427724b487980afc69",
+       "name": "ZORA",
+       "decimals": 18
+      },
+      "tokenPrice": {
+       "priceInUsdc": "0.0000076018961189876397497437278539530154459",
+       "currencyAddress": "0x5dda271bcf6bfc091934cbea953e920e26ca71c4",
+       "priceInPoolToken": "0.000961767343139000052167075782705296660424210131168365478515625"
+      },
+      "marketCap": "7603.27",
+      "marketCapDelta24h": "282.48",
+      "chainId": 8453,
+      "tokenUri": "https://trends.theme.wtf/trend/zoraprofiles",
+      "platformReferrerAddress": "0x0000000000000000000000000000000000000000",
+      "payoutRecipientAddress": "0x0000000000000000000000000000000000000000",
+      "creatorProfile": {
+       "__typename": "GraphQLAccountProfile",
+       "id": "R3JhcGhRTEFjY291bnRQcm9maWxlOjY4ZTZkMmQxOTYwOGM0YzY4ZDJhOGI3Ng==",
+       "handle": "zoratv",
+       "platformBlocked": false,
+       "avatar": {
+        "previewImage": {
+         "blurhash": null,
+         "medium": "https://scontent-iad4-1.choicecdn.com/-/rs:fit:1200:1200/f:best/aHR0cHM6Ly9tYWdpYy5kZWNlbnRyYWxpemVkLWNvbnRlbnQuY29tL2lwZnMvYmFmeWJlaWdhbm43bW96ZG91Y3RkbW4zajdpYWdoNno0dmh0YnVjbTR4NTNnN2d5djd6dnJ1bXFpM20=",
+         "small": "https://scontent-iad4-1.choicecdn.com/-/rs:fit:600:600/f:best/aHR0cHM6Ly9tYWdpYy5kZWNlbnRyYWxpemVkLWNvbnRlbnQuY29tL2lwZnMvYmFmeWJlaWdhbm43bW96ZG91Y3RkbW4zajdpYWdoNno0dmh0YnVjbTR4NTNnN2d5djd6dnJ1bXFpM20="
+        }
+       },
+       "socialAccounts": {
+        "instagram": null,
+        "tiktok": null,
+        "twitter": {
+         "username": "zora_clipped",
+         "displayName": "zoratv",
+         "followerCount": 1541,
+         "id": null
+        },
+        "farcaster": null
+       },
+       "creatorCoin": {
+        "address": "0x30bcd19a2e80a3ea73b3aac1eae1b08e3b9b2cef"
+       }
+      },
+      "mediaContent": {
+       "mimeType": "image/jpeg",
+       "originalUri": "https://trends.theme.wtf/image/zoraprofiles",
+       "previewImage": {
+        "small": "https://scontent-iad4-1.choicecdn.com/-/rs:fit:600:600/f:best/aHR0cHM6Ly90cmVuZHMudGhlbWUud3RmL2ltYWdlL3pvcmFwcm9maWxlcw==",
+        "medium": "https://scontent-iad4-1.choicecdn.com/-/rs:fit:1200:1200/f:best/aHR0cHM6Ly90cmVuZHMudGhlbWUud3RmL2ltYWdlL3pvcmFwcm9maWxlcw==",
+        "blurhash": "eD78n8aNl3kTfjkTf7f7fjfQq6kmZne;f7aNfjf%e;fQUka4k,f%fj"
+       }
+      },
+      "uniqueHolders": 462,
+      "uniswapV4PoolKey": {
+       "token0Address": "0x1111111111166b7fe7bd91427724b487980afc69",
+       "token1Address": "0x5dda271bcf6bfc091934cbea953e920e26ca71c4",
+       "fee": 8388608,
+       "tickSpacing": 200,
+       "hookAddress": "0x0469a4bd3724dc86c9542f4694c976da13c450c0"
+      }
+     }
+    }
+   },
+   {
+    "cursor": "3",
+    "node": {
+     "__typename": "GlobalSearchUserProfileResult",
+     "entityType": "USER_PROFILE",
+     "profile": {
+      "__typename": "GraphQLAccountProfile",
+      "id": "R3JhcGhRTEFjY291bnRQcm9maWxlOjY2NzA1Zjg0ZDA5NTZlZjY2NTk0YmZjOA==",
+      "handle": "imagine",
+      "platformBlocked": false,
+      "avatar": {
+       "previewImage": {
+        "blurhash": null,
+        "medium": "https://scontent-iad4-1.choicecdn.com/-/rs:fit:1200:1200/f:best/aHR0cHM6Ly9tYWdpYy5kZWNlbnRyYWxpemVkLWNvbnRlbnQuY29tL2lwZnMvYmFmeWJlaWZ0b2p3cWM3aXB5NjVzNGlnb3BzejV4eHdvaXR3aXd6ZXUyeHRqdDRwd2N2bm1oZ2kyYmU=",
+        "small": "https://scontent-iad4-1.choicecdn.com/-/rs:fit:600:600/f:best/aHR0cHM6Ly9tYWdpYy5kZWNlbnRyYWxpemVkLWNvbnRlbnQuY29tL2lwZnMvYmFmeWJlaWZ0b2p3cWM3aXB5NjVzNGlnb3BzejV4eHdvaXR3aXd6ZXUyeHRqdDRwd2N2bm1oZ2kyYmU="
+       }
+      },
+      "creatorCoin": null
+     }
+    }
+   }
+  ]
+ }
+}

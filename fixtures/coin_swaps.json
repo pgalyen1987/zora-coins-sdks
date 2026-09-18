@@ -1,0 +1,106 @@
+{
+ "zora20Token": {
+  "swapActivities": {
+   "count": 332851,
+   "edges": [
+    {
+     "node": {
+      "id": "R3JhcGhRTFN3YXBBY3Rpdml0eTpCQVNFLU1BSU5ORVQuJC4weDYyNWVlMjk2Yzc1N2FhNjVlZDdkZDkwZWQ3MTM3MWJjOWY5NDM1ZjBlZmYwYjk5ZmU5ZTU1ZWI5NGFhODU5MTYuJC4xMjc=",
+      "currencyAmountWithPrice": {
+       "priceUsdc": "2495.2303830595677218792005593242562479",
+       "currencyAmount": {
+        "currencyAddress": "0x4200000000000000000000000000000000000006",
+        "amountDecimal": 0.000254467626201344
+       }
+      },
+      "senderAddress": "0x03d9964f4d93a24b58c0fc3a8df3474b59ba8557",
+      "recipientAddress": "0x9f8c6a094434c6e6f5f2792088bb4d2d5971ddcc",
+      "transactionHash": "0x625ee296c757aa65ed7dd90ed71371bc9f9435f0eff0b99fe9e55eb94aa85916",
+      "coinAmount": "1815421765755483873740",
+      "blockTimestamp": "2026-09-18T08:45:31+00:00",
+      "activityType": "SELL",
+      "senderProfile": {
+       "__typename": "GraphQLWalletProfile",
+       "id": "R3JhcGhRTFdhbGxldFByb2ZpbGU6MHgwM2Q5OTY0ZjRkOTNhMjRiNThjMGZjM2E4ZGYzNDc0YjU5YmE4NTU3",
+       "handle": "0x03d9...8557",
+       "platformBlocked": false,
+       "avatar": null
+      },
+      "__typename": "GraphQLSwapActivity"
+     },
+     "cursor": "eyJibG9ja19jb250ZXh0LmJsb2NrX3RpbWVzdGFtcCI6IHsiJGRhdGUiOiAiMjAyNi0wOS0xOFQwODo0NTozMVoifSwgIl9pZCI6IHsiJG9pZCI6ICI2YWFjZmEyYjMwYmE4NGRhNmVlODY4YWQifX0="
+    },
+    {
+     "node": {
+      "id": "R3JhcGhRTFN3YXBBY3Rpdml0eTpCQVNFLU1BSU5ORVQuJC4weDkyZTQwNTIzNjgyN2EwZmY4YzU4NTM0M2M4MzUzMjJmY2IyOGRmNDllMTliODJlNmI1NzIzNTc1Mjg2MmNhMzQuJC4xMzI=",
+      "currencyAmountWithPrice": {
+       "priceUsdc": "2484.4903691249753159118176208381059207",
+       "currencyAmount": {
+        "currencyAddress": "0x4200000000000000000000000000000000000006",
+        "amountDecimal": 8.055161747648e-06
+       }
+      },
+      "senderAddress": "0x20f267a0cab21c4cc817500990df5401817440b1",
+      "recipientAddress": "0x20f267a0cab21c4cc817500990df5401817440b1",
+      "transactionHash": "0x92e405236827a0ff8c585343c835322fcb28df49e19b82e6b57235752862ca34",
+      "coinAmount": "56322703819653099332",
+      "blockTimestamp": "2026-09-18T05:33:19+00:00",
+      "activityType": "BUY",
+      "senderProfile": {
+       "__typename": "GraphQLAccountProfile",
+       "id": "R3JhcGhRTEFjY291bnRQcm9maWxlOjY5YjMyNTIzNzM1OGU3NTdmMTg4MmM1NA==",
+       "handle": "bubbleinc",
+       "platformBlocked": false,
+       "avatar": {
+        "previewImage": {
+         "blurhash": null,
+         "medium": "https://scontent-iad4-1.choicecdn.com/-/rs:fit:1200:1200/f:best/aHR0cHM6Ly9tYWdpYy5kZWNlbnRyYWxpemVkLWNvbnRlbnQuY29tL2lwZnMvYmFmeWJlaWV0ajZsYzY1bWluaTJiNWtuYmF1aGNrbzJ4a2dlN3d3cjVnbnp3eWxoZmZ0ZWZjdGhoYnU=",
+         "small": "https://scontent-iad4-1.choicecdn.com/-/rs:fit:600:600/f:best/aHR0cHM6Ly9tYWdpYy5kZWNlbnRyYWxpemVkLWNvbnRlbnQuY29tL2lwZnMvYmFmeWJlaWV0ajZsYzY1bWluaTJiNWtuYmF1aGNrbzJ4a2dlN3d3cjVnbnp3eWxoZmZ0ZWZjdGhoYnU="
+        }
+       }
+      },
+      "__typename": "GraphQLSwapActivity"
+     },
+     "cursor": "eyJibG9ja19jb250ZXh0LmJsb2NrX3RpbWVzdGFtcCI6IHsiJGRhdGUiOiAiMjAyNi0wOS0xOFQwNTozMzoxOVoifSwgIl9pZCI6IHsiJG9pZCI6ICI2YWFjY2QxZjMwYmE4NGRhNmVlN2IzZjAifX0="
+    },
+    {
+     "node": {
+      "id": "R3JhcGhRTFN3YXBBY3Rpdml0eTpCQVNFLU1BSU5ORVQuJC4weDk3NmJkY2QwYzRiODU0OThiMjg5ZDE3ZmU5MmRkYjgxNDZmOTljNmJkNzRmNjI5YjgxZDIyOTVlNjE2ZjJkNjIuJC4zMDg=",
+      "currencyAmountWithPrice": {
+       "priceUsdc": "2484.6149712912143687501642084693195233",
+       "currencyAmount": {
+        "currencyAddress": "0x4200000000000000000000000000000000000006",
+        "amountDecimal": 8.0574845912458e-05
+       }
+      },
+      "senderAddress": "0x20f267a0cab21c4cc817500990df5401817440b1",
+      "recipientAddress": "0x6ff5693b99212da76ad316178a184ab56d299b43",
+      "transactionHash": "0x976bdcd0c4b85498b289d17fe92ddb8146f99c6bd74f629b81d2295e616f2d62",
+      "coinAmount": "563392081220867276165",
+      "blockTimestamp": "2026-09-18T05:31:05+00:00",
+      "activityType": "BUY",
+      "senderProfile": {
+       "__typename": "GraphQLAccountProfile",
+       "id": "R3JhcGhRTEFjY291bnRQcm9maWxlOjY5YjMyNTIzNzM1OGU3NTdmMTg4MmM1NA==",
+       "handle": "bubbleinc",
+       "platformBlocked": false,
+       "avatar": {
+        "previewImage": {
+         "blurhash": null,
+         "medium": "https://scontent-iad4-1.choicecdn.com/-/rs:fit:1200:1200/f:best/aHR0cHM6Ly9tYWdpYy5kZWNlbnRyYWxpemVkLWNvbnRlbnQuY29tL2lwZnMvYmFmeWJlaWV0ajZsYzY1bWluaTJiNWtuYmF1aGNrbzJ4a2dlN3d3cjVnbnp3eWxoZmZ0ZWZjdGhoYnU=",
+         "small": "https://scontent-iad4-1.choicecdn.com/-/rs:fit:600:600/f:best/aHR0cHM6Ly9tYWdpYy5kZWNlbnRyYWxpemVkLWNvbnRlbnQuY29tL2lwZnMvYmFmeWJlaWV0ajZsYzY1bWluaTJiNWtuYmF1aGNrbzJ4a2dlN3d3cjVnbnp3eWxoZmZ0ZWZjdGhoYnU="
+        }
+       }
+      },
+      "__typename": "GraphQLSwapActivity"
+     },
+     "cursor": "eyJibG9ja19jb250ZXh0LmJsb2NrX3RpbWVzdGFtcCI6IHsiJGRhdGUiOiAiMjAyNi0wOS0xOFQwNTozMTowNVoifSwgIl9pZCI6IHsiJG9pZCI6ICI2YWFjY2M5OTMwYmE4NGRhNmVlN2IxZWUifX0="
+    }
+   ],
+   "pageInfo": {
+    "endCursor": "eyJibG9ja19jb250ZXh0LmJsb2NrX3RpbWVzdGFtcCI6IHsiJGRhdGUiOiAiMjAyNi0wOS0xOFQwNTozMTowNVoifSwgIl9pZCI6IHsiJG9pZCI6ICI2YWFjY2M5OTMwYmE4NGRhNmVlN2IxZWUifX0=",
+    "hasNextPage": true
+   }
+  }
+ }
+}

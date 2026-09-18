@@ -1,0 +1,148 @@
+{
+ "exploreList": {
+  "edges": [
+   {
+    "node": {
+     "__typename": "GraphQLZora20Token",
+     "id": "R3JhcGhRTFpvcmEyMFRva2VuOkJBU0UtTUFJTk5FVC4weGQ3NjlkNTZmNDc5ZTllNzJhNzdiYjE1MjNlODY2YTMzMDk4ZmVlYzU=",
+     "platformBlocked": false,
+     "name": "Base is for everyone",
+     "description": "Base is for coiners, collectors, traders, builders, creators, artists, writers, musicians, visionaries, sports fans, podcasters, travelers, DeFi users, students, and so much more.\n\nWhen we say everyone, we mean everyone.\n\n-\n\nThis and future coins on Zora are not an official network or protocol token for Base, Coinbase, or any other related product. They are created solely for artistic and cultural purposes as collectibles, not as investments or financial instruments. Base 'posts' are similar to those already shared on X - do not expect profits or returns and no ongoing development or efforts will be made to increase their value. There is a significant risk of losing all funds spent on them. Purchase only for entertainment and creative purposes.\n\nBase will receive 10 million tokens out of a total supply of 1 billion as creators and will never sell these tokens. All fees generated will go to grants supporting builders on Base.",
+     "address": "0xd769d56f479e9e72a77bb1523e866a33098feec5",
+     "coinType": "CONTENT",
+     "symbol": "Base is for everyone",
+     "totalSupply": "1000000000",
+     "totalVolume": "124039539.82813388",
+     "volume24h": "18651.37",
+     "createdAt": "2025-04-16T19:11:49+00:00",
+     "creatorAddress": "0x19ff7ea0badffa183f03533c3884f9ca03145aad",
+     "poolCurrencyToken": {
+      "address": "0x4200000000000000000000000000000000000006",
+      "name": "WETH",
+      "decimals": 18
+     },
+     "tokenPrice": {
+      "priceInUsdc": "0.00057947480459738989979407302516909059720",
+      "currencyAddress": "0xd769d56f479e9e72a77bb1523e866a33098feec5",
+      "priceInPoolToken": "0.000000231061592999999987417024198931014833391373031190596520900726318359375"
+     },
+     "marketCap": "434014.58",
+     "marketCapDelta24h": "-96921.14",
+     "chainId": 8453,
+     "tokenUri": "ipfs://bafybeibhzi643r3ogdmzuzfho7zrb6ua7jqo5bkhrnqq2g54xs5u74zcni",
+     "platformReferrerAddress": "0x7bf90111ad7c22bec9e9dff8a01a44713cc1b1b6",
+     "payoutRecipientAddress": "0x9652721d02b9db43f4311102820158abb4ecc95b",
+     "creatorProfile": {
+      "__typename": "GraphQLAccountProfile",
+      "id": "R3JhcGhRTEFjY291bnRQcm9maWxlOjY1YWVkY2U5NDk2NTBiNWU1NTI5ZjFhMg==",
+      "handle": "base",
+      "platformBlocked": false,
+      "avatar": {
+       "previewImage": {
+        "blurhash": null,
+        "medium": "https://scontent-iad4-1.choicecdn.com/-/rs:fit:1200:1200/f:best/aHR0cHM6Ly9tYWdpYy5kZWNlbnRyYWxpemVkLWNvbnRlbnQuY29tL2lwZnMvYmFma3JlaWdnMmtuM3Y0bWp5a3hsdzZwYnpkN3U1c2pneGRjZ2t5enZ6NWN1ajRwY2c1MmF6NzdsbWU=",
+        "small": "https://scontent-iad4-1.choicecdn.com/-/rs:fit:600:600/f:best/aHR0cHM6Ly9tYWdpYy5kZWNlbnRyYWxpemVkLWNvbnRlbnQuY29tL2lwZnMvYmFma3JlaWdnMmtuM3Y0bWp5a3hsdzZwYnpkN3U1c2pneGRjZ2t5enZ6NWN1ajRwY2c1MmF6NzdsbWU="
+       }
+      },
+      "socialAccounts": {
+       "instagram": null,
+       "tiktok": null,
+       "twitter": null,
+       "farcaster": null
+      },
+      "creatorCoin": null
+     },
+     "mediaContent": {
+      "mimeType": "image/png",
+      "originalUri": "ipfs://bafybeidgzeos5zfqbm2mac2crniwccnnlfvt26gojqg2xljfncdagmh67m",
+      "previewImage": {
+       "small": "https://scontent-iad4-1.choicecdn.com/-/rs:fit:600:600/f:best/aHR0cHM6Ly9tYWdpYy5kZWNlbnRyYWxpemVkLWNvbnRlbnQuY29tL2lwZnMvYmFmeWJlaWRnemVvczV6ZnFibTJtYWMyY3JuaXdjY25ubGZ2dDI2Z29qcWcyeGxqZm5jZGFnbWg2N20=",
+       "medium": "https://scontent-iad4-1.choicecdn.com/-/rs:fit:1200:1200/f:best/aHR0cHM6Ly9tYWdpYy5kZWNlbnRyYWxpemVkLWNvbnRlbnQuY29tL2lwZnMvYmFmeWJlaWRnemVvczV6ZnFibTJtYWMyY3JuaXdjY25ubGZ2dDI2Z29qcWcyeGxqZm5jZGFnbWg2N20=",
+       "blurhash": "eGSF^fj[_1ofjD-kfQRoj[Rk~Ua#9afPW?4^j@xoay%Ks,j[WEWVaz"
+      }
+     },
+     "uniqueHolders": 79583,
+     "uniswapV3PoolAddress": "0x06d7874037e622d6ef42294cf32eb259806cb1c6"
+    },
+    "cursor": "eyJ2b2x1bWVfMjRoIjogMTg2NTEuMzcsICJfaWQiOiB7IiRvaWQiOiAiNjgwMDAwZjg3MGEyMWQ5YWMyMDE3YzhjIn19"
+   },
+   {
+    "node": {
+     "__typename": "GraphQLZora20V4Token",
+     "id": "R3JhcGhRTFpvcmEyMFY0VG9rZW46QkFTRS1NQUlOTkVULjB4YjAzMDIzNjE0ZjVmYzIyZTQxNzQ4NDU3MjVjYzQ3YmZmMTlkODgwMA==",
+     "platformBlocked": false,
+     "name": "CLARITY Act",
+     "description": "",
+     "address": "0xb03023614f5fc22e4174845725cc47bff19d8800",
+     "coinType": "CONTENT",
+     "symbol": "CLARITY Act",
+     "totalSupply": "1000000000",
+     "totalVolume": "5.73",
+     "volume24h": "1781.46",
+     "createdAt": "2026-09-15T19:08:21+00:00",
+     "creatorAddress": "0x5a03ee2bf71275e98148aab36b801b419cdb613a",
+     "poolCurrencyToken": {
+      "address": "0x873d4c4d468eda65cb5bed73b860d22b8654e4d5",
+      "name": "grandmacraft",
+      "decimals": 18
+     },
+     "tokenPrice": {
+      "priceInUsdc": "0.0000025489692908110093541003835051367303169",
+      "currencyAddress": "0xb03023614f5fc22e4174845725cc47bff19d8800",
+      "priceInPoolToken": "0.216867479224915005175944315851666033267974853515625"
+     },
+     "marketCap": "2401.20",
+     "marketCapDelta24h": "153.11",
+     "chainId": 8453,
+     "tokenUri": "ipfs://bafybeidb5mp7bvr2kur6ellidemfajphixtqaajc2nwuwjm7t33uoa54gq",
+     "platformReferrerAddress": "0x67421e82e0157a3ca9508ee92f6417a93bbf59cb",
+     "payoutRecipientAddress": "0x5a03ee2bf71275e98148aab36b801b419cdb613a",
+     "creatorProfile": {
+      "__typename": "GraphQLAccountProfile",
+      "id": "R3JhcGhRTEFjY291bnRQcm9maWxlOjY5Njk5NzMyZjZjMTcyMGZhNDRmYWJjOQ==",
+      "handle": "grandmacraft",
+      "platformBlocked": false,
+      "avatar": {
+       "previewImage": {
+        "blurhash": null,
+        "medium": "https://scontent-iad4-1.choicecdn.com/-/rs:fit:1200:1200/f:best/aHR0cHM6Ly9tYWdpYy5kZWNlbnRyYWxpemVkLWNvbnRlbnQuY29tL2lwZnMvYmFmeWJlaWR0NmZkNmFqbmRlYmZwc3diYWZ5d2Ztd3J0bTNndTQydWx6eW95dm1pZnp6NmNwd3JyeXE=",
+        "small": "https://scontent-iad4-1.choicecdn.com/-/rs:fit:600:600/f:best/aHR0cHM6Ly9tYWdpYy5kZWNlbnRyYWxpemVkLWNvbnRlbnQuY29tL2lwZnMvYmFmeWJlaWR0NmZkNmFqbmRlYmZwc3diYWZ5d2Ztd3J0bTNndTQydWx6eW95dm1pZnp6NmNwd3JyeXE="
+       }
+      },
+      "socialAccounts": {
+       "instagram": null,
+       "tiktok": null,
+       "twitter": null,
+       "farcaster": null
+      },
+      "creatorCoin": {
+       "address": "0x873d4c4d468eda65cb5bed73b860d22b8654e4d5"
+      }
+     },
+     "mediaContent": {
+      "mimeType": "image/jpeg",
+      "originalUri": "ipfs://bafybeigawxpkgayh5ailv6qa4dtbhrygwqaefuewq65rrgfxsibv6j54l4",
+      "previewImage": {
+       "small": "https://scontent-iad4-1.choicecdn.com/-/rs:fit:600:600/f:best/aHR0cHM6Ly9tYWdpYy5kZWNlbnRyYWxpemVkLWNvbnRlbnQuY29tL2lwZnMvYmFmeWJlaWdhd3hwa2dheWg1YWlsdjZxYTRkdGJocnlnd3FhZWZ1ZXdxNjVycmdmeHNpYnY2ajU0bDQ=",
+       "medium": "https://scontent-iad4-1.choicecdn.com/-/rs:fit:1200:1200/f:best/aHR0cHM6Ly9tYWdpYy5kZWNlbnRyYWxpemVkLWNvbnRlbnQuY29tL2lwZnMvYmFmeWJlaWdhd3hwa2dheWg1YWlsdjZxYTRkdGJocnlnd3FhZWZ1ZXdxNjVycmdmeHNpYnY2ajU0bDQ=",
+       "blurhash": null
+      }
+     },
+     "uniqueHolders": 3,
+     "uniswapV4PoolKey": {
+      "token0Address": "0x873d4c4d468eda65cb5bed73b860d22b8654e4d5",
+      "token1Address": "0xb03023614f5fc22e4174845725cc47bff19d8800",
+      "fee": 8388608,
+      "tickSpacing": 200,
+      "hookAddress": "0x0469a4bd3724dc86c9542f4694c976da13c450c0"
+     }
+    },
+    "cursor": "eyJ2b2x1bWVfMjRoIjogMTc4MS40NiwgIl9pZCI6IHsiJG9pZCI6ICI2YWE5OTdhNzc1NDU4MzdiNDQzMWYxMTcifX0="
+   }
+  ],
+  "pageInfo": {
+   "endCursor": "eyJ2b2x1bWVfMjRoIjogMTc4MS40NiwgIl9pZCI6IHsiJG9pZCI6ICI2YWE5OTdhNzc1NDU4MzdiNDQzMWYxMTcifX0=",
+   "hasNextPage": true
+  }
+ }
+}
