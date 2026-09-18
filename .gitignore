@@ -10,3 +10,4 @@ __pycache__/
 .DS_Store
 build-asan/
 typescript/dist/
+dotnet/artifacts/
