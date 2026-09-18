@@ -8,3 +8,4 @@ cpp/build/
 __pycache__/
 *.pyc
 .DS_Store
+build-asan/
