@@ -43,7 +43,7 @@ Zora rewards for 0x55c88bb05602da94fce8feadc1cbebf5b72c2453
   Total (current prices)                                      $2.58
 ```
 
-The CLI ships with the Python, TypeScript, Go and Rust packages (`pip install zora-coins`, `npx -p zora-coins zora-rewards`, `go install …/cmd/zora-rewards@latest`, `cargo install zora-coins --features cli`), and the C++ build has one too.
+The CLI ships with the Python, TypeScript, Go and Rust packages (`pip install zora-coins`, `npx -p zora-coins zora-rewards`, `go install github.com/pgalyen1987/zora-coins-sdks/go/cmd/zora-rewards@latest`, `cargo install zora-coins --features cli`), and the C++ build has one too.
 
 ## One request with GraphQL
 
