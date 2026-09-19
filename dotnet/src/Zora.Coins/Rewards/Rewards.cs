@@ -67,6 +67,12 @@ public static class RewardsDecoder
     public const string TopicMarketRewardsV4 = "0x35b5031218696db1dfd903223a47f38e66a1998e14a942a5d60fddaa49a685fc";
     /// <summary>keccak256 of CoinTradeRewards(address,address,address,address,uint256,uint256,uint256,uint256,address).</summary>
     public const string TopicTradeRewardsV3 = "0x6b67f906562afcdc3afeeeb6754e906cc24d9ce090e9db1b7b68e6462682d966";
+    /// <summary>
+    /// keccak256 of CreatorCoinRewards(address,address,address,address,uint256,uint256): the V4 hooks' payout on
+    /// creator-coin trades, the creator's and the protocol's shares. The coin is indexed, the rest is not. In a sample
+    /// day on Base it carried about a third of all payouts and nearly half of what creators earned.
+    /// </summary>
+    public const string TopicCreatorCoinRewards = "0xea92473287be4e55f8279d0b8395a45960a217ae2f1a76ac9cae84af58a751ed";
     /// <summary>"Nobody" in a recipient field; native ETH as a currency.</summary>
     public const string ZeroAddress = "0x0000000000000000000000000000000000000000";
     /// <summary>Unix time of Base's genesis block.</summary>
@@ -98,6 +104,17 @@ public static class RewardsDecoder
                 {
                     [Role.Creator] = P(2, 7), [Role.PlatformReferrer] = P(3, 9), [Role.TradeReferrer] = P(4, 11),
                     [Role.Protocol] = P(5, 13), [Role.Doppler] = P(6, 15),
+                });
+        }
+        if (t0 == TopicCreatorCoinRewards && log.Topics.Count >= 2 && words >= 5)
+        {
+            // coin (indexed), then currency, creator, protocol, creator amount, protocol amount
+            return new RewardEvent(block, log.TransactionHash.ToLowerInvariant(), index, emitter, 4, Addr(log.Topics[1].Replace("0x", "")), Addr(W(0)),
+                new Dictionary<Role, Payout>
+                {
+                    [Role.Creator] = new(Addr(W(1)), Uint(W(3)), 0), [Role.PlatformReferrer] = new(ZeroAddress, 0, 0),
+                    [Role.TradeReferrer] = new(ZeroAddress, 0, 0), [Role.Protocol] = new(Addr(W(2)), Uint(W(4)), 0),
+                    [Role.Doppler] = new(ZeroAddress, 0, 0),
                 });
         }
         if (t0 == TopicTradeRewardsV3 && log.Topics.Count >= 4 && words >= 6)
@@ -199,6 +216,12 @@ public sealed class RewardsIndexer
     public const string DefaultRpc = "https://mainnet.base.org";
     /// <summary>No CoinMarketRewardsV4 events exist before this block (2025-06-01).</summary>
     public const long V4FirstBlock = 31_000_000;
+    /// <summary>
+    /// Label for the V4 hooks' scanned ranges in the store. Ranges saved as 4 were scanned for CoinMarketRewardsV4 alone,
+    /// before CreatorCoinRewards was read too, so they don't count: a store from an earlier version re-scans those
+    /// blocks once (stored events are kept; repeats are ignored).
+    /// </summary>
+    public const int V4Scan = 5;
 
     private readonly HttpClient _http;
     private readonly Uri _rpc;
@@ -227,7 +250,7 @@ public sealed class RewardsIndexer
         var head = toBlock ?? await HeadAsync(cancellationToken).ConfigureAwait(false);
         var start = fromBlock ?? (days is { } d ? Math.Max(0, (DateTimeOffset.UtcNow.ToUnixTimeSeconds() - (long)(d * 86400) - RewardsDecoder.BaseGenesisTimestamp) / 2) : 0);
         var lo = Math.Max(start, V4FirstBlock);
-        var plan = lo > head ? new List<(long, long)>() : Ranges.Merge(addrs.SelectMany(a => Ranges.Missing(lo, head, Store.Scanned(a, 4))));
+        var plan = lo > head ? new List<(long, long)>() : Ranges.Merge(addrs.SelectMany(a => Ranges.Missing(lo, head, Store.Scanned(a, V4Scan))));
         long total = plan.Sum(p => p.Item2 - p.Item1 + 1), done = 0;
         var found = 0;
         var watch = new HashSet<string>(addrs);
@@ -248,7 +271,7 @@ public sealed class RewardsIndexer
                     continue;
                 }
                 var mine = events.Where(e => e.Pays(watch)).ToList();
-                Store.Save(mine, addrs, 4, from, to);
+                Store.Save(mine, addrs, V4Scan, from, to);
                 found += mine.Count;
                 done += to - from + 1;
                 progress?.Report((done, total, found));
@@ -270,7 +293,7 @@ public sealed class RewardsIndexer
 
     private async Task<List<RewardEvent>> FetchAsync(long lo, long hi, CancellationToken ct)
     {
-        var filter = new Dictionary<string, object> { ["fromBlock"] = "0x" + lo.ToString("x", CultureInfo.InvariantCulture), ["toBlock"] = "0x" + hi.ToString("x", CultureInfo.InvariantCulture), ["topics"] = new[] { RewardsDecoder.TopicMarketRewardsV4 } };
+        var filter = new Dictionary<string, object> { ["fromBlock"] = "0x" + lo.ToString("x", CultureInfo.InvariantCulture), ["toBlock"] = "0x" + hi.ToString("x", CultureInfo.InvariantCulture), ["topics"] = new object[] { new[] { RewardsDecoder.TopicMarketRewardsV4, RewardsDecoder.TopicCreatorCoinRewards } } };
         var result = await CallAsync("eth_getLogs", new object[] { filter }, ct).ConfigureAwait(false);
         var logs = result.Deserialize<List<RpcLog>>() ?? new List<RpcLog>();
         return logs.Select(RewardsDecoder.Decode).Where(e => e is not null).Select(e => e!).GroupBy(e => e.Key).Select(g => g.First()).ToList();

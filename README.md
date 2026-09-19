@@ -29,7 +29,7 @@ Zora's official SDK is TypeScript only. These cover the same API in the language
 
 ## Rewards: what did an address earn?
 
-Every trade of a Zora coin pays the coin's creator, the platform that launched it, and the interface that routed the trade. On V4 coins those payouts are `CoinMarketRewardsV4` events, and **none of their fields are indexed**. You can't ask a node for "rewards paid to my address"; you have to read every reward event and filter them. Each SDK does that, remembers what it has scanned, and reports earnings per role and token at current prices:
+Every trade of a Zora coin pays the coin's creator, the platform that launched it, and the interface that routed the trade. On V4 coins those payouts are `CoinMarketRewardsV4` events, plus `CreatorCoinRewards` for the creator's and protocol's shares on creator-coin trades (in a sample day on Base, nearly half of what creators earned), and **none of their recipient fields are indexed**. You can't ask a node for "rewards paid to my address"; you have to read every reward event and filter them. Each SDK does that, remembers what it has scanned, and reports earnings per role and token at current prices:
 
 ```
 $ zora-rewards --days 0.25 0x55c88bb05602da94fce8feadc1cbebf5b72c2453

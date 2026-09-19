@@ -162,7 +162,7 @@ func TestFileStoreRoundTrip(t *testing.T) {
 	}
 	e, _ := DecodeLog(realLogs(t)[0])
 	who := e.Payouts[RoleCreator].Recipient
-	if err := st.Save([]*Event{e}, []string{who}, 4, 10, 20); err != nil {
+	if err := st.Save([]*Event{e}, []string{who}, V4Scan, 10, 20); err != nil {
 		t.Fatal(err)
 	}
 	again, err := OpenFileStore(path)
@@ -170,7 +170,7 @@ func TestFileStoreRoundTrip(t *testing.T) {
 		t.Fatal(err)
 	}
 	got, _ := again.EventsFor([]string{who}, 0)
-	ranges, _ := again.Scanned(who, 4)
+	ranges, _ := again.Scanned(who, V4Scan)
 	if len(got) != 1 || got[0].Payouts[RoleCreator].Currency.Cmp(e.Payouts[RoleCreator].Currency) != 0 || fmt.Sprint(ranges) != "[[10 20]]" {
 		t.Fatalf("round trip lost data: %v %v", got, ranges)
 	}
@@ -201,5 +201,98 @@ func TestFormatUSD(t *testing.T) {
 		if got := FormatUSD(in); got != want {
 			t.Errorf("FormatUSD(%v) = %s, want %s", in, got, want)
 		}
+	}
+}
+
+// Two real logs from one Base trade (tx 0x53f27c…f195): a CreatorCoinRewards payout for a creator coin and a
+// CoinMarketRewardsV4 payout for a content coin, both to the same creator.
+const ccCreator = "0xf4acf3edc65df843630976459ab1349a88258e6d"
+
+func creatorCoinLogs(t *testing.T) []Log {
+	t.Helper()
+	b, err := os.ReadFile(filepath.Join("..", "..", "fixtures", "creator_coin_rewards_logs.json"))
+	if err != nil {
+		t.Fatal(err)
+	}
+	var logs []Log
+	if err := json.Unmarshal(b, &logs); err != nil {
+		t.Fatal(err)
+	}
+	return logs
+}
+
+func TestDecodeRealCreatorCoinRewardsLog(t *testing.T) {
+	l := creatorCoinLogs(t)[0]
+	if l.Topics[0] != TopicCreatorCoinRewards {
+		t.Fatalf("fixture topic %s", l.Topics[0])
+	}
+	e, ok := DecodeLog(l)
+	if !ok || e.Version != 4 || e.Coin != "0x3177fa60b8a342cd044badf34bf820c536094656" || e.Currency != "0x1111111111166b7fe7bd91427724b487980afc69" {
+		t.Fatalf("decoded %+v, ok=%v", e, ok)
+	}
+	c, p := e.Payouts[RoleCreator], e.Payouts[RoleProtocol]
+	if c.Recipient != ccCreator || c.Currency.String() != "11879451646867555805" || p.Currency.Cmp(c.Currency) != 0 {
+		t.Fatalf("creator %+v protocol %+v", c, p)
+	}
+	for _, r := range []Role{RolePlatformReferrer, RoleTradeReferrer, RoleDoppler} {
+		if e.Payouts[r].Recipient != ZeroAddress || e.Payouts[r].Currency.Sign() != 0 {
+			t.Fatalf("%s should be empty: %+v", r, e.Payouts[r])
+		}
+	}
+}
+
+func TestScanReadsBothV4EventsAndRescansOldRangesOnce(t *testing.T) {
+	logs := creatorCoinLogs(t)
+	block, _ := strconv.ParseUint(strings.TrimPrefix(logs[0].BlockNumber, "0x"), 16, 64)
+	var calls atomic.Int32
+	var asked []string
+	srv := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		calls.Add(1)
+		var req struct {
+			Method string           `json:"method"`
+			Params []map[string]any `json:"params"`
+		}
+		json.NewDecoder(r.Body).Decode(&req)
+		if req.Method == "eth_blockNumber" {
+			fmt.Fprintf(w, `{"jsonrpc":"2.0","id":1,"result":"0x%x"}`, block+10)
+			return
+		}
+		topics, _ := json.Marshal(req.Params[0]["topics"])
+		asked = append(asked, string(topics))
+		lo, _ := strconv.ParseUint(strings.TrimPrefix(req.Params[0]["fromBlock"].(string), "0x"), 16, 64)
+		hi, _ := strconv.ParseUint(strings.TrimPrefix(req.Params[0]["toBlock"].(string), "0x"), 16, 64)
+		var out []Log
+		for _, l := range logs {
+			b, _ := strconv.ParseUint(strings.TrimPrefix(l.BlockNumber, "0x"), 16, 64)
+			if b >= lo && b <= hi {
+				out = append(out, l)
+			}
+		}
+		json.NewEncoder(w).Encode(map[string]any{"jsonrpc": "2.0", "id": 1, "result": out})
+	}))
+	t.Cleanup(srv.Close)
+
+	st := NewMemoryStore()
+	// what an earlier version recorded: these blocks scanned for CoinMarketRewardsV4 only
+	if err := st.Save(nil, []string{ccCreator}, 4, block-5, block+10); err != nil {
+		t.Fatal(err)
+	}
+	idx := NewIndexer(st, srv.URL)
+	n, err := idx.Scan(context.Background(), []string{ccCreator}, ScanOptions{FromBlock: block - 5})
+	if err != nil || n != 2 {
+		t.Fatalf("found %d (err %v), want both payouts", n, err)
+	}
+	want := fmt.Sprintf(`[[%q,%q]]`, TopicMarketRewardsV4, TopicCreatorCoinRewards)
+	for _, a := range asked {
+		if a != want {
+			t.Fatalf("asked for topics %s, want %s", a, want)
+		}
+	}
+	before := calls.Load()
+	if again, err := idx.Scan(context.Background(), []string{ccCreator}, ScanOptions{FromBlock: block - 5}); err != nil || again != 0 {
+		t.Fatalf("second scan found %d (err %v), want 0", again, err)
+	}
+	if calls.Load()-before != 1 {
+		t.Fatalf("second scan made %d calls, want only eth_blockNumber", calls.Load()-before)
 	}
 }

@@ -1,10 +1,14 @@
 import { readFileSync } from "node:fs";
 import { describe, expect, it } from "vitest";
 
-import { Indexer, MemoryStore, TOPIC_TRADE_REWARDS_V3, addressTopic, buildReport, decodeLog, formatUsd, missingRanges, type Log } from "../src/rewards/index.js";
+import { Indexer, MemoryStore, TOPIC_CREATOR_COIN_REWARDS, TOPIC_MARKET_REWARDS_V4, TOPIC_TRADE_REWARDS_V3, addressTopic, buildReport, decodeLog, formatUsd, missingRanges, type Log } from "../src/rewards/index.js";
 
 const logs: Log[] = JSON.parse(readFileSync(new URL("../../fixtures/rewards_v4_logs.json", import.meta.url), "utf8"));
 const w = (n: number) => n.toString(16).padStart(64, "0");
+// Two real logs from one Base trade (tx 0x53f27c…f195): a CreatorCoinRewards payout for a creator coin and a
+// CoinMarketRewardsV4 payout for a content coin, both to the same creator.
+const cc: Log[] = JSON.parse(readFileSync(new URL("../../fixtures/creator_coin_rewards_logs.json", import.meta.url), "utf8"));
+const CREATOR = "0xf4acf3edc65df843630976459ab1349a88258e6d";
 
 describe("rewards", () => {
   it("decodes a real V4 log", () => {
@@ -60,5 +64,38 @@ describe("rewards", () => {
     expect(r.toText()).toContain("Platform referral");
     expect(r.toHtml()).toContain("<svg");
     expect([formatUsd(0), formatUsd(1234.5), formatUsd(0.0042)]).toEqual(["$0.00", "$1,234.50", "$0.0042"]);
+  });
+
+  it("decodes a real CreatorCoinRewards log (the creator's and protocol's shares on a creator-coin trade)", () => {
+    expect(cc[0]!.topics[0]).toBe(TOPIC_CREATOR_COIN_REWARDS);
+    const e = decodeLog(cc[0]!)!;
+    expect([e.version, e.coin, e.currency]).toEqual([4, "0x3177fa60b8a342cd044badf34bf820c536094656", "0x1111111111166b7fe7bd91427724b487980afc69"]);
+    expect(e.payouts.creator).toEqual({ recipient: CREATOR, currency: 11879451646867555805n, coin: 0n });
+    expect(e.payouts.protocol.currency).toBe(11879451646867555805n);
+    expect(e.payouts.platform_referrer.currency + e.payouts.trade_referrer.currency + e.payouts.doppler.currency).toBe(0n);
+  });
+
+  it("scans both V4 payout events, and a store saved before that rescans its V4 blocks once", async () => {
+    const block = Number(BigInt(cc[0]!.blockNumber));
+    const topicsAsked: unknown[] = [];
+    let calls = 0;
+    const node = (async (_: unknown, init: RequestInit) => {
+      calls++;
+      const req = JSON.parse(String(init.body));
+      if (req.method === "eth_blockNumber") return Response.json({ jsonrpc: "2.0", id: 1, result: "0x" + (block + 10).toString(16) });
+      topicsAsked.push(req.params[0].topics);
+      const lo = Number(BigInt(req.params[0].fromBlock)), hi = Number(BigInt(req.params[0].toBlock));
+      return Response.json({ jsonrpc: "2.0", id: 1, result: cc.filter((l) => { const b = Number(BigInt(l.blockNumber)); return b >= lo && b <= hi; }) });
+    }) as typeof fetch;
+    // what an earlier version saved: these blocks scanned for CoinMarketRewardsV4 only (no format field)
+    const old = JSON.stringify({ events: [], scans: { [`${CREATOR}@v4`]: [[block - 5, block + 10]] } });
+    const store = MemoryStore.fromJSON(old);
+    const idx = new Indexer(store, "http://node", node);
+    expect(await idx.scan([CREATOR], { fromBlock: block - 5 })).toBe(2);
+    expect(topicsAsked.every((t) => JSON.stringify(t) === JSON.stringify([[TOPIC_MARKET_REWARDS_V4, TOPIC_CREATOR_COIN_REWARDS]]))).toBe(true);
+    const again = MemoryStore.fromJSON(store.toJSON()); // saved now: its ranges count
+    const before = calls;
+    expect(await new Indexer(again, "http://node", node).scan([CREATOR], { fromBlock: block - 5 })).toBe(0);
+    expect(calls - before).toBe(1); // only eth_blockNumber
   });
 });

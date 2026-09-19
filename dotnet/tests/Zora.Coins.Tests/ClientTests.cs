@@ -229,6 +229,54 @@ public class RewardsTests
         Assert.Equal("$1,234.50", RewardsReport.FormatUsd(1234.5));
     }
 
+    // Two real logs from one Base trade (tx 0x53f27c…f195): a CreatorCoinRewards payout for a creator coin and a
+    // CoinMarketRewardsV4 payout for a content coin, both to the same creator.
+    const string CcCreator = "0xf4acf3edc65df843630976459ab1349a88258e6d";
+    static List<RpcLog> CreatorCoinLogs() => JsonSerializer.Deserialize<List<RpcLog>>(ClientTests.Fixture("creator_coin_rewards_logs"))!;
+
+    [Fact]
+    public void DecodesARealCreatorCoinRewardsLog()
+    {
+        var l = CreatorCoinLogs()[0];
+        Assert.Equal(RewardsDecoder.TopicCreatorCoinRewards, l.Topics[0]);
+        var e = RewardsDecoder.Decode(l)!;
+        Assert.Equal(4, e.Version);
+        Assert.Equal("0x3177fa60b8a342cd044badf34bf820c536094656", e.Coin);
+        Assert.Equal("0x1111111111166b7fe7bd91427724b487980afc69", e.Currency);
+        Assert.Equal(CcCreator, e.Payouts[Role.Creator].Recipient);
+        Assert.Equal(System.Numerics.BigInteger.Parse("11879451646867555805"), e.Payouts[Role.Creator].Currency);
+        Assert.Equal(e.Payouts[Role.Creator].Currency, e.Payouts[Role.Protocol].Currency);
+        Assert.Equal(RewardsDecoder.ZeroAddress, e.Payouts[Role.PlatformReferrer].Recipient);
+    }
+
+    [Fact]
+    public async Task ScansBothV4EventsAndRescansOldRangesOnce()
+    {
+        var logs = CreatorCoinLogs();
+        var block = Convert.ToInt64(logs[0].BlockNumber, 16);
+        var calls = 0;
+        var asked = new List<string>();
+        var node = new FakeHandler((_, body) =>
+        {
+            calls++;
+            var req = JsonNode.Parse(body!)!;
+            if ((string?)req["method"] == "eth_blockNumber") return Json("{\"jsonrpc\":\"2.0\",\"id\":1,\"result\":\"0x" + (block + 10).ToString("x") + "\"}");
+            var f = req["params"]![0]!;
+            asked.Add(f["topics"]!.ToJsonString());
+            long lo = Convert.ToInt64((string)f["fromBlock"]!, 16), hi = Convert.ToInt64((string)f["toBlock"]!, 16);
+            var inRange = logs.Where(x => { var b = Convert.ToInt64(x.BlockNumber, 16); return b >= lo && b <= hi; });
+            return Json("{\"jsonrpc\":\"2.0\",\"id\":1,\"result\":" + JsonSerializer.Serialize(inRange) + "}");
+        });
+        var store = new MemoryStore();
+        store.Save(new List<RewardEvent>(), new[] { CcCreator }, 4, block - 5, block + 10); // an earlier version's V4 scan
+        var idx = new RewardsIndexer(store, new Uri("http://node"), new HttpClient(node));
+        Assert.Equal(2, await idx.ScanAsync(new[] { CcCreator }, fromBlock: block - 5));
+        Assert.All(asked, t => Assert.Equal($"[[\"{RewardsDecoder.TopicMarketRewardsV4}\",\"{RewardsDecoder.TopicCreatorCoinRewards}\"]]", t));
+        var before = calls;
+        Assert.Equal(0, await idx.ScanAsync(new[] { CcCreator }, fromBlock: block - 5));
+        Assert.Equal(1, calls - before);
+    }
+
     static HttpResponseMessage Json(string body) => new(HttpStatusCode.OK) { Content = new StringContent(body, Encoding.UTF8, "application/json") };
 }
 

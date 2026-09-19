@@ -23,6 +23,12 @@ import { USDC_ADDRESS, WETH_ADDRESS, type ZoraCoins } from "../index.js";
 
 export const TOPIC_MARKET_REWARDS_V4 = "0x35b5031218696db1dfd903223a47f38e66a1998e14a942a5d60fddaa49a685fc";
 export const TOPIC_TRADE_REWARDS_V3 = "0x6b67f906562afcdc3afeeeb6754e906cc24d9ce090e9db1b7b68e6462682d966";
+/**
+ * keccak256("CreatorCoinRewards(address,address,address,address,uint256,uint256)"): the V4 hooks' payout
+ * on creator-coin trades, creator and protocol shares only. The coin is indexed, the recipients are not.
+ * In a sample day on Base it carried about a third of all payouts and nearly half of what creators earned.
+ */
+export const TOPIC_CREATOR_COIN_REWARDS = "0xea92473287be4e55f8279d0b8395a45960a217ae2f1a76ac9cae84af58a751ed";
 export const ZERO_ADDRESS = "0x0000000000000000000000000000000000000000";
 /** Base makes a block exactly every 2 seconds from this Unix time, so a block's time needs no RPC. */
 export const BASE_GENESIS_TIMESTAMP = 1686789347;
@@ -87,6 +93,17 @@ export function decodeLog(l: Log): RewardEvent | null {
     return { ...base, version: 4, coin: addr(w(0)), currency: addr(w(1)),
       payouts: { creator: p(2, 7), platform_referrer: p(3, 9), trade_referrer: p(4, 11), protocol: p(5, 13), doppler: p(6, 15) } };
   }
+  if (t0 === TOPIC_CREATOR_COIN_REWARDS && l.topics.length >= 2 && n >= 5) {
+    const w = (i: number) => word(l.data, i);
+    const none = { recipient: ZERO_ADDRESS, currency: 0n, coin: 0n };
+    return { ...base, version: 4, coin: addr((l.topics[1] ?? "").replace(/^0x/, "")), currency: addr(w(0)),
+      payouts: {
+        creator: { recipient: addr(w(1)), currency: uint(w(3)), coin: 0n },
+        platform_referrer: { ...none }, trade_referrer: { ...none },
+        protocol: { recipient: addr(w(2)), currency: uint(w(4)), coin: 0n },
+        doppler: { ...none },
+      } };
+  }
   if (t0 === TOPIC_TRADE_REWARDS_V3 && l.topics.length >= 4 && n >= 6) {
     const w = (i: number) => word(l.data, i);
     const topic = (i: number) => addr((l.topics[i] ?? "").replace(/^0x/, ""));
@@ -107,7 +124,11 @@ const keyOf = (e: RewardEvent) => `${e.txHash}:${e.logIndex}`;
 
 // ---- storage ---------------------------------------------------------------------------------
 
-/** Keeps indexed events and the block ranges scanned per address. Implement it for your own database. */
+/**
+ * Keeps indexed events and the block ranges scanned per address. Implement it for your own database.
+ * Upgrading from a version that didn't read CreatorCoinRewards: clear your stored V4 ranges once, so
+ * those blocks are scanned again for it ({@link MemoryStore} does this itself).
+ */
 export interface Store {
   save(events: RewardEvent[], addresses: string[], version: 3 | 4, from: number, to: number): void | Promise<void>;
   scanned(address: string, version: 3 | 4): Array<[number, number]> | Promise<Array<[number, number]>>;
@@ -134,6 +155,9 @@ export function missingRanges(lo: number, hi: number, have: Array<[number, numbe
   if (cur <= hi) gaps.push([cur, hi]);
   return gaps;
 }
+
+/** 2: V4 scans cover CreatorCoinRewards as well as CoinMarketRewardsV4. */
+const STORE_FORMAT = 2;
 
 /**
  * Everything in memory. `toJSON()` / `MemoryStore.fromJSON()` persist it anywhere — a file on Node,
@@ -164,13 +188,13 @@ export class MemoryStore implements Store {
 
   /** A JSON string of everything stored (amounts as decimal strings). */
   toJSON(): string {
-    return JSON.stringify({ events: [...this.events.values()], scans: Object.fromEntries(this.scans) }, (_k, v) => (typeof v === "bigint" ? v.toString() : v));
+    return JSON.stringify({ format: STORE_FORMAT, events: [...this.events.values()], scans: Object.fromEntries(this.scans) }, (_k, v) => (typeof v === "bigint" ? v.toString() : v));
   }
 
   /** Restore a store saved with {@link MemoryStore.toJSON}. */
   static fromJSON(json: string): MemoryStore {
     const s = new MemoryStore();
-    const d = JSON.parse(json) as { events: RewardEvent[]; scans: Record<string, Array<[number, number]>> };
+    const d = JSON.parse(json) as { format?: number; events: RewardEvent[]; scans: Record<string, Array<[number, number]>> };
     for (const e of d.events) {
       for (const r of ROLES) {
         const p = e.payouts[r];
@@ -179,7 +203,11 @@ export class MemoryStore implements Store {
       }
       s.events.set(keyOf(e), e);
     }
-    for (const [k, v] of Object.entries(d.scans)) s.scans.set(k, v);
+    for (const [k, v] of Object.entries(d.scans)) {
+      // V4 ranges saved before CreatorCoinRewards was read were scanned for one event: scan them again
+      if ((d.format ?? 1) < STORE_FORMAT && k.endsWith("@v4")) continue;
+      s.scans.set(k, v);
+    }
     return s;
   }
 }
@@ -272,7 +300,8 @@ export class Indexer<S extends Store = MemoryStore> {
     const span = { fromBlock: "0x" + lo.toString(16), toBlock: "0x" + hi.toString(16) };
     let logs: Log[] = [];
     if (version === 4) {
-      logs = await this.call<Log[]>("eth_getLogs", [{ ...span, topics: [TOPIC_MARKET_REWARDS_V4] }], signal);
+      // both V4 payout events in one call: topic0 is either
+      logs = await this.call<Log[]>("eth_getLogs", [{ ...span, topics: [[TOPIC_MARKET_REWARDS_V4, TOPIC_CREATOR_COIN_REWARDS]] }], signal);
     } else {
       const topics = addrs.map(addressTopic);
       for (const pos of [1, 2, 3]) { // payoutRecipient, platformReferrer, tradeReferrer

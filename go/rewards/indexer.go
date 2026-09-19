@@ -24,6 +24,11 @@ const (
 	V3FirstBlock = 27_000_000
 )
 
+// V4Scan labels scanned ranges for the V4 hooks' events in a Store. Ranges saved as 4 were scanned for
+// CoinMarketRewardsV4 alone, before CreatorCoinRewards was read too, so they don't count: a store
+// written by an earlier version re-scans those blocks once (stored events are kept; repeats are ignored).
+const V4Scan = 5
+
 // Indexer finds reward events paying a set of addresses and saves them in a Store.
 type Indexer struct {
 	Store      Store
@@ -77,7 +82,7 @@ func (x *Indexer) Scan(ctx context.Context, addresses []string, opt ScanOptions)
 	versions := []struct {
 		v     int
 		floor uint64
-	}{{4, V4FirstBlock}}
+	}{{V4Scan, V4FirstBlock}}
 	if opt.IncludeV3 {
 		versions = append(versions, struct {
 			v     int
@@ -170,8 +175,9 @@ func (x *Indexer) step() uint64 {
 func (x *Indexer) fetch(ctx context.Context, version int, lo, hi uint64, addrs []string) ([]*Event, error) {
 	span := map[string]any{"fromBlock": "0x" + strconv.FormatUint(lo, 16), "toBlock": "0x" + strconv.FormatUint(hi, 16)}
 	var logs []Log
-	if version == 4 {
-		span["topics"] = []any{TopicMarketRewardsV4}
+	if version == V4Scan {
+		// both V4 payout events in one call: topic0 is either
+		span["topics"] = []any{[]string{TopicMarketRewardsV4, TopicCreatorCoinRewards}}
 		if err := x.call(ctx, "eth_getLogs", []any{span}, &logs); err != nil {
 			return nil, err
 		}

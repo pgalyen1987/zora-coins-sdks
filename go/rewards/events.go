@@ -2,7 +2,8 @@
 //
 // Every trade of a Zora coin splits its fee between the coin's creator (the payout recipient), the
 // platform that launched the coin, the interface that routed the trade, the protocol, and Doppler.
-// On V4 coins those payouts are CoinMarketRewardsV4 events, and none of their fields are indexed:
+// On V4 coins those payouts are CoinMarketRewardsV4 events (plus CreatorCoinRewards for the creator's and
+// protocol's shares on creator-coin trades), and none of their recipient fields are indexed:
 // no node can answer "rewards paid to this address". This package reads every reward event in a
 // block range, keeps the ones that pay the addresses you watch, and remembers what it has scanned so
 // a re-run only fetches new blocks.
@@ -30,6 +31,11 @@ const (
 	// TopicTradeRewardsV3 is keccak256 of
 	// CoinTradeRewards(address,address,address,address,uint256,uint256,uint256,uint256,address).
 	TopicTradeRewardsV3 = "0x6b67f906562afcdc3afeeeb6754e906cc24d9ce090e9db1b7b68e6462682d966"
+	// TopicCreatorCoinRewards is keccak256 of
+	// CreatorCoinRewards(address,address,address,address,uint256,uint256): the V4 hooks' payout on
+	// creator-coin trades, the creator's and the protocol's shares. The coin is indexed, the rest is not.
+	// In a sample day on Base it carried about a third of all payouts and nearly half of what creators earned.
+	TopicCreatorCoinRewards = "0xea92473287be4e55f8279d0b8395a45960a217ae2f1a76ac9cae84af58a751ed"
 )
 
 // ZeroAddress marks "nobody" in a recipient field, and native ETH as a currency.
@@ -126,6 +132,21 @@ func DecodeLog(l Log) (e *Event, ok bool) {
 			RoleTradeReferrer:    {addr(words[4]), word(words[11]), word(words[12])},
 			RoleProtocol:         {addr(words[5]), word(words[13]), word(words[14])},
 			RoleDoppler:          {addr(words[6]), word(words[15]), word(words[16])},
+		}
+		return &base, true
+	case TopicCreatorCoinRewards:
+		if len(l.Topics) < 2 || len(words) < 5 {
+			return nil, false
+		}
+		// coin (indexed), then currency, creator, protocol, creator amount, protocol amount
+		zero := new(big.Int)
+		base.Version, base.Coin, base.Currency = 4, addr(hexWord(l.Topics[1])), addr(words[0])
+		base.Payouts = map[Role]Payout{
+			RoleCreator:          {addr(words[1]), word(words[3]), zero},
+			RolePlatformReferrer: {ZeroAddress, zero, zero},
+			RoleTradeReferrer:    {ZeroAddress, zero, zero},
+			RoleProtocol:         {addr(words[2]), word(words[4]), zero},
+			RoleDoppler:          {ZeroAddress, zero, zero},
 		}
 		return &base, true
 	case TopicTradeRewardsV3:
