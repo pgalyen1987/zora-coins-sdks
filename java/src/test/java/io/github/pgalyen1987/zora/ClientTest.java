@@ -228,4 +228,42 @@ class ClientTest {
         assertEquals("$0.0042", Rewards.Report.formatUsd(0.0042));
         assertEquals("$1,234.50", Rewards.Report.formatUsd(1234.5));
     }
+
+    // Two real logs from one Base trade (tx 0x53f27c…f195): a CreatorCoinRewards payout for a creator coin and a
+    // CoinMarketRewardsV4 payout for a content coin, both to the same creator.
+    static final String CC_CREATOR = "0xf4acf3edc65df843630976459ab1349a88258e6d";
+
+    @Test
+    void rewardsCreatorCoinRewardsDecodeAndScan() throws IOException {
+        List<Rewards.Log> logs = Arrays.asList(Json.read(fixture("creator_coin_rewards_logs"), Rewards.Log[].class));
+        assertEquals(Rewards.TOPIC_CREATOR_COIN_REWARDS, logs.get(0).topics.get(0));
+        Rewards.Event e = Rewards.decode(logs.get(0)).orElseThrow();
+        assertEquals(4, e.version);
+        assertEquals("0x3177fa60b8a342cd044badf34bf820c536094656", e.coin);
+        assertEquals("0x1111111111166b7fe7bd91427724b487980afc69", e.currency);
+        assertEquals(CC_CREATOR, e.payouts.get(Rewards.Role.CREATOR).recipient);
+        assertEquals(new java.math.BigInteger("11879451646867555805"), e.payouts.get(Rewards.Role.CREATOR).currency);
+        assertEquals(e.payouts.get(Rewards.Role.CREATOR).currency, e.payouts.get(Rewards.Role.PROTOCOL).currency);
+        assertEquals(Rewards.ZERO_ADDRESS, e.payouts.get(Rewards.Role.PLATFORM_REFERRER).recipient);
+
+        long block = Long.parseLong(logs.get(0).blockNumber.substring(2), 16);
+        List<String> asked = new ArrayList<>();
+        Fake node = new Fake((u, b) -> {
+            JsonNode req = Json.read(b.getBytes(StandardCharsets.UTF_8), JsonNode.class);
+            if (req.get("method").asText().equals("eth_blockNumber")) return ok(("{\"jsonrpc\":\"2.0\",\"id\":1,\"result\":\"0x" + Long.toHexString(block + 10) + "\"}").getBytes(StandardCharsets.UTF_8));
+            JsonNode f = req.get("params").get(0);
+            asked.add(f.get("topics").toString());
+            long lo = Long.parseLong(f.get("fromBlock").asText().substring(2), 16), hi = Long.parseLong(f.get("toBlock").asText().substring(2), 16);
+            List<Rewards.Log> in = new ArrayList<>();
+            for (Rewards.Log l : logs) {
+                long blk = Long.parseLong(l.blockNumber.substring(2), 16);
+                if (blk >= lo && blk <= hi) in.add(l);
+            }
+            return ok(("{\"jsonrpc\":\"2.0\",\"id\":1,\"result\":" + Json.write(in) + "}").getBytes(StandardCharsets.UTF_8));
+        });
+        Rewards.Indexer idx = new Rewards.Indexer(new Rewards.MemoryStore(), "http://node", node);
+        assertEquals(2, idx.scan(List.of(CC_CREATOR), block - 5, null, null, null));
+        String want = "[[\"" + Rewards.TOPIC_MARKET_REWARDS_V4 + "\",\"" + Rewards.TOPIC_CREATOR_COIN_REWARDS + "\"]]";
+        for (String t : asked) assertEquals(want, t);
+    }
 }

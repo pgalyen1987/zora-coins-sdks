@@ -13,6 +13,7 @@ import java.math.BigInteger;
 import java.nio.charset.StandardCharsets;
 import java.time.Duration;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.EnumMap;
 import java.util.HashMap;
@@ -46,6 +47,12 @@ public final class Rewards {
     public static final String TOPIC_MARKET_REWARDS_V4 = "0x35b5031218696db1dfd903223a47f38e66a1998e14a942a5d60fddaa49a685fc";
     /** keccak256 of CoinTradeRewards(address,address,address,address,uint256,uint256,uint256,uint256,address). */
     public static final String TOPIC_TRADE_REWARDS_V3 = "0x6b67f906562afcdc3afeeeb6754e906cc24d9ce090e9db1b7b68e6462682d966";
+    /**
+     * keccak256 of CreatorCoinRewards(address,address,address,address,uint256,uint256): the V4 hooks' payout on
+     * creator-coin trades, the creator's and the protocol's shares. The coin is indexed, the rest is not. In a sample
+     * day on Base it carried about a third of all payouts and nearly half of what creators earned.
+     */
+    public static final String TOPIC_CREATOR_COIN_REWARDS = "0xea92473287be4e55f8279d0b8395a45960a217ae2f1a76ac9cae84af58a751ed";
     /** "Nobody" in a recipient field; native ETH as a currency. */
     public static final String ZERO_ADDRESS = "0x0000000000000000000000000000000000000000";
     /** Unix time of Base's genesis block; Base makes a block exactly every 2 seconds. */
@@ -193,6 +200,15 @@ public final class Rewards {
                 p.put(roles[i], new Payout(addr(word(l.data, 2 + i)), uint(word(l.data, 7 + 2 * i)), uint(word(l.data, 8 + 2 * i))));
             }
             return Optional.of(new Event(block, tx, index, 4, addr(word(l.data, 0)), addr(word(l.data, 1)), p));
+        }
+        if (t0.equals(TOPIC_CREATOR_COIN_REWARDS) && l.topics.size() >= 2 && words >= 5) {
+            // coin (indexed), then currency, creator, protocol, creator amount, protocol amount
+            p.put(Role.CREATOR, new Payout(addr(word(l.data, 1)), uint(word(l.data, 3)), BigInteger.ZERO));
+            p.put(Role.PLATFORM_REFERRER, new Payout(ZERO_ADDRESS, BigInteger.ZERO, BigInteger.ZERO));
+            p.put(Role.TRADE_REFERRER, new Payout(ZERO_ADDRESS, BigInteger.ZERO, BigInteger.ZERO));
+            p.put(Role.PROTOCOL, new Payout(addr(word(l.data, 2)), uint(word(l.data, 4)), BigInteger.ZERO));
+            p.put(Role.DOPPLER, new Payout(ZERO_ADDRESS, BigInteger.ZERO, BigInteger.ZERO));
+            return Optional.of(new Event(block, tx, index, 4, addr(l.topics.get(1).replace("0x", "")), addr(word(l.data, 0)), p));
         }
         if (t0.equals(TOPIC_TRADE_REWARDS_V3) && l.topics.size() >= 4 && words >= 6) {
             p.put(Role.CREATOR, new Payout(addr(l.topics.get(1).replace("0x", "")), uint(word(l.data, 1)), BigInteger.ZERO));
@@ -346,7 +362,8 @@ public final class Rewards {
             Map<String, Object> filter = new LinkedHashMap<>();
             filter.put("fromBlock", "0x" + Long.toHexString(lo));
             filter.put("toBlock", "0x" + Long.toHexString(hi));
-            filter.put("topics", Collections.singletonList(TOPIC_MARKET_REWARDS_V4));
+            // both V4 payout events in one call: topic0 is either
+            filter.put("topics", Collections.singletonList(Arrays.asList(TOPIC_MARKET_REWARDS_V4, TOPIC_CREATOR_COIN_REWARDS)));
             JsonNode result = call("eth_getLogs", Collections.singletonList(filter));
             Map<String, Event> out = new LinkedHashMap<>();
             for (JsonNode n : result) decode(Json.MAPPER.convertValue(n, Log.class)).ifPresent(e -> out.putIfAbsent(e.key(), e));

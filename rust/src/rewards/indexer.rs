@@ -4,7 +4,7 @@ use std::time::{Duration, SystemTime, UNIX_EPOCH};
 use serde::de::DeserializeOwned;
 use serde_json::json;
 
-use super::events::{address_topic, decode_log, Event, Log, BASE_GENESIS_TIMESTAMP, TOPIC_MARKET_REWARDS_V4, TOPIC_TRADE_REWARDS_V3};
+use super::events::{address_topic, decode_log, Event, Log, BASE_GENESIS_TIMESTAMP, TOPIC_CREATOR_COIN_REWARDS, TOPIC_MARKET_REWARDS_V4, TOPIC_TRADE_REWARDS_V3};
 use super::store::{merge, missing, Store};
 use crate::error::{Error, Result};
 
@@ -14,6 +14,10 @@ pub const DEFAULT_RPC: &str = "https://mainnet.base.org";
 pub const V4_FIRST_BLOCK: u64 = 31_000_000;
 /// Where legacy V3 scans start.
 pub const V3_FIRST_BLOCK: u64 = 27_000_000;
+/// Label for the V4 hooks' scanned ranges in a [`Store`](super::Store). Ranges saved as 4 were scanned for
+/// `CoinMarketRewardsV4` alone, before `CreatorCoinRewards` was read too, so they don't count: a store from an
+/// earlier version re-scans those blocks once (stored events are kept; repeats are ignored).
+pub const V4_SCAN: u8 = 5;
 
 /// Which blocks to scan. With nothing set, the scan covers all of V4 history.
 #[derive(Debug, Clone, Default)]
@@ -82,7 +86,7 @@ impl<S: Store> Indexer<S> {
         let now = SystemTime::now().duration_since(UNIX_EPOCH).map(|d| d.as_secs() as i64).unwrap_or(0);
         let start = opt.from_block.or(opt.days.map(|d| block_at(now - (d * 86_400.0) as i64))).unwrap_or(0);
         let mut plan: Vec<(u8, u64, u64)> = Vec::new();
-        let mut versions = vec![(4u8, V4_FIRST_BLOCK)];
+        let mut versions = vec![(V4_SCAN, V4_FIRST_BLOCK)];
         if opt.include_v3 {
             versions.push((3, V3_FIRST_BLOCK));
         }
@@ -134,8 +138,9 @@ impl<S: Store> Indexer<S> {
     async fn fetch(&self, version: u8, lo: u64, hi: u64, addrs: &[String]) -> Result<Vec<Event>> {
         let (from, to) = (format!("0x{lo:x}"), format!("0x{hi:x}"));
         let mut logs: Vec<Log> = Vec::new();
-        if version == 4 {
-            logs = self.call("eth_getLogs", json!([{ "fromBlock": from, "toBlock": to, "topics": [TOPIC_MARKET_REWARDS_V4] }])).await?;
+        if version == V4_SCAN {
+            // both V4 payout events in one call: topic0 is either
+            logs = self.call("eth_getLogs", json!([{ "fromBlock": from, "toBlock": to, "topics": [[TOPIC_MARKET_REWARDS_V4, TOPIC_CREATOR_COIN_REWARDS]] }])).await?;
         } else {
             let topics: Vec<String> = addrs.iter().map(|a| address_topic(a)).collect();
             for pos in 1..=3 {

@@ -2,8 +2,9 @@
 //!
 //! Every trade of a Zora coin splits its fee between the coin's creator (the payout recipient), the
 //! platform that launched the coin, the interface that routed the trade, the protocol, and Doppler.
-//! On V4 coins those payouts are `CoinMarketRewardsV4` events, and none of their fields are
-//! indexed: no node can answer "rewards paid to this address". This module reads every reward event
+//! On V4 coins those payouts are `CoinMarketRewardsV4` events (plus `CreatorCoinRewards` for the creator's
+//! and protocol's shares on creator-coin trades), and none of their recipient fields are indexed: no node
+//! can answer "rewards paid to this address". This module reads every reward event
 //! in a block range, keeps the ones paying the addresses you watch, and remembers what it scanned,
 //! so running it again only fetches new blocks.
 //!
@@ -25,7 +26,7 @@ mod indexer;
 mod report;
 mod store;
 
-pub use events::{address_topic, decode_log, Event, Log, Payout, Role, BASE_GENESIS_TIMESTAMP, TOPIC_MARKET_REWARDS_V4, TOPIC_TRADE_REWARDS_V3, ZERO_ADDRESS};
-pub use indexer::{block_at, Indexer, ScanOptions, DEFAULT_RPC, V3_FIRST_BLOCK, V4_FIRST_BLOCK};
+pub use events::{address_topic, decode_log, Event, Log, Payout, Role, BASE_GENESIS_TIMESTAMP, TOPIC_CREATOR_COIN_REWARDS, TOPIC_MARKET_REWARDS_V4, TOPIC_TRADE_REWARDS_V3, ZERO_ADDRESS};
+pub use indexer::{block_at, Indexer, ScanOptions, DEFAULT_RPC, V3_FIRST_BLOCK, V4_FIRST_BLOCK, V4_SCAN};
 pub use report::{build_report, format_usd, Line, Report, Token};
 pub use store::{FileStore, MemoryStore, Store};

@@ -24,6 +24,10 @@ namespace zora::rewards {
 
 inline constexpr const char* kTopicMarketRewardsV4 = "0x35b5031218696db1dfd903223a47f38e66a1998e14a942a5d60fddaa49a685fc";
 inline constexpr const char* kTopicTradeRewardsV3 = "0x6b67f906562afcdc3afeeeb6754e906cc24d9ce090e9db1b7b68e6462682d966";
+/// keccak256 of CreatorCoinRewards(address,address,address,address,uint256,uint256): the V4 hooks' payout on
+/// creator-coin trades, the creator's and the protocol's shares. The coin is indexed, the rest is not. In a sample
+/// day on Base it carried about a third of all payouts and nearly half of what creators earned.
+inline constexpr const char* kTopicCreatorCoinRewards = "0xea92473287be4e55f8279d0b8395a45960a217ae2f1a76ac9cae84af58a751ed";
 inline constexpr const char* kZeroAddress = "0x0000000000000000000000000000000000000000";
 inline constexpr std::int64_t kBaseGenesisTimestamp = 1686789347;
 inline constexpr const char* kDefaultRpc = "https://mainnet.base.org";
@@ -146,6 +150,18 @@ inline std::optional<Event> decode(const nlohmann::json& log) {
         for (int i = 0; i < 5; ++i) e.payouts[roles[i]] = {detail::addr(w(2 + i)), BigUint::from_hex(w(7 + 2 * i)), BigUint::from_hex(w(8 + 2 * i))};
         return e;
     }
+    if (t0 == kTopicCreatorCoinRewards && log["topics"].size() >= 2 && words >= 5) {
+        // coin (indexed), then currency, creator, protocol, creator amount, protocol amount
+        e.version = 4;
+        e.coin = detail::addr(log["topics"][1].get<std::string>().substr(2));
+        e.currency = detail::addr(w(0));
+        e.payouts[Role::Creator] = {detail::addr(w(1)), BigUint::from_hex(w(3)), {}};
+        e.payouts[Role::PlatformReferrer] = {kZeroAddress, {}, {}};
+        e.payouts[Role::TradeReferrer] = {kZeroAddress, {}, {}};
+        e.payouts[Role::Protocol] = {detail::addr(w(2)), BigUint::from_hex(w(4)), {}};
+        e.payouts[Role::Doppler] = {kZeroAddress, {}, {}};
+        return e;
+    }
     if (t0 == kTopicTradeRewardsV3 && log["topics"].size() >= 4 && words >= 6) {
         auto topic = [&](int i) { return detail::addr(log["topics"][i].get<std::string>().substr(2)); };
         e.version = 3;
@@ -239,7 +255,7 @@ public:
                 std::int64_t to = std::min(from + s - 1, b);
                 nlohmann::json logs;
                 try {
-                    logs = call("eth_getLogs", nlohmann::json::array({{{"fromBlock", to_hex(from)}, {"toBlock", to_hex(to)}, {"topics", {kTopicMarketRewardsV4}}}}));
+                    logs = call("eth_getLogs", nlohmann::json::array({{{"fromBlock", to_hex(from)}, {"toBlock", to_hex(to)}, {"topics", nlohmann::json::array({nlohmann::json::array({kTopicMarketRewardsV4, kTopicCreatorCoinRewards})})}}}));
                 } catch (const std::runtime_error& e) {
                     std::string m = detail::lower(e.what());
                     if (m.find("rate") == std::string::npos && (m.find("range") != std::string::npos || m.find("too many") != std::string::npos) && s > 50) {

@@ -7,6 +7,10 @@ use serde::{Deserialize, Serialize};
 pub const TOPIC_MARKET_REWARDS_V4: &str = "0x35b5031218696db1dfd903223a47f38e66a1998e14a942a5d60fddaa49a685fc";
 /// keccak256 of `CoinTradeRewards(address,address,address,address,uint256,uint256,uint256,uint256,address)`.
 pub const TOPIC_TRADE_REWARDS_V3: &str = "0x6b67f906562afcdc3afeeeb6754e906cc24d9ce090e9db1b7b68e6462682d966";
+/// keccak256 of `CreatorCoinRewards(address,address,address,address,uint256,uint256)`: the V4 hooks' payout on
+/// creator-coin trades, the creator's and the protocol's shares. The coin is indexed, the rest is not. In a
+/// sample day on Base it carried about a third of all payouts and nearly half of what creators earned.
+pub const TOPIC_CREATOR_COIN_REWARDS: &str = "0xea92473287be4e55f8279d0b8395a45960a217ae2f1a76ac9cae84af58a751ed";
 /// "Nobody" in a recipient field; native ETH as a currency.
 pub const ZERO_ADDRESS: &str = "0x0000000000000000000000000000000000000000";
 /// Base makes a block exactly every 2 seconds from this Unix time, so a block's time needs no RPC.
@@ -157,6 +161,19 @@ pub fn decode_log(l: &Log) -> Option<Event> {
         for (i, role) in roles.into_iter().enumerate() {
             e.payouts.insert(role, payout(addr(&w[2 + i]), uint(&w[7 + 2 * i]), uint(&w[8 + 2 * i])));
         }
+        return Some(e);
+    }
+    if topic0 == TOPIC_CREATOR_COIN_REWARDS && l.topics.len() >= 2 && w.len() >= 5 {
+        // coin (indexed), then currency, creator, protocol, creator amount, protocol amount
+        e.version = 4;
+        e.coin = topic_addr(&l.topics[1]);
+        e.currency = addr(&w[0]);
+        let zero = BigUint::default;
+        e.payouts.insert(Role::Creator, payout(addr(&w[1]), uint(&w[3]), zero()));
+        e.payouts.insert(Role::PlatformReferrer, payout(ZERO_ADDRESS.to_owned(), zero(), zero()));
+        e.payouts.insert(Role::TradeReferrer, payout(ZERO_ADDRESS.to_owned(), zero(), zero()));
+        e.payouts.insert(Role::Protocol, payout(addr(&w[2]), uint(&w[4]), zero()));
+        e.payouts.insert(Role::Doppler, payout(ZERO_ADDRESS.to_owned(), zero(), zero()));
         return Some(e);
     }
     if topic0 == TOPIC_TRADE_REWARDS_V3 && l.topics.len() >= 4 && w.len() >= 6 {

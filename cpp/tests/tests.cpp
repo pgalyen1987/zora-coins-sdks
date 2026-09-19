@@ -201,6 +201,46 @@ void rewards_decode_scan_and_report() {
     CHECK(zora::rewards::BigUint::from_hex("0xffffffffffffffffffffffffffffffff").str() == "340282366920938463463374607431768211455");
 }
 
+// Two real logs from one Base trade (tx 0x53f27c…f195): a CreatorCoinRewards payout for a creator coin and a
+// CoinMarketRewardsV4 payout for a content coin, both to the same creator.
+void rewards_creator_coin_rewards() {
+    const std::string creator = "0xf4acf3edc65df843630976459ab1349a88258e6d";
+    auto logs = nlohmann::json::parse(fixture("creator_coin_rewards_logs"));
+    CHECK(logs[0]["topics"][0] == zora::rewards::kTopicCreatorCoinRewards);
+    auto e = zora::rewards::decode(logs[0]);
+    CHECK(e && e->version == 4);
+    CHECK(e->coin == "0x3177fa60b8a342cd044badf34bf820c536094656" && e->currency == "0x1111111111166b7fe7bd91427724b487980afc69");
+    CHECK(e->payouts[zora::rewards::Role::Creator].recipient == creator);
+    CHECK(e->payouts[zora::rewards::Role::Creator].currency.str() == "11879451646867555805");
+    CHECK(e->payouts[zora::rewards::Role::Protocol].currency.str() == "11879451646867555805");
+    CHECK(e->payouts[zora::rewards::Role::PlatformReferrer].recipient == zora::rewards::kZeroAddress);
+    auto block = std::stoll(logs[0]["blockNumber"].get<std::string>().substr(2), nullptr, 16);
+    std::vector<std::string> asked;
+    auto node = std::make_shared<Fake>([&](const Call& c) {
+        auto req = nlohmann::json::parse(c.body);
+        if (req["method"] == "eth_blockNumber") {
+            std::ostringstream h;
+            h << "0x" << std::hex << (block + 10);
+            return ok(nlohmann::json{{"jsonrpc", "2.0"}, {"id", 1}, {"result", h.str()}}.dump());
+        }
+        asked.push_back(req["params"][0]["topics"].dump());
+        auto lo = std::stoll(req["params"][0]["fromBlock"].get<std::string>().substr(2), nullptr, 16);
+        auto hi = std::stoll(req["params"][0]["toBlock"].get<std::string>().substr(2), nullptr, 16);
+        nlohmann::json in = nlohmann::json::array();
+        for (const auto& l : logs) {
+            auto b = std::stoll(l["blockNumber"].get<std::string>().substr(2), nullptr, 16);
+            if (b >= lo && b <= hi) in.push_back(l);
+        }
+        return ok(nlohmann::json{{"jsonrpc", "2.0"}, {"id", 1}, {"result", in}}.dump());
+    });
+    zora::rewards::MemoryStore store;
+    zora::rewards::Indexer idx(store, "http://node", node);
+    CHECK(idx.scan({creator}, block - 5) == 2);
+    const std::string want = std::string("[[\"") + zora::rewards::kTopicMarketRewardsV4 + "\",\"" + zora::rewards::kTopicCreatorCoinRewards + "\"]]";
+    CHECK(!asked.empty());
+    for (const auto& t : asked) CHECK(t == want);
+}
+
 void live() {
     const char* fv = "0x0b8590d3c0b1ee6c797e184a4afbb15f8f58a46b";
     zora::Client z;
@@ -259,7 +299,7 @@ int main() {
         {"coin_decodes_a_real_response", coin_decodes_a_real_response}, {"missing_coin_is_empty", missing_coin_is_empty},
         {"for_each_follows_cursors_and_stops", for_each_follows_cursors_and_stops}, {"retries_then_errors", retries_then_errors},
         {"query_encoding_and_quote", query_encoding_and_quote}, {"every_fixture_decodes_and_unknown_enums_survive", every_fixture_decodes_and_unknown_enums_survive},
-        {"graphql_returns_data_and_throws_on_errors", graphql_returns_data_and_throws_on_errors}, {"rewards_decode_scan_and_report", rewards_decode_scan_and_report},
+        {"graphql_returns_data_and_throws_on_errors", graphql_returns_data_and_throws_on_errors}, {"rewards_decode_scan_and_report", rewards_decode_scan_and_report}, {"rewards_creator_coin_rewards", rewards_creator_coin_rewards},
     };
     for (const auto& [name, fn] : tests) {
         int before = failures;
