@@ -10,7 +10,7 @@
     ".": { "import": { "types": "./dist/index.d.ts", "default": "./dist/index.js" }, "require": { "types": "./dist/index.d.cts", "default": "./dist/index.cjs" } },
     "./rewards": { "import": { "types": "./dist/rewards/index.d.ts", "default": "./dist/rewards/index.js" }, "require": { "types": "./dist/rewards/index.d.cts", "default": "./dist/rewards/index.cjs" } }
   },
-  "bin": { "zora-rewards": "./dist/cli.js" },
+  "bin": { "zora-rewards": "dist/cli.js" },
   "files": ["dist", "README.md", "LICENSE"],
   "sideEffects": false,
   "engines": { "node": ">=20" },
