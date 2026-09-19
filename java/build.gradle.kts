@@ -5,7 +5,7 @@ plugins {
 }
 
 group = "io.github.pgalyen1987"
-version = "0.1.0"
+version = "0.1.1"
 description = "Typed client for the Zora Coins API (all 30 endpoints), a GraphQL client, and an onchain indexer for Zora creator and referral rewards on Base. Java 11+ and Android."
 
 java {

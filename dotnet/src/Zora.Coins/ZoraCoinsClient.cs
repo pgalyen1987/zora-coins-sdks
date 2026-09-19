@@ -59,7 +59,7 @@ public sealed partial class ZoraCoinsClient : IDisposable
     /// <summary>The ZORA token on Base.</summary>
     public const string ZoraAddress = "0x1111111111166b7fe7bd91427724b487980afc69";
 
-    internal const string Version = "0.1.0";
+    internal const string Version = "0.1.1";
 
     private static readonly Random Jitter = new();
     private readonly HttpClient _http;

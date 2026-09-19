@@ -5,7 +5,7 @@ Typed client for the [Zora Coins API](https://docs.zora.co/coins): all 30 endpoi
 > Unofficial and community-maintained. Not affiliated with Zora.
 
 ```kotlin
-implementation("io.github.pgalyen1987:zora-coins:0.1.0")
+implementation("io.github.pgalyen1987:zora-coins:0.1.1")
 ```
 
 ## Quick start

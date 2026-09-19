@@ -18,7 +18,7 @@ public abstract class BaseClient {
     /** Base mainnet, where Zora coins live. Every call defaults to it. */
     public static final long BASE_CHAIN_ID = 8453L;
     /** SDK version, sent in the User-Agent header. */
-    public static final String VERSION = "0.1.0";
+    public static final String VERSION = "0.1.1";
 
     private final String baseUrl;
     private final String apiKey;

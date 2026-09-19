@@ -43,7 +43,7 @@ inline constexpr std::int64_t kBaseChainId = 8453;
 inline constexpr const char* kWethAddress = "0x4200000000000000000000000000000000000006";
 inline constexpr const char* kUsdcAddress = "0x833589fcd6edb6e08f4c7c32d4f71b54bda02913";
 inline constexpr const char* kZoraAddress = "0x1111111111166b7fe7bd91427724b487980afc69";
-inline constexpr const char* kVersion = "0.1.0";
+inline constexpr const char* kVersion = "0.1.1";
 
 /// The Zora API answered with an HTTP error after retries were used up.
 class ApiError : public std::runtime_error {

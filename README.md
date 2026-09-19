@@ -11,7 +11,7 @@ Typed clients for the [Zora Coins API](https://docs.zora.co/coins) in **Python, 
 | **Go** | [`…/zora-coins-sdks/go`](https://pkg.go.dev/github.com/pgalyen1987/zora-coins-sdks/go/zora) | `go get github.com/pgalyen1987/zora-coins-sdks/go` |
 | **Rust** | [`zora-coins`](https://crates.io/crates/zora-coins) | `cargo add zora-coins` |
 | **C# / .NET / Unity** | [`Zora.Coins`](https://www.nuget.org/packages/Zora.Coins) | `dotnet add package Zora.Coins` |
-| **Java / Kotlin / Android** | [`io.github.pgalyen1987:zora-coins`](https://central.sonatype.com/artifact/io.github.pgalyen1987/zora-coins) | `implementation("io.github.pgalyen1987:zora-coins:0.1.0")` |
+| **Java / Kotlin / Android** | [`io.github.pgalyen1987:zora-coins`](https://central.sonatype.com/artifact/io.github.pgalyen1987/zora-coins) | `implementation("io.github.pgalyen1987:zora-coins:0.1.1")` |
 | **C++** | [`cpp/`](cpp/) | CMake `FetchContent` |
 | **GraphQL** | [`graphql/`](graphql/) | `go run github.com/pgalyen1987/zora-coins-sdks/graphql/cmd/zora-graphql@latest` |
 

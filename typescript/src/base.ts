@@ -3,7 +3,7 @@ export const DEFAULT_BASE_URL = "https://api-sdk.zora.engineering";
 /** Base mainnet, where Zora coins live. Every call defaults to it. */
 export const BASE_CHAIN_ID = 8453;
 /** SDK version, sent in the User-Agent header where the runtime allows it. */
-export const VERSION = "0.1.0";
+export const VERSION = "0.1.1";
 
 /** Options for {@link ZoraCoins} and {@link ZoraGraphQL}. */
 export interface ClientOptions {

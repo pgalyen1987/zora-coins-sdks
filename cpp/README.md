@@ -6,7 +6,7 @@ A C++17 client for the [Zora Coins API](https://docs.zora.co/coins): all 30 endp
 
 ```cmake
 include(FetchContent)
-FetchContent_Declare(zora_coins GIT_REPOSITORY https://github.com/pgalyen1987/zora-coins-sdks.git GIT_TAG v0.1.0 SOURCE_SUBDIR cpp)
+FetchContent_Declare(zora_coins GIT_REPOSITORY https://github.com/pgalyen1987/zora-coins-sdks.git GIT_TAG v0.1.1 SOURCE_SUBDIR cpp)
 FetchContent_MakeAvailable(zora_coins)
 target_link_libraries(my_app PRIVATE zora::coins)
 ```
